@@ -37,6 +37,7 @@ for Elkies' elliptic-curve construction are outside this profile.
 - [Independent implementation review](tests/REVIEW.md)
 - [Actual source mutations](mutations/README.md)
 - [Public-source compiler qualification](evidence/public-source/RESULTS.md)
+- [Public-download reproduction and full CLI corpus](evidence/public-replay/RESULTS.md)
 - [Review-export transformations and integrity](PUBLICATION.md)
 - [Certificate inventory](tests/CASES.tsv)
 

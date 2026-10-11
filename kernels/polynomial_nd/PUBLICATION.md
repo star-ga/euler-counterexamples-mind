@@ -70,10 +70,12 @@ All six build/run exits were zero, stderr was empty and harness stdout matched
 the historical final output bytes. Fresh receipt paths use declared generic
 placeholders; their tool/input/output hashes identify the observed artifacts.
 
-This new qualification does not rerun the historical extension mutation campaign,
-standalone CLI corpus, LLVM 23 or direct-native backend under the new compiler.
-Those obligations remain explicit if those profiles are claimed for that
-compiler. Public reproduction depends on the pinned public compiler source,
+This initial qualification did not rerun the standalone CLI corpus. The later
+[public-download replay](evidence/public-replay/RESULTS.md) repeated the three
+harnesses and passed all 54 CLI certificates under the same compiler. The
+historical extension mutation campaign, LLVM 23 and direct-native backend were
+not rerun under that compiler; those profile obligations remain explicit.
+Public reproduction depends on the pinned public compiler source,
 supplied lockfile and the existing LLVM/MLIR build prerequisites; a different
 compiler digest needs new qualification.
 
@@ -81,12 +83,13 @@ Engineering tests and the prose soundness argument do not grant formal
 acceptance. The extension remains `FORMAL_PROOF_SUBMITTED`, with independent
 acceptance obligations open. This submission selects no new publication license.
 
-## Publication transition
+## Initial publication transition
 
 Owner authorization on 2026-10-11 permits publishing this extension in the
 separate public Euler repository as a draft pull request; it does not authorize
 merging, a proof-status upgrade or publication of other repositories.
-Relative to the reviewed export, only this document, the package README and
+At public commit `5cca55f16a52f7dd468a7f19733ef2c2c54a497f`, relative to the
+reviewed export, only this document, the package README and
 the root `POLYNOMIAL_EXTENSION.md` change publication-status prose; the root
 entry also explains the separate optional Arch-Mind integration.
 An additive package `.gitattributes` exempts the intentional whitespace in one
@@ -97,3 +100,14 @@ from editorial whitespace warnings. No fixture or receipt bytes are changed.
 source/certificate/mutation artifacts and all 1,601 original public files
 remain byte-identical. Existing signatures retain their original scope and
 do not cover this extension.
+
+## Later documentation and receipt alignment
+
+The subsequent documentation update adds `evidence/public-replay/RESULTS.md`,
+its 183 stage streams/exits, the full CLI outcome table and a receipt export
+map. Current entry points now distinguish this later replay from the initial
+three-harness qualification. The per-file export map and package manifest
+are updated for changed documentation and new receipts. Historical source and
+execution identities remain explicit; no checker, certificate, mutation or
+original signed-release byte changes. These additions are also outside the
+earlier PQC signature scope.

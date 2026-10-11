@@ -14,6 +14,8 @@ normalization for universally quantified polynomial identities. Start with its
 [soundness argument](kernels/polynomial_nd/SOUNDNESS.md),
 [reproduction](kernels/polynomial_nd/REPRODUCE.md) and
 [326-call public-source compiler qualification](kernels/polynomial_nd/evidence/public-source/RESULTS.md).
+The later [public-download reproduction](kernels/polynomial_nd/evidence/public-replay/RESULTS.md)
+also covers the full 54-certificate CLI corpus with that compiler.
 Its status remains **FORMAL_PROOF_SUBMITTED**; formal acceptance is blocked.
 
 [Transformation and integrity notes](kernels/polynomial_nd/PUBLICATION.md)

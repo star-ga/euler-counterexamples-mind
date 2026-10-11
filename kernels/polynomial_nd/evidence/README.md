@@ -6,8 +6,10 @@ Author: STARGA Inc.
 54 certificate stdout/stderr/exit triples. LLVM 23 harness receipts are under
 `llvm23/{main,resource,cache}`; historical LLVM 20 harness receipts are under
 `../tests/evidence/final-*`. The separately executed public-source compiler
-qualification is under `public-source/`; its scope is the three harnesses and
-326 checker calls.
+initial qualification is under `public-source/`; its scope is the three
+harnesses and 326 checker calls. The later [public-download replay](public-replay/RESULTS.md)
+repeated those harnesses and covered all 54 CLI certificates using the same
+compiler. Its stage streams/exits and case table are separate under `public-replay/`.
 
 `mutations/M01` through `M12` retain actual historical mutated-source builds,
 positive controls and distinguishing invalid-certificate runs. Source diffs in

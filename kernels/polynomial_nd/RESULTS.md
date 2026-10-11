@@ -9,7 +9,9 @@ Historical compiler SHA-256 (unchanged):
 `a1444e4412efcf6eef4d2f0635ee530cacdc58414531b7c7b5bec6eff15d7ffa`.
 The historical campaign below used that compiler. The separately qualified
 [public-source profile](evidence/public-source/RESULTS.md) passes all 326 harness
-calls with compiler `c6a4cdce...811ea5`; it does not transfer all historical
+calls with compiler `c6a4cdce...811ea5`. The later
+[public-download replay](evidence/public-replay/RESULTS.md) also passed all
+54 CLI certificates with this compiler. Neither run transfers historical
 mutation/backend qualifications to that compiler.
 
 All successful proof/test builds below emitted Linux x86-64 ELF through the

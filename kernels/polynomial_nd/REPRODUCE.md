@@ -7,7 +7,10 @@ in [the public bootstrap profile](../../toolchain/public-source/README.md).
 Its compiler SHA-256 is
 `c6a4cdce63a76af95025de2664ade696df9f3dbd1b9a84f4a77e6379e6811ea5`.
 The [extension qualification](evidence/public-source/RESULTS.md) records the same
-326 calls on this exact compiler. Obtain it by the public source/lockfile recipe;
+326 calls on this exact compiler. A later
+[public-download replay](evidence/public-replay/RESULTS.md) repeated those
+harnesses and checked all 54 standalone CLI certificates. Obtain the compiler
+by the public source/lockfile recipe;
 no compiler binary is redistributed here. Record your actual compiler digest.
 A different rebuild digest requires its own qualification before adoption.
 
@@ -54,6 +57,14 @@ by LF and produce empty stderr. This indicates acceptance of the goal encoded
 in those certificate bytes. A filename or a supplied PASS string is not trusted.
 An invalid certificate normally prints `KERNEL_CHECK=FAIL` and exits 1; exit 2,
 signals, crashes and timeouts are execution failures.
+
+The two commands above demonstrate the named identities. For the full CLI
+corpus, run that same invocation for every certificate in `tests/CASES.tsv`;
+the third column is the expected acceptance (1 accepts, 0 refuses). The
+[public replay table](evidence/public-replay/receipts/cli-cases-observed.tsv)
+records all 54 expected exits and stream hashes: 16 accepts and 38 normal
+refusals. Preserve the exact malformed bytes and count execution failures
+separately from ordinary refusals.
 
 Build each native test harness independently:
 

@@ -36,10 +36,13 @@ unlimited CPU-time allowance, 1 GiB build address space and 256 MiB run address
 space. No timeout, memory-floor stop or host OOM-counter increment occurred.
 See [the reproduction commands](../../REPRODUCE.md).
 
-This profile qualifies only these three harnesses on this Linux x86-64 host.
-The extension's 12-mutation campaign, full standalone-CLI corpus, LLVM 23 and
-direct-native compatibility runs were not repeated with this compiler. Their
-historical receipts remain labeled by their original compiler. These runs are
+This initial run qualified only these three harnesses on this Linux x86-64
+host. The later [public-download replay](../public-replay/RESULTS.md) repeated
+these harnesses and passed all 54 standalone CLI certificates with this
+compiler; those later receipts are recorded separately. The extension's
+12-mutation campaign, LLVM 23 and direct-native compatibility runs were not
+repeated with this compiler. Their historical receipts remain labeled by
+their original compiler. These runs are
 engineering evidence, not a soundness metatheorem, a new cross-host claim,
 formal acceptance or publication authorization. Existing PQC signatures cover
 their original manifests only and do not cover this new extension.
