@@ -3,7 +3,7 @@
 Author: STARGA Inc.
 Date: 2026-10-11
 
-Scope: the separate public repository `star-ga/euler-k4-mind`. The owner
+Scope: the separate public repository `star-ga/euler-counterexamples-mind`. The owner
 authorized publication of this Euler artifact. Other research repositories,
 their histories and their access information are excluded. Existing rights
 are reserved under the root LICENSE.md; no new open-source grant is selected.

@@ -5,7 +5,7 @@ universal instantiation and assumption discharge.
 
 We have shared the full source, certificate, soundness argument, adversarial
 tests, mutation evidence and reproduction limitations here:
-https://github.com/star-ga/euler-k4-mind
+https://github.com/star-ga/euler-counterexamples-mind
 
 The candidate checker accepts the certificate; independent human review of
 the kernel is still welcome. This is a formalization effort, not a new

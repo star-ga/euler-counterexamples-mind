@@ -2,20 +2,55 @@
 
 Author: STARGA Inc.
 
-MIND documents the [MIC format](https://mindlang.dev/docs/mic),
-[MAP metadata](https://mindlang.dev/docs/map) and optional evidence signing.
-Signing is not required for this public proof candidate. No signature or signer
-identity is claimed for the supplied proof certificate.
+## MIND's documented signing capability
+
+Official references: [MIND](https://mindlang.dev/),
+[documentation](https://mindlang.dev/docs),
+[MIC format](https://mindlang.dev/docs/mic),
+[MAP metadata](https://mindlang.dev/docs/map),
+[roadmap](https://mindlang.dev/roadmap), and
+[RFC 0016](https://github.com/star-ga/mind/blob/main/docs/rfcs/0016-evidence-chain-emission.md).
+The live documentation was rechecked on 2026-10-11.
+
+The roadmap identifies optional evidence signing as shipped. Its hybrid uses
+ML-DSA-87 and SLH-DSA-SHAKE-256s, with scheme identifier
+`pqc-hybrid-ml-dsa-87-slh-dsa-256s`. Both signatures must verify; removing one
+does not permit fallback to a weaker scheme. Signing requires a compiler built
+with both `evidence-mldsa` and `evidence-slhdsa`, plus configured signing keys.
+Unsigned emission remains available.
+
+With a signing-enabled compiler configured for the documented hybrid scheme:
+
+```sh
+mindc example.mind --emit-evidence example.mic3
+mindc verify --require-signed example.mic3
+```
+
+These commands illustrate the documented interface, not an execution receipt
+for this Euler release. To bind a trusted hybrid signer, provide both full
+public keys obtained independently, using repeated `--signer-pubkey` options
+as implemented by `mindc verify`. An internally consistent signature alone does not
+establish who controls the signing keys.
+
+## Status of this Euler package
+
+Signing is optional for this public proof candidate. The supplied proof
+certificate and current Git commits are unsigned, with no signer identity
+claimed. This package did not execute the hybrid signing example above. Its
+qualified public compiler bootstrap and historical pin remain documented
+separately; neither is promoted to a qualified signing build by this text.
+
+## Historical compiler diagnostic
 
 A bounded diagnostic used the historical compiler pin to emit the exact kernel
 source with `--emit-evidence` and source-hash metadata, then verified the result
 with `--require-strict-fp --require-deterministic` and inspected the IR.
 Emission and verification succeeded, but inspection exposed a material limit:
 the 20 kernel functions were represented by 60 instructions consisting of
-constant-zero/output/return forms. That summary does not encode the actual
+constant-zero outputs. That summary does not encode the actual
 kernel's control flow and arithmetic.
 
-Consequently a valid trace hash for that MIC only authenticates the emitted
+Consequently a valid trace hash for that MIC only checks the emitted
 summary's internal consistency. It cannot attest source equivalence, native
 executable semantics, certificate acceptance or mathematical soundness. No
 kernel-attestation claim is made from this diagnostic, and that MIC is not

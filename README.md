@@ -2,6 +2,12 @@
 
 Author: STARGA Inc.
 
+Built in [MIND](https://mindlang.dev/). Official references:
+[language and compiler documentation](https://mindlang.dev/docs),
+[MIC artifacts](https://mindlang.dev/docs/mic),
+[MAP metadata](https://mindlang.dev/docs/map), and
+[capabilities and roadmap](https://mindlang.dev/roadmap).
+
 Public review copy. [Existing all-rights-reserved terms](LICENSE.md) are retained;
 publication does not select a new open-source license.
 
@@ -78,8 +84,13 @@ stdout, stderr and exit codes on a [second Linux machine](toolchain/public-sourc
 These are measured results for the documented hosts/backend, not a claim about
 every architecture or a formally verified compiler.
 
-[MIC/MAP limitations](MIC_EVIDENCE.md) explain why a verified hash of the
-compiler's lossy IR summary is not used to attest this kernel's full semantics.
+MIND supports optional hybrid post-quantum evidence signing with
+**ML-DSA-87 + SLH-DSA-SHAKE-256s**, as documented in the
+[official roadmap](https://mindlang.dev/roadmap). This published Euler package
+is unsigned. [MIC/MAP capabilities and this artifact's scope](MIC_EVIDENCE.md)
+explain the signing options and the limits observed with the benchmark's
+specific historical compiler. Those observations do not imply that MIND lacks
+PQC signing.
 
 This is STARGA's implementation and formalization of Roger Frye's published
 counterexample, not a new mathematical discovery. It makes no RH progress claim.
