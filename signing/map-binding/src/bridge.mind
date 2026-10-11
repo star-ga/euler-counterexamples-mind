@@ -1,0 +1,134 @@
+// Author: STARGA Inc.
+// Exact-carrier profile EULER-PQC-MAP-BINDING/1. No cryptographic authority.
+// Input must separately pass mindc verify with both trusted hybrid public keys.
+// Return 1 means canonical metadata shape and expected digest equality only.
+// p[0..n), expected[0..en), work[0..cap) are caller-owned, valid, nonoverlapping.
+// n<=131072; en=65; work requires 16 bytes. No dynamic allocation or I/O.
+
+fn pb_equal(a: i64, b: i64, n: i64) -> i64 {
+    let mut i: i64 = 0;
+    while i < n {
+        if __mind_load_i8(a + i) != __mind_load_i8(b + i) { return 0; }
+        i = i + 1;
+    }
+    return 1;
+}
+fn pb_literal(p: i64, n: i64, s: String) -> i64 {
+    if n != s.len { return 0; }
+    return pb_equal(p, s.addr, n);
+}
+fn pb_hex(b: i64) -> i64 {
+    if b >= 48 && b <= 57 { return b - 48; }
+    if b >= 97 && b <= 102 { return b - 87; }
+    return 0 - 1;
+}
+fn pb_hex_bytes(p: i64, n: i64, s: String) -> i64 {
+    if s.len != n * 2 { return 0; }
+    let mut i: i64 = 0;
+    while i < n {
+        let a: i64 = pb_hex(__mind_load_i8(s.addr + 2 * i));
+        let b: i64 = pb_hex(__mind_load_i8(s.addr + 2 * i + 1));
+        if a < 0 || b < 0 { return 0; }
+        if __mind_load_i8(p + i) != a * 16 + b { return 0; }
+        i = i + 1;
+    }
+    return 1;
+}
+// The literal is the COMPLETE 35-byte body from the official carrier emitter.
+// Matching it fixes the MAP offset without scanning for a sentinel in data.
+fn pb_body(p: i64, n: i64) -> i64 {
+    if n < 35 { return 0; }
+    return pb_hex_bytes(p, 35, "4d4943330201046d61696e010003150000010000020100001701000100001300000000");
+}
+fn pb_key(i: i64) -> String {
+    if i == 0 { return "evidence_chain.determinism"; }
+    if i == 1 { return "evidence_chain.schema"; }
+    if i == 2 { return "evidence_chain.substrate"; }
+    if i == 3 { return "evidence_chain.toolchain"; }
+    if i == 4 { return "evidence_chain.trace_hash"; }
+    if i == 5 { return "evidence_chain.trace_hash_kind"; }
+    if i == 6 { return "org.starga.attestation_scope"; }
+    if i == 7 { return "org.starga.package_manifest_sha256"; }
+    if i == 8 { return "signature.mldsa87"; }
+    if i == 9 { return "signature.mldsa87_pubkey"; }
+    if i == 10 { return "signature.scheme"; }
+    if i == 11 { return "signature.slhdsa"; }
+    return "signature.slhdsa_pubkey";
+}
+// Bounded minimal ULEB128: value <=131072, at most3 bytes, no leading zero
+// terminal group. work[0] is cursor; failure returns -1 before any out-of-bounds.
+fn pb_nat(p: i64, n: i64, work: i64) -> i64 {
+    let mut v: i64 = 0; let mut scale: i64 = 1; let mut count: i64 = 0;
+    while count < 3 {
+        let at: i64 = __mind_load_i64(work);
+        if at < 0 || at >= n { return 0 - 1; }
+        let b: i64 = __mind_load_i8(p + at);
+        __mind_store_i64(work, at + 1);
+        v = v + (b % 128) * scale;
+        if v > 131072 { return 0 - 1; }
+        if b < 128 {
+            if count > 0 && b == 0 { return 0 - 1; }
+            return v;
+        }
+        scale = scale * 128; count = count + 1;
+    }
+    return 0 - 1;
+}
+fn pb_take(p: i64, n: i64, work: i64, amount: i64) -> i64 {
+    let at: i64 = __mind_load_i64(work);
+    if amount < 0 || amount > n || at < 0 || at > n - amount { return 0; }
+    __mind_store_i64(work, at + amount);
+    return p + at;
+}
+pub fn pqc_binding_check(p: i64, n: i64, expected: i64, en: i64, work: i64, cap: i64) -> i64 {
+    if p == 0 || expected == 0 || work == 0 || cap < 16 { return 0; }
+    if n < 37 || n > 131072 || en != 65 { return 0; }
+    let mut i: i64 = 0;
+    while i < 64 {
+        if pb_hex(__mind_load_i8(expected + i)) < 0 { return 0; }
+        i = i + 1;
+    }
+    if __mind_load_i8(expected + 64) != 10 { return 0; }
+    if pb_body(p, n) != 1 || __mind_load_i8(p + 35) != 77 { return 0; }
+    __mind_store_i64(work, 36);
+    if pb_nat(p, n, work) != 13 { return 0; }
+    i = 0;
+    while i < 13 {
+        let kn: i64 = pb_nat(p, n, work);
+        if kn < 1 || kn > 64 { return 0; }
+        let kp: i64 = pb_take(p, n, work, kn);
+        if kp == 0 || pb_literal(kp, kn, pb_key(i)) != 1 { return 0; }
+        let tp: i64 = pb_take(p, n, work, 1);
+        if tp == 0 { return 0; }
+        let tag: i64 = __mind_load_i8(tp);
+        if i == 1 {
+            if tag != 1 || pb_nat(p, n, work) != 2 { return 0; }
+        } else {
+            let mut want_tag: i64 = 0;
+            if i == 4 || i == 8 || i == 9 || i == 11 || i == 12 { want_tag = 2; }
+            if tag != want_tag { return 0; }
+            let vn: i64 = pb_nat(p, n, work);
+            if vn < 0 { return 0; }
+            let vp: i64 = pb_take(p, n, work, vn);
+            if vp == 0 { return 0; }
+            if i == 0 && pb_literal(vp, vn, "deterministic") != 1 { return 0; }
+            if i == 2 && pb_literal(vp, vn, "cpu") != 1 { return 0; }
+            if i == 3 && pb_literal(vp, vn, "0.10.2") != 1 { return 0; }
+            if i == 4 && pb_hex_bytes(vp, vn, "f59773d526008bf435f985b1c4f66c28817b709e0f6c509f0f73d0189c45e13f") != 1 { return 0; }
+            if i == 5 && pb_literal(vp, vn, "mic3-bytes") != 1 { return 0; }
+            if i == 6 && pb_literal(vp, vn, "package-provenance") != 1 { return 0; }
+            if i == 7 {
+                if vn != 64 { return 0; }
+                if pb_equal(vp, expected, 64) != 1 { return 0; }
+            }
+            if i == 8 && vn != 4627 { return 0; }
+            if i == 9 && vn != 2592 { return 0; }
+            if i == 10 && pb_literal(vp, vn, "pqc-hybrid-ml-dsa-87-slh-dsa-256s") != 1 { return 0; }
+            if i == 11 && vn != 29792 { return 0; }
+            if i == 12 && vn != 64 { return 0; }
+        }
+        i = i + 1;
+    }
+    if __mind_load_i64(work) != n { return 0; }
+    return 1;
+}

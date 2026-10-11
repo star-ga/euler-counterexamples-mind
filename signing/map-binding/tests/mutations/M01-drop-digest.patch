@@ -1,0 +1,10 @@
+--- src/bridge.mind
++++ src/bridge.mind
+@@ -119,7 +119,6 @@
+             if i == 6 && pb_literal(vp, vn, "package-provenance") != 1 { return 0; }
+             if i == 7 {
+                 if vn != 64 { return 0; }
+-                if pb_equal(vp, expected, 64) != 1 { return 0; }
+             }
+             if i == 8 && vn != 4627 { return 0; }
+             if i == 9 && vn != 2592 { return 0; }

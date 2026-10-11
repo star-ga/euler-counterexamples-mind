@@ -1,0 +1,3 @@
+// Author: STARGA Inc.
+// Package-provenance carrier only; this program is not the theorem checker.
+fn main() -> i64 { return 0; }

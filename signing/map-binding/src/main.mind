@@ -1,0 +1,39 @@
+// Author: STARGA Inc.
+// stdin: complete authenticated carrier MIC; fd3: exact64lowercasehex plusLF.
+// The caller must run the trusted crypto verifier on the SAME frozen bytes.
+import bridge;
+fn pb_emit(s: String) -> i64 {
+    let mut at: i64 = 0;
+    while at < s.len {
+        let got: i64 = __mind_write(1, s.addr + at, s.len - at, 0 - 1);
+        if got <= 0 { return 0; } at = at + got;
+    }
+    return 1;
+}
+// Reads until EOF; -1 I/O, -2 too large. Caller allocates cap+1 bytes.
+fn pb_read(fd: i64, p: i64, cap: i64) -> i64 {
+    let mut n: i64 = 0;
+    while n <= cap {
+        let got: i64 = __mind_read(fd, p + n, cap + 1 - n, 0 - 1);
+        if got < 0 { return 0 - 1; }
+        if got == 0 { return n; }
+        n = n + got;
+        if n > cap { return 0 - 2; }
+    }
+    return 0 - 2;
+}
+fn main() -> i64 {
+    let p: i64 = __mind_alloc(131073);
+    let expected: i64 = __mind_alloc(66);
+    let work: i64 = __mind_alloc(16);
+    if p == 0 || expected == 0 || work == 0 { return 2; }
+    let n: i64 = pb_read(0, p, 131072);
+    let en: i64 = pb_read(3, expected, 65);
+    if n == 0 - 1 || en == 0 - 1 { return 2; }
+    let accepted: i64 = pqc_binding_check(p, n, expected, en, work, 16);
+    __mind_free(p); __mind_free(expected); __mind_free(work);
+    if accepted == 1 {
+        if pb_emit("MAP_DIGEST_BINDING=PASS\n") != 1 { return 2; } return 0;
+    }
+    if pb_emit("MAP_DIGEST_BINDING=FAIL\n") != 1 { return 2; } return 1;
+}

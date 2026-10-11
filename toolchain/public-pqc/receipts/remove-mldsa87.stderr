@@ -1,0 +1,1 @@
+error[verify]: signature is malformed — artifact signature does not verify over the trace_hash (fail-closed)

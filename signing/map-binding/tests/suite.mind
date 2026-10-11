@@ -1,0 +1,249 @@
+// Author: STARGA Inc.
+// Synthetic signatures below are NOT valid cryptographic signatures.
+// Tests ONLY canonical MAP parsing and expected digest binding.
+import bridge;
+fn t_write(fd: i64, p: i64, n: i64) -> i64 {
+    let mut at: i64 = 0;
+    while at < n {
+        let got: i64 = __mind_write(fd, p + at, n - at, 0 - 1);
+        if got <= 0 { return 0; } at = at + got;
+    }
+    return 1;
+}
+fn t_emit(s: String) -> i64 { return t_write(1, s.addr, s.len); }
+fn t_hex(b: i64) -> i64 {
+    if b < 58 { return b - 48; } return b - 87;
+}
+fn t_add(p: i64, at: i64, s: String) -> i64 {
+    let mut i: i64 = 0;
+    while i < s.len { __mind_store_i8(p + at + i, __mind_load_i8(s.addr + i)); i = i + 1; }
+    return at + s.len;
+}
+fn t_hexadd(p: i64, at: i64, s: String) -> i64 {
+    let mut i: i64 = 0;
+    while 2 * i < s.len {
+        __mind_store_i8(p + at + i, 16 * t_hex(__mind_load_i8(s.addr + 2 * i)) + t_hex(__mind_load_i8(s.addr + 2 * i + 1)));
+        i = i + 1;
+    }
+    return at + i;
+}
+fn t_nat(p: i64, at: i64, value: i64) -> i64 {
+    let mut v: i64 = value; let mut pos: i64 = at;
+    while v >= 128 { __mind_store_i8(p + pos, 128 + v % 128); pos = pos + 1; v = v / 128; }
+    __mind_store_i8(p + pos, v); return pos + 1;
+}
+fn t_key(i: i64) -> String {
+    if i == 0 { return "evidence_chain.determinism"; }
+    if i == 1 { return "evidence_chain.schema"; }
+    if i == 2 { return "evidence_chain.substrate"; }
+    if i == 3 { return "evidence_chain.toolchain"; }
+    if i == 4 { return "evidence_chain.trace_hash"; }
+    if i == 5 { return "evidence_chain.trace_hash_kind"; }
+    if i == 6 { return "org.starga.attestation_scope"; }
+    if i == 7 { return "org.starga.package_manifest_sha256"; }
+    if i == 8 { return "signature.mldsa87"; }
+    if i == 9 { return "signature.mldsa87_pubkey"; }
+    if i == 10 { return "signature.scheme"; }
+    if i == 11 { return "signature.slhdsa"; }
+    return "signature.slhdsa_pubkey";
+}
+fn t_string(i: i64) -> String {
+    if i == 0 { return "deterministic"; }
+    if i == 2 { return "cpu"; }
+    if i == 3 { return "0.10.2"; }
+    if i == 5 { return "mic3-bytes"; }
+    if i == 6 { return "package-provenance"; }
+    return "pqc-hybrid-ml-dsa-87-slh-dsa-256s";
+}
+// Independent fixture encoder. meta records key-len/key/tag/value-len/value/
+// value-size/start/end offsets for hostile modifications, 64 bytes per record.
+fn t_build(p: i64, meta: i64, digit: i64, mode: i64) -> i64 {
+    let mut at: i64 = t_hexadd(p, 0, "4d4943330201046d61696e010003150000010000020100001701000100001300000000");
+    __mind_store_i8(p + at, 77); at = at + 1;
+    let mut count: i64 = 13;
+    if mode == 33 { count = 12; }
+    at = t_nat(p, at, count);
+    let mut j: i64 = 0;
+    while j < count {
+        let mut i: i64 = j;
+        if mode == 16 && j == 1 { i = 0; }
+        if mode == 17 && j == 0 { i = 1; }
+        if mode == 17 && j == 1 { i = 0; }
+        let m: i64 = meta + j * 64;
+        __mind_store_i64(m + 48, at);
+        __mind_store_i64(m, at);
+        let key: String = t_key(i);
+        at = t_nat(p, at, key.len); __mind_store_i64(m + 8, at);
+        at = t_add(p, at, key); __mind_store_i64(m + 16, at);
+        let mut tag: i64 = 0;
+        if i == 1 { tag = 1; }
+        if i == 4 || i == 8 || i == 9 || i == 11 || i == 12 { tag = 2; }
+        __mind_store_i8(p + at, tag); at = at + 1;
+        __mind_store_i64(m + 24, at);
+        if i == 1 {
+            __mind_store_i64(m + 32, at); __mind_store_i64(m + 40, 1);
+            at = t_nat(p, at, 2);
+        } else {
+            let mut size: i64 = 0;
+            if tag == 0 && i != 7 { let s: String = t_string(i); size = s.len; }
+            if i == 4 { size = 32; }
+            if i == 7 || i == 12 { size = 64; }
+            if i == 8 { size = 4627; }
+            if i == 9 { size = 2592; }
+            if i == 11 { size = 29792; }
+            if i == 7 && mode == 20 { size = 63; }
+            if i == 7 && mode == 21 { size = 65; }
+            if i == 8 && mode == 31 { size = 4626; }
+            at = t_nat(p, at, size); __mind_store_i64(m + 32, at); __mind_store_i64(m + 40, size);
+            if i == 4 {
+                at = t_hexadd(p, at, "f59773d526008bf435f985b1c4f66c28817b709e0f6c509f0f73d0189c45e13f");
+            } else {
+                if tag == 0 && i != 7 { at = t_add(p, at, t_string(i)); }
+                else {
+                    let mut fill: i64 = 17 + i;
+                    if i == 7 { fill = digit; }
+                    let mut k: i64 = 0;
+                    while k < size { __mind_store_i8(p + at + k, fill); k = k + 1; }
+                    at = at + size;
+                }
+            }
+        }
+        __mind_store_i64(m + 56, at); j = j + 1;
+    }
+    return at;
+}
+fn t_expected(e: i64, b: i64) -> i64 {
+    let mut i: i64 = 0;
+    while i < 64 { __mind_store_i8(e + i, b); i = i + 1; }
+    __mind_store_i8(e + 64, 10); __mind_store_i8(e + 65, 10); return 65;
+}
+fn t_insert(p: i64, n: i64, pos: i64, b: i64) -> i64 {
+    let mut i: i64 = n;
+    while i > pos { __mind_store_i8(p + i, __mind_load_i8(p + i - 1)); i = i - 1; }
+    __mind_store_i8(p + pos, b); return n + 1;
+}
+fn t_record(totals: i64, id: i64, expected: i64, actual: i64) -> i64 {
+    if t_emit("CASE_ID=") != 1 { return 0; } print(id);
+    if t_emit("EXPECTED=") != 1 { return 0; } print(expected);
+    if t_emit("OBSERVED=") != 1 { return 0; } print(actual);
+    if actual != expected { __mind_store_i64(totals, __mind_load_i64(totals) + 1); }
+    if expected == 1 { __mind_store_i64(totals + 8, __mind_load_i64(totals + 8) + 1); }
+    else { __mind_store_i64(totals + 16, __mind_load_i64(totals + 16) + 1); }
+    return 1;
+}
+fn main() -> i64 {
+    let p: i64 = __mind_alloc(131073); let e: i64 = __mind_alloc(66);
+    let w: i64 = __mind_alloc(16); let meta: i64 = __mind_alloc(832);
+    let totals: i64 = __mind_alloc(24); let genuine: i64 = __mind_alloc(420);
+    if p == 0 || e == 0 || w == 0 || meta == 0 || totals == 0 || genuine == 0 { return 2; }
+    __mind_store_i64(totals, 0); __mind_store_i64(totals + 8, 0); __mind_store_i64(totals + 16, 0);
+    let mut n: i64 = t_build(p, meta, 48, 0); t_expected(e, 48);
+    if t_write(5, p, n) != 1 || t_write(6, e, 65) != 1 { return 2; }
+    t_expected(e, 102); if t_write(7, e, 65) != 1 { return 2; }
+    __mind_store_i8(p + n, 0); if t_write(8, p, n + 1) != 1 { return 2; }
+    t_expected(e, 48);
+    if t_record(totals, 101, 1, pqc_binding_check(p, n, e, 65, w, 16)) != 1 { return 2; }
+    n = t_build(p, meta, 102, 0); t_expected(e, 102);
+    if t_record(totals, 102, 1, pqc_binding_check(p, n, e, 65, w, 16)) != 1 { return 2; }
+    n = t_build(p, meta, 48, 0); t_expected(e, 48);
+    __mind_store_i8(p + __mind_load_i64(meta + 8 * 64 + 32), 77);
+    if t_record(totals, 103, 1, pqc_binding_check(p, n, e, 65, w, 16)) != 1 { return 2; }
+    let mut id: i64 = 1;
+    while id <= 45 {
+        let mut mode: i64 = 0;
+        if id == 16 || id == 17 || id == 20 || id == 21 || id == 31 || id == 33 { mode = id; }
+        n = t_build(p, meta, 48, mode); t_expected(e, 48);
+        let mut en: i64 = 65; let mut ip: i64 = p; let mut ep: i64 = e;
+        let mut wp: i64 = w; let mut cap: i64 = 16;
+        if id == 1 { t_expected(e, 102); }
+        if id == 2 { en = 64; }
+        if id == 3 { en = 66; }
+        if id == 4 { __mind_store_i8(e, 65); }
+        if id == 5 { __mind_store_i8(e, 103); }
+        if id == 6 { __mind_store_i8(e + 64, 13); }
+        if id == 7 { __mind_store_i8(p + 10, 120); }
+        if id == 8 { n = 34; }
+        if id == 9 { __mind_store_i8(p, 0); }
+        if id == 10 { __mind_store_i8(p + 4, 3); }
+        if id == 11 { __mind_store_i8(p + 35, 0); }
+        if id == 12 { __mind_store_i8(p + 36, 0); }
+        if id == 13 { __mind_store_i8(p + 36, 12); }
+        if id == 14 { __mind_store_i8(p + 36, 14); }
+        if id == 15 { __mind_store_i8(p + 36, 141); n = t_insert(p, n, 37, 0); }
+        if id == 18 { __mind_store_i8(p + __mind_load_i64(meta + 8), 120); }
+        if id == 19 { __mind_store_i8(p + __mind_load_i64(meta + 7 * 64 + 16), 2); }
+        if id == 22 { __mind_store_i8(p + __mind_load_i64(meta + 7 * 64 + 32), 65); }
+        if id == 23 { __mind_store_i8(p + __mind_load_i64(meta + 7 * 64 + 32), 103); }
+        if id == 24 { __mind_store_i8(p + __mind_load_i64(meta + 6 * 64 + 32), 120); }
+        if id == 25 { __mind_store_i8(p + __mind_load_i64(meta + 1 * 64 + 32), 0); }
+        if id == 26 { __mind_store_i8(p + __mind_load_i64(meta + 2 * 64 + 32), 120); }
+        if id == 27 { __mind_store_i8(p + __mind_load_i64(meta + 3 * 64 + 32), 120); }
+        if id == 28 { __mind_store_i8(p + __mind_load_i64(meta + 4 * 64 + 32), 0); }
+        if id == 29 { __mind_store_i8(p + __mind_load_i64(meta + 5 * 64 + 32), 120); }
+        if id == 30 { __mind_store_i8(p + __mind_load_i64(meta + 8 * 64 + 16), 0); }
+        if id == 32 { __mind_store_i8(p + __mind_load_i64(meta + 10 * 64 + 32), 120); }
+        if id == 34 { n = n - 1; }
+        if id == 35 { __mind_store_i8(p + n, 0); n = n + 1; }
+        if id == 36 { __mind_store_i8(p + n, 77); __mind_store_i8(p + n + 1, 0); n = n + 2; }
+        if id == 37 {
+            let at: i64 = __mind_load_i64(meta);
+            __mind_store_i8(p + at, 255); __mind_store_i8(p + at + 1, 255); __mind_store_i8(p + at + 2, 127);
+        }
+        if id == 38 {
+            let at: i64 = __mind_load_i64(meta + 7 * 64 + 24);
+            __mind_store_i8(p + at, 192); n = t_insert(p, n, at + 1, 0);
+        }
+        if id == 39 {
+            let at: i64 = __mind_load_i64(meta);
+            __mind_store_i8(p + at, 128 + __mind_load_i8(p + at)); n = t_insert(p, n, at + 1, 0);
+        }
+        if id == 40 { ip = 0; }
+        if id == 41 { n = 0 - 1; }
+        if id == 42 { n = 131073; }
+        if id == 43 { ep = 0; }
+        if id == 44 { cap = 15; }
+        if id == 45 { wp = 0; }
+        if t_record(totals, id, 0, pqc_binding_check(ip, n, ep, en, wp, cap)) != 1 { return 2; }
+        id = id + 1;
+    }
+    let mut gn: i64 = 0; let mut ended: i64 = 0;
+    while gn < 420 && ended == 0 {
+        let got: i64 = __mind_read(4, genuine + gn, 420 - gn, 0 - 1);
+        if got < 0 { return 2; }
+        if got == 0 { ended = 1; } else { gn = gn + got; }
+    }
+    if gn != 419 || ended != 1 { return 2; }
+    t_expected(e, 48);
+    if t_record(totals, 46, 0, pqc_binding_check(genuine, gn, e, 65, w, 16)) != 1 { return 2; }
+    n = t_build(p, meta, 48, 0);
+    let mut cut: i64 = 0; let mut cut_failures: i64 = 0; let mut cut_count: i64 = 0;
+    while cut <= 419 {
+        if pqc_binding_check(p, cut, e, 65, w, 16) != 0 { cut_failures = cut_failures + 1; }
+        cut_count = cut_count + 1; cut = cut + 1;
+    }
+    let mut i: i64 = 8;
+    while i < 13 {
+        if i != 10 {
+            let start: i64 = __mind_load_i64(meta + i * 64 + 32);
+            let size: i64 = __mind_load_i64(meta + i * 64 + 40);
+            if pqc_binding_check(p, start, e, 65, w, 16) != 0 { cut_failures = cut_failures + 1; }
+            if pqc_binding_check(p, start + size / 2, e, 65, w, 16) != 0 { cut_failures = cut_failures + 1; }
+            cut_count = cut_count + 2;
+            if start + size < n {
+                if pqc_binding_check(p, start + size, e, 65, w, 16) != 0 { cut_failures = cut_failures + 1; }
+                cut_count = cut_count + 1;
+            }
+        }
+        i = i + 1;
+    }
+    if t_emit("PREFIX_CHECKS=") != 1 { return 2; } print(cut_count);
+    if t_emit("PREFIX_FAILURES=") != 1 { return 2; } print(cut_failures);
+    __mind_store_i64(totals, __mind_load_i64(totals) + cut_failures);
+    __mind_store_i64(totals + 16, __mind_load_i64(totals + 16) + cut_count);
+    if t_record(totals, 104, 1, pqc_binding_check(p, n, e, 65, w, 16)) != 1 { return 2; }
+    if t_emit("EXPECTED_ACCEPTS=") != 1 { return 2; } print(__mind_load_i64(totals + 8));
+    if t_emit("EXPECTED_REJECTIONS=") != 1 { return 2; } print(__mind_load_i64(totals + 16));
+    if t_emit("UNEXPECTED_RESULTS=") != 1 { return 2; } print(__mind_load_i64(totals));
+    if __mind_load_i64(totals) != 0 { if t_emit("MAP_BINDING_SUITE=FAIL\n") != 1 { return 2; } return 1; }
+    if t_emit("MAP_BINDING_SUITE=PASS\n") != 1 { return 2; } return 0;
+}

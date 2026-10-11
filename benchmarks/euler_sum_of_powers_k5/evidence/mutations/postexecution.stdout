@@ -1,0 +1,12 @@
+MUTATION_CONTRACT.md: OK
+src/binding.mind: OK
+cli/main.mind: OK
+Mind.toml: OK
+PREEXECUTION.sha256: OK
+mutations/M01_fifth_power_binding.diff.txt: OK
+mutations/M02_positivity_binding.diff.txt: OK
+certificates/P01_c5_refutation.nd.txt: OK
+certificates/B04_missing_positive_hypothesis.nd.txt: OK
+certificates/B06_valid_square_refutation.nd.txt: OK
+../../kernels/finite_nd/src/kernel.mind: OK
+../../toolchain/compiler.sha256: OK

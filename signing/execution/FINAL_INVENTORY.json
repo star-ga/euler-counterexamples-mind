@@ -1,0 +1,10 @@
+{
+  "tracked_files_before_this_receipt": 1596,
+  "covered_payload_files": 1506,
+  "exact_private_seed_matches": 0,
+  "symlinks": 0,
+  "manifest_sha256": "d3471291b15b9e3f6d43860d4525729098c628472f7812611c2ae522a1d83965",
+  "artifact_sha256": "aade52f3d0c3ad874ff7c25113f423f487c0579e864cf71ddf1833618ba86918",
+  "owner_identity": "STARGA Inc. <noreply@star.ga>",
+  "proof_status": "FORMAL_PROOF_SUBMITTED"
+}

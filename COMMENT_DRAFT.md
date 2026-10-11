@@ -1,13 +1,10 @@
-This post inspired us to build a small MIND inference checker for Frye's
-known fourth-power counterexample. It checks the exact arithmetic and a
-structured derivation of the negation of the stated conjecture, including
-universal instantiation and assumption discharge.
+Dimitrios, your post inspired us to check the known K4 and K5 counterexamples
+using the same MIND inference kernel. The code, certificates, tests and
+reproduction steps are public. STARGA Inc. signed the artifact manifest using
+ML-DSA-87 and SLH-DSA-SHAKE-256s; both signatures and public keys are included.
 
-We have shared the full source, certificate, soundness argument, adversarial
-tests, mutation evidence and reproduction limitations here:
+The checker accepts both derivations. Independent validation of the kernel
+remains open. Would anyone like to reproduce the results and review the
+arithmetic bridge and proof rules?
+
 https://github.com/star-ga/euler-counterexamples-mind
-
-The candidate checker accepts the certificate; independent human review of
-the kernel is still welcome. This is a formalization effort, not a new
-counterexample discovery. Comments on the rules, arithmetic bridge and trust
-assumptions would be especially useful.

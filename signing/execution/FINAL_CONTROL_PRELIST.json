@@ -1,0 +1,41 @@
+{
+  "artifact_sha256": "aade52f3d0c3ad874ff7c25113f423f487c0579e864cf71ddf1833618ba86918",
+  "cases": [
+    {
+      "id": "baseline",
+      "file": "package.mic3",
+      "expected": 0
+    },
+    {
+      "id": "mutate-mldsa87",
+      "file": "mutate-mldsa87.mic3",
+      "offset": 440,
+      "expected": 1,
+      "sha256": "77826658cd02034804112fb4e9f7714b99b001ffb74b30649337ac278bb01345"
+    },
+    {
+      "id": "mutate-slhdsa",
+      "file": "mutate-slhdsa.mic3",
+      "offset": 7760,
+      "expected": 1,
+      "sha256": "64be22aef861bdbaace679063affba1d073cf44bade48071c4a855bd96003bdb"
+    },
+    {
+      "id": "mutate-manifest",
+      "file": "mutate-manifest.mic3",
+      "offset": 355,
+      "expected": 1,
+      "sha256": "f5f2d8a09874d312a920db2f0467f294d0535e6ce16b7bcb147cf51460114274"
+    },
+    {
+      "id": "wrong-mldsa87-pin",
+      "file": "package.mic3",
+      "expected": 1
+    },
+    {
+      "id": "wrong-slhdsa-pin",
+      "file": "package.mic3",
+      "expected": 1
+    }
+  ]
+}

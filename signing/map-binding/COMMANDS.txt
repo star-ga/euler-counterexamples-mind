@@ -1,0 +1,36 @@
+Author: STARGA Inc.
+Working directory: /BUILD_TMP
+
+Pinned compiler: /PINNED_TOOLCHAIN/mindc
+SHA256: a1444e4412efcf6eef4d2f0635ee530cacdc58414531b7c7b5bec6eff15d7ffa
+
+Build CLI from the scratch root:
+/usr/bin/time -v -o receipts/build-checker-v2.time.txt timeout 60 taskset -c 0 nice -n 19 prlimit --as=1073741824 --cpu=50 -- env MLIR_OPT=/usr/lib/llvm-20/bin/mlir-opt MLIR_TRANSLATE=/usr/lib/llvm-20/bin/mlir-translate CLANG=/usr/lib/llvm-20/bin/clang CC=/usr/lib/llvm-20/bin/clang /PINNED_TOOLCHAIN/mindc build src/main.mind --backend mlir --target cpu --emit binary --optimize debug --no-cache --out map-binding-check > receipts/build-checker-v2.stdout 2> receipts/build-checker-v2.stderr
+Save shell exit code to receipts/build-checker-v2.exit immediately.
+
+Build baseline suite: stage exactly tests/suite.mind as builds/suite/src/main.mind,
+src/bridge.mind as builds/suite/src/bridge.mind, and Mind.toml at builds/suite/.
+From builds/suite use the same bounded build command, output suite; receipts are
+../../receipts/build-suite.{stdout,stderr,exit,time.txt}.
+
+Run baseline from scratch root:
+/usr/bin/time -v -o receipts/suite.time.txt timeout 60 taskset -c 0 nice -n 19 prlimit --as=268435456 --cpu=50 -- builds/suite/suite 4<reference/carrier-twoattrs-unsigned.mic3 5>tests/synthetic-shape.mic3 6>tests/expected-zero.txt 7>tests/expected-wrong.txt 8>tests/synthetic-trailing.mic3 >receipts/suite.stdout 2>receipts/suite.stderr
+Save shell exit code to receipts/suite.exit immediately.
+
+Mutants: stage fresh identical projects at builds/M01 and builds/M02, apply only
+the corresponding tests/mutations/*.patch to src/bridge.mind. Build from each
+project with the same command; receipts M01-build.* and M02-build.*. Their main
+files remain byte-identical to tests/suite.mind.
+
+Run each mutant from scratch root with same suite limits/inputfd4, but output
+fds5,6,7,8 redirected to /dev/null to preserve baseline generated fixture bytes:
+/usr/bin/time -v -o receipts/M01-run.time.txt timeout 60 taskset -c 0 nice -n 19 prlimit --as=268435456 --cpu=50 -- builds/M01/suite 4<reference/carrier-twoattrs-unsigned.mic3 5>/dev/null 6>/dev/null 7>/dev/null 8>/dev/null >receipts/M01-run.stdout 2>receipts/M01-run.stderr
+M02 identical with M02 substituted. Capture exit codes immediately.
+
+CLI fixture runs use timeout30, CPU20, taskset0, nice19, address-space268435456:
+map-binding-check <tests/synthetic-shape.mic3 3<tests/expected-zero.txt
+map-binding-check <tests/synthetic-shape.mic3 3<tests/expected-wrong.txt
+map-binding-check <tests/synthetic-trailing.mic3 3<tests/expected-zero.txt
+map-binding-check <reference/carrier-twoattrs-unsigned.mic3 3<tests/expected-zero.txt
+Raw output/exits/timings stored under cli-positive,cli-wrong-digest,cli-trailing,
+cli-unsigned in receipts. Synthetic positive signature slots are not signatures.

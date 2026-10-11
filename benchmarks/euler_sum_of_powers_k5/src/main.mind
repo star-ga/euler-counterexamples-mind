@@ -1,0 +1,106 @@
+// Author: STARGA Inc. MIND test decisions over the frozen K5 contract.
+import kernel;
+import binding;
+import fixtures;
+
+fn main() -> i64 {
+    let work: i64 = __mind_alloc(65536);
+    let input: i64 = __mind_alloc(65536);
+    if work == 0 || input == 0 {
+        return 2;
+    }
+    if k5_fixture_count() != 42 {
+        return 1;
+    }
+    let mut generic_accepts: i64 = 0;
+    let mut bound_accepts: i64 = 0;
+    let mut generic_rejects: i64 = 0;
+    let mut bound_rejects: i64 = 0;
+    let mut i: i64 = 0;
+    while i < 42 {
+        let fixture: String = k5_fixture_text(i);
+        let generic: i64 = finite_nd_check(fixture.addr, fixture.len, work, 65536);
+        let bound: i64 = k5_check(fixture.addr, fixture.len, work, 65536);
+        if k5_emit("CASE=") != 1 {
+            return 2;
+        }
+        if k5_emit(k5_fixture_name(i)) != 1 {
+            return 2;
+        }
+        if k5_emit("\nGENERIC=") != 1 {
+            return 2;
+        }
+        print(generic);
+        if k5_emit("C5_BOUND=") != 1 {
+            return 2;
+        }
+        print(bound);
+        if generic != k5_fixture_kernel(i) || bound != k5_fixture_bound(i) {
+            return 1;
+        }
+        if generic == 1 {
+            generic_accepts = generic_accepts + 1;
+        } else {
+            generic_rejects = generic_rejects + 1;
+        }
+        if bound == 1 {
+            bound_accepts = bound_accepts + 1;
+        } else {
+            bound_rejects = bound_rejects + 1;
+        }
+        i = i + 1;
+    }
+    let original: String = k5_fixture_text(0);
+    if original.len != 1045 {
+        return 1;
+    }
+    i = 0;
+    while i < original.len {
+        __mind_store_i8(input + i, __mind_load_i8(original.addr + i));
+        i = i + 1;
+    }
+    i = 0;
+    while i < original.len {
+        if finite_nd_check(input, i, work, 65536) != 0 {
+            return 1;
+        }
+        if k5_check(input, i, work, 65536) != 0 {
+            return 1;
+        }
+        generic_rejects = generic_rejects + 1;
+        bound_rejects = bound_rejects + 1;
+        i = i + 1;
+    }
+    i = 0;
+    while i < original.len {
+        let saved: i64 = __mind_load_i8(input + i);
+        __mind_store_i8(input + i, 88);
+        let generic: i64 = finite_nd_check(input, original.len, work, 65536);
+        let bound: i64 = k5_check(input, original.len, work, 65536);
+        __mind_store_i8(input + i, saved);
+        if generic != 0 || bound != 0 {
+            return 1;
+        }
+        generic_rejects = generic_rejects + 1;
+        bound_rejects = bound_rejects + 1;
+        i = i + 1;
+    }
+    if finite_nd_check(input, original.len, work, 65536) != 1 {
+        return 1;
+    }
+    if k5_check(input, original.len, work, 65536) != 1 {
+        return 1;
+    }
+    if generic_accepts != 10 || bound_accepts != 3 {
+        return 1;
+    }
+    if generic_rejects != 2122 || bound_rejects != 2129 {
+        return 1;
+    }
+    if k5_emit("STATIC_CASES=42\nGENERIC_ACCEPTS=10\nC5_BOUND_ACCEPTS=3\nGENERIC_REJECTS=2122\nC5_BOUND_REJECTS=2129\nPREFIX_CASES=1045\nBYTE_CORRUPTIONS=1045\nRESTORED_C5=PASS\nK5_TESTS=PASS\nFORMAL_ACCEPTANCE=BLOCKED\n") != 1 {
+        return 2;
+    }
+    __mind_free(input);
+    __mind_free(work);
+    return 0;
+}

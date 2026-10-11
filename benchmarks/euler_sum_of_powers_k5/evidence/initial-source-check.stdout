@@ -1,0 +1,5 @@
+benchmarks/euler_sum_of_powers_k5/src/binding.mind:225:8: error: unsupported call to `finite_nd_check` [type_check::E2003]
+benchmarks/euler_sum_of_powers_k5/src/main.mind:22:28: error: unsupported call to `finite_nd_check` [type_check::E2003]
+benchmarks/euler_sum_of_powers_k5/src/main.mind:64:12: error: unsupported call to `finite_nd_check` [type_check::E2003]
+benchmarks/euler_sum_of_powers_k5/src/main.mind:78:28: error: unsupported call to `finite_nd_check` [type_check::E2003]
+benchmarks/euler_sum_of_powers_k5/src/main.mind:88:8: error: unsupported call to `finite_nd_check` [type_check::E2003]

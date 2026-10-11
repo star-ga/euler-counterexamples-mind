@@ -34,11 +34,24 @@ establish who controls the signing keys.
 
 ## Status of this Euler package
 
-Signing is optional for this public proof candidate. The supplied proof
-certificate and current Git commits are unsigned, with no signer identity
-claimed. This package did not execute the hybrid signing example above. Its
-qualified public compiler bootstrap and historical pin remain documented
-separately; neither is promoted to a qualified signing build by this text.
+The release supplies a hybrid-signed package-provenance carrier, its exact
+payload manifest, both public keys and reproducible verification commands in
+[signing/](signing/README.md). The carrier's two signatures authenticate the
+manifest digest; checking that manifest binds the listed proof artifacts.
+Both signatures are embedded in the carrier. Git commits themselves remain
+unsigned. This dedicated project key is not a previously established global
+STARGA root; compare the public-key fingerprints through a trusted owner channel.
+
+The [separate public signing profile](toolchain/public-pqc/README.md) is built
+from pinned public compiler source with both required crypto features. The
+historical mathematical compiler pin is unchanged. [Execution records](signing/execution/RESULTS.md)
+describe actual signing, both-key authentication, metadata binding, tampering
+controls and independent replay. The auxiliary [MIND binding checker](signing/map-binding/README.md)
+requires the exact carrier profile and expected manifest digest.
+
+This authenticates package bytes, not mathematical soundness or an equivalence
+between source and executed machine code. The carrier program is deliberately
+minimal and makes no claim to serialize the inference kernel.
 
 ## Historical compiler diagnostic
 

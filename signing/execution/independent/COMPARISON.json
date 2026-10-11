@@ -1,0 +1,53 @@
+{
+  "rows": [
+    {
+      "bytes": 5813,
+      "call": "crypto",
+      "equal": true,
+      "host_a_sha256": "2243b01132a0f705af24c7b75c126c002029ee5b287340f9726a5bb6bac588aa",
+      "host_b_sha256": "2243b01132a0f705af24c7b75c126c002029ee5b287340f9726a5bb6bac588aa",
+      "stream": "stdout"
+    },
+    {
+      "bytes": 0,
+      "call": "crypto",
+      "equal": true,
+      "host_a_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "host_b_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stream": "stderr"
+    },
+    {
+      "bytes": 2,
+      "call": "crypto",
+      "equal": true,
+      "host_a_sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "host_b_sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "stream": "exit"
+    },
+    {
+      "bytes": 24,
+      "call": "binding",
+      "equal": true,
+      "host_a_sha256": "b8a85d0af6dc67cf372e5e0828bc409b31aa064018a9761309d0036c259d4e5f",
+      "host_b_sha256": "b8a85d0af6dc67cf372e5e0828bc409b31aa064018a9761309d0036c259d4e5f",
+      "stream": "stdout"
+    },
+    {
+      "bytes": 0,
+      "call": "binding",
+      "equal": true,
+      "host_a_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "host_b_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stream": "stderr"
+    },
+    {
+      "bytes": 2,
+      "call": "binding",
+      "equal": true,
+      "host_a_sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "host_b_sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "stream": "exit"
+    }
+  ],
+  "schema": "EULER-FINAL-CROSS-HOST/1"
+}

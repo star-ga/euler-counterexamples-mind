@@ -1,0 +1,9 @@
+--- src/bridge.mind
++++ src/bridge.mind
+@@ -129,6 +129,5 @@
+         }
+         i = i + 1;
+     }
+-    if __mind_load_i64(work) != n { return 0; }
+     return 1;
+ }

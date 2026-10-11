@@ -1,0 +1,4 @@
+/usr/bin/x86_64-linux-gnu-ld.bfd: /BUILD_TMP/target/obj/tests.o: in function `main':
+LLVMDialectModule:(.text+0xf50): multiple definition of `main'; /BUILD_TMP/target/obj/main.o:LLVMDialectModule:(.text+0xe0): first defined here
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+error[build]: linking failed with exit code: Some(1)

@@ -19,6 +19,13 @@ private research data is vendored. The owner supplied the witness and a social
 post as motivation. The post's image and unverified timing claims are not
 redistributed or relied upon.
 
+The fifth-power witness 27, 84, 110, 133, 144 is due to L. J. Lander and
+T. R. Parkin, *Counterexample to Euler's conjecture on sums of like powers*,
+Bulletin of the American Mathematical Society 72 (1966), p. 1079,
+[DOI 10.1090/S0002-9904-1966-11654-3](https://doi.org/10.1090/S0002-9904-1966-11654-3).
+The new K5 certificate uses the unchanged inference kernel. This is a
+formalization of that known witness, not a new counterexample or discovery.
+
 STARGA Inc. is the author of this original MIND implementation,
 formalization and documentation. AI tools assisted implementation and review;
 they are neither authors nor mathematical authorities. Fixture generation used

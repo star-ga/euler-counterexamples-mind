@@ -1,0 +1,3 @@
+byte_identical=true
+artifact_bytes=37642
+artifact_sha256=aade52f3d0c3ad874ff7c25113f423f487c0579e864cf71ddf1833618ba86918

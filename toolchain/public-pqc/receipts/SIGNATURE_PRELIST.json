@@ -1,0 +1,133 @@
+{
+  "authority": "cryptographic integrity/authentication only; no mathematical proof promotion",
+  "case_count": 9,
+  "cases": [
+    {
+      "artifact": "signed.mic3",
+      "expected_exit": 0,
+      "id": "baseline",
+      "ml_key": "ml-dsa-87.pub.hex",
+      "slh_key": "slh-dsa-shake-256s.pub.hex"
+    },
+    {
+      "artifact": "signed.mic3",
+      "expected_exit": 1,
+      "id": "wrong-mldsa87-pin",
+      "ml_key": "ml-dsa-87.wrong.pub.hex",
+      "slh_key": "slh-dsa-shake-256s.pub.hex"
+    },
+    {
+      "artifact": "signed.mic3",
+      "expected_exit": 1,
+      "id": "wrong-slhdsa-pin",
+      "ml_key": "ml-dsa-87.pub.hex",
+      "slh_key": "slh-dsa-shake-256s.wrong.pub.hex"
+    },
+    {
+      "artifact": "mutate-mldsa87.mic3",
+      "expected_exit": 1,
+      "id": "mutate-mldsa87",
+      "ml_key": "ml-dsa-87.pub.hex",
+      "slh_key": "slh-dsa-shake-256s.pub.hex"
+    },
+    {
+      "artifact": "mutate-slhdsa.mic3",
+      "expected_exit": 1,
+      "id": "mutate-slhdsa",
+      "ml_key": "ml-dsa-87.pub.hex",
+      "slh_key": "slh-dsa-shake-256s.pub.hex"
+    },
+    {
+      "artifact": "mutate-manifest.mic3",
+      "expected_exit": 1,
+      "id": "mutate-manifest",
+      "ml_key": "ml-dsa-87.pub.hex",
+      "slh_key": "slh-dsa-shake-256s.pub.hex"
+    },
+    {
+      "artifact": "mutate-scope.mic3",
+      "expected_exit": 1,
+      "id": "mutate-scope",
+      "ml_key": "ml-dsa-87.pub.hex",
+      "slh_key": "slh-dsa-shake-256s.pub.hex"
+    },
+    {
+      "artifact": "remove-mldsa87.mic3",
+      "expected_exit": 1,
+      "id": "remove-mldsa87",
+      "ml_key": "ml-dsa-87.pub.hex",
+      "slh_key": "slh-dsa-shake-256s.pub.hex"
+    },
+    {
+      "artifact": "remove-slhdsa.mic3",
+      "expected_exit": 1,
+      "id": "remove-slhdsa",
+      "ml_key": "ml-dsa-87.pub.hex",
+      "slh_key": "slh-dsa-shake-256s.pub.hex"
+    }
+  ],
+  "compiler_sha256": "1550b0d19f76941794521cc8e5ce67c66fbb4d3d940c9ab731d28a63f3d8cd0e",
+  "input_sha256": {
+    "ml-dsa-87.pub.hex": "22076215501568cc11703013214eecb8f299489f78c80025dc059a0dfa366811",
+    "ml-dsa-87.wrong.pub.hex": "679e6ffff720a05b7fa3ef5afaed0bbb27aaeb64b189862f8e21937b6cfa9898",
+    "mutate-manifest.mic3": "3b3e621044a17159adc214bd8a28986b068e4a9e46b2dd5ea950ac72eacccb17",
+    "mutate-mldsa87.mic3": "db0b4cfc24841755b1d3458b8745d6754b97e3e8dc4a9fb7db95b9d3a72477d5",
+    "mutate-scope.mic3": "b7c7b3482704bffc27cb3175b3ecd5a91b7fb09e84114315da79a451330cd691",
+    "mutate-slhdsa.mic3": "d3809d73a040eb307bb15fd2956270306f2f640ac552fbe5f7a00b67e6b5f04a",
+    "remove-mldsa87.mic3": "578207baf791ec254d095ad97d53d454a9522c3752a06a5a26c48fcc560e3449",
+    "remove-slhdsa.mic3": "d480a6545f214f7b81a6eb0ab5ca5f4e043c2add4359a8c2895813faf438e0d0",
+    "signed.mic3": "0f941b637d620ef4d9aac6ea38c8f362df492a43c91b53536fb28a48436854f4",
+    "slh-dsa-shake-256s.pub.hex": "1d6bd469c3da9b2f6297148eb3ea2685bd2a04531cf5973a334a913f5441c479",
+    "slh-dsa-shake-256s.wrong.pub.hex": "4615b42c4f00f2ebb0527640e53192c9e4be3fcb2c17bda78822072539951128"
+  },
+  "limits": {
+    "address_space_bytes": 1073741824,
+    "cpu_count": 1,
+    "cpu_seconds": 10,
+    "nice": 19,
+    "wall_seconds": 15
+  },
+  "mic3_revision": 2,
+  "mutations": {
+    "mutate-manifest": {
+      "field": "org.starga.package_manifest_sha256",
+      "length_preserved": true,
+      "mutated_byte": 48,
+      "offset": 355,
+      "original_byte": 56
+    },
+    "mutate-mldsa87": {
+      "field": "signature.mldsa87",
+      "length_preserved": true,
+      "mutated_byte": 227,
+      "offset": 440,
+      "original_byte": 226
+    },
+    "mutate-scope": {
+      "field": "org.starga.attestation_scope",
+      "length_preserved": true,
+      "mutated_byte": 113,
+      "offset": 300,
+      "original_byte": 112
+    },
+    "mutate-slhdsa": {
+      "field": "signature.slhdsa",
+      "length_preserved": true,
+      "mutated_byte": 51,
+      "offset": 7760,
+      "original_byte": 50
+    },
+    "remove-mldsa87": {
+      "all_other_entry_bytes_preserved": true,
+      "remaining_entry_count": 12,
+      "removed_field": "signature.mldsa87"
+    },
+    "remove-slhdsa": {
+      "all_other_entry_bytes_preserved": true,
+      "remaining_entry_count": 12,
+      "removed_field": "signature.slhdsa"
+    }
+  },
+  "schema": "EULER-PQC-INDEPENDENT-CONTROLS/1",
+  "signed_artifact_sha256": "0f941b637d620ef4d9aac6ea38c8f362df492a43c91b53536fb28a48436854f4"
+}

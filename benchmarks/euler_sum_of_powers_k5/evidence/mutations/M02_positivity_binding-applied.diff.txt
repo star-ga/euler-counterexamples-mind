@@ -1,0 +1,12 @@
+--- a/binding.mind
++++ b/binding.mind
+@@ -209,9 +209,6 @@
+     if k5_ftag(w, body, 5) != 1 {
+         return 0;
+     }
+-    if k5_positives(w, k5_fleft(w, body)) != 1 {
+-        return 0;
+-    }
+     let negative_equation: i64 = k5_fright(w, body);
+     if k5_ftag(w, negative_equation, 5) != 1 {
+         return 0;

@@ -16,6 +16,54 @@ COMPILE = $(BUILD_LIMIT) "$(MINDC)" build src/main.mind --backend mlir --target 
 
 .PHONY: check-source check-pin kernel verify test review regression
 
+PQC_MINDC ?= mindc
+PQC_MINDC_SHA256 ?= 1550b0d19f76941794521cc8e5ce67c66fbb4d3d940c9ab731d28a63f3d8cd0e
+.PHONY: k5-test k5-verify binding-check binding-test signed-verify
+
+k5-test: check-pin check-source
+	@mkdir -p "$(BUILD)/k5-suite/src"
+	cp benchmarks/euler_sum_of_powers_k5/Mind.toml "$(BUILD)/k5-suite/"
+	cp benchmarks/euler_sum_of_powers_k5/src/*.mind kernels/finite_nd/src/kernel.mind "$(BUILD)/k5-suite/src/"
+	cd "$(BUILD)/k5-suite" && $(COMPILE) --out "$(BUILD)/k5-suite-check"
+	$(RUN_LIMIT) "$(BUILD)/k5-suite-check"
+
+k5-verify: check-pin check-source
+	@mkdir -p "$(BUILD)/k5-cli/src"
+	cp benchmarks/euler_sum_of_powers_k5/Mind.toml "$(BUILD)/k5-cli/"
+	cp benchmarks/euler_sum_of_powers_k5/cli/main.mind benchmarks/euler_sum_of_powers_k5/src/binding.mind kernels/finite_nd/src/kernel.mind "$(BUILD)/k5-cli/src/"
+	cd "$(BUILD)/k5-cli" && $(COMPILE) --out "$(BUILD)/k5-check"
+	$(RUN_LIMIT) "$(BUILD)/k5-check" < benchmarks/euler_sum_of_powers_k5/certificates/P01_c5_refutation.nd.txt
+
+binding-check: check-pin
+	@mkdir -p "$(BUILD)/binding/src"
+	cp signing/map-binding/Mind.toml "$(BUILD)/binding/"
+	cp signing/map-binding/src/*.mind "$(BUILD)/binding/src/"
+	cd "$(BUILD)/binding" && $(COMPILE) --out "$(BUILD)/map-binding-check"
+
+binding-test: check-pin
+	@mkdir -p "$(BUILD)/binding-suite/src"
+	cp signing/map-binding/Mind.toml "$(BUILD)/binding-suite/"
+	cp signing/map-binding/src/bridge.mind "$(BUILD)/binding-suite/src/"
+	cp signing/map-binding/tests/suite.mind "$(BUILD)/binding-suite/src/main.mind"
+	cd "$(BUILD)/binding-suite" && $(COMPILE) --out "$(BUILD)/binding-suite-check"
+	$(RUN_LIMIT) "$(BUILD)/binding-suite-check" 4<signing/map-binding/reference/carrier-twoattrs-unsigned.mic3 5>/dev/null 6>/dev/null 7>/dev/null 8>/dev/null
+
+# Use a fresh checkout with no concurrent writer. Public-key identity must be
+# selected independently; these keys alone do not establish organizational trust.
+signed-verify: binding-check
+	@signer_path="$$(command -v -- "$(PQC_MINDC)")"; test "$$(sha256sum "$$signer_path" | cut -d ' ' -f1)" = "$(PQC_MINDC_SHA256)"
+	@set -eu; snapshot=$$(mktemp -d); trap 'rm -rf "$$snapshot"' EXIT; \
+	cp signing/package.mic3 "$$snapshot/package.mic3"; \
+	cp signing/PAYLOAD_SHA256SUMS "$$snapshot/PAYLOAD_SHA256SUMS"; \
+	cp signing/public-keys/*.pub.hex "$$snapshot/"; \
+	$(RUN_LIMIT) env -u MIND_EVIDENCE_VERIFY_PUBKEYS "$(PQC_MINDC)" verify "$$snapshot/package.mic3" --json --require-signed --require-strict-fp --require-deterministic \
+	  --signer-pubkey "$$(cat "$$snapshot/ml-dsa-87.pub.hex")" \
+	  --signer-pubkey "$$(cat "$$snapshot/slh-dsa-shake-256s.pub.hex")"; \
+	sha256sum "$$snapshot/PAYLOAD_SHA256SUMS" | cut -d ' ' -f1 > "$$snapshot/expected-digest.txt"; \
+	$(RUN_LIMIT) "$(BUILD)/map-binding-check" < "$$snapshot/package.mic3" 3<"$$snapshot/expected-digest.txt"; \
+	sha256sum -c "$$snapshot/PAYLOAD_SHA256SUMS"; \
+	printf '%s\n' 'SIGNED_PAYLOAD=PASS'
+
 check-source:
 	sha256sum -c publication/SOURCE_SHA256SUMS
 

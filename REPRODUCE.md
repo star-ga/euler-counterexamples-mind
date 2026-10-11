@@ -49,6 +49,14 @@ are MIND. Shell, Git, hashing utilities and build tools are orchestration
 dependencies, not proof rules. Capture build/run stdout, stderr, exit values and
 executable hashes separately. Resource exhaustion is a failed run, not proof.
 
+For K5, follow [its exact contract and build recipe](benchmarks/euler_sum_of_powers_k5/REPRODUCE.md)
+or run `make k5-test k5-verify` with the same explicit compiler settings.
+The original kernel is shared without modification. For package authenticity,
+follow [the PQC verification recipe](signing/README.md); `make signed-verify`
+uses a separately qualified crypto-enabled compiler plus a native MIND
+manifest-binding checker. `make binding-test` exercises that binding parser.
+All make targets build sequentially by default; do not use unrestricted `-j`.
+
 The archived campaign receipts are sanitized public copies. Generic paths
 beginning `/BUILD_` or `/PINNED_TOOLCHAIN` describe the historical execution and
 are not commands to execute verbatim. The dedicated reproduction instructions

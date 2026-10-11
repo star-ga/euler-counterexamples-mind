@@ -1,0 +1,11 @@
+--- a/binding.mind
++++ b/binding.mind
+@@ -219,7 +219,7 @@
+     if k5_ftag(w, k5_fright(w, negative_equation), 3) != 1 {
+         return 0;
+     }
+-    return k5_equation(w, k5_fleft(w, negative_equation));
++    return 1;
+ }
+ pub fn k5_check(p: i64, n: i64, work: i64, cap: i64) -> i64 {
+     if finite_nd_check(p, n, work, cap) != 1 {

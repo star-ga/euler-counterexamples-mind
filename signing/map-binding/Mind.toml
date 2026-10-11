@@ -1,0 +1,8 @@
+[package]
+name = "starga-euler-pqc-binding"
+version = "0.1.0"
+authors = ["STARGA Inc."]
+description = "Bounded MAP package digest binding; signature verification is separate"
+[build]
+target = "cpu"
+entry = "src/main.mind"

@@ -1,0 +1,54 @@
+// Author: STARGA Inc. Candidate acceptance bound to the exact negation of C5.
+import binding;
+
+fn main() -> i64 {
+    let input: i64 = __mind_alloc(65537);
+    let work: i64 = __mind_alloc(65536);
+    if input == 0 || work == 0 {
+        return 2;
+    }
+    let mut n: i64 = 0;
+    let mut ended: i64 = 0;
+    while n < 65536 && ended == 0 {
+        let got: i64 = __mind_read(0, input + n, 65536 - n, 0 - 1);
+        if got < 0 {
+            __mind_free(input);
+            __mind_free(work);
+            return 2;
+        }
+        if got == 0 {
+            ended = 1;
+        } else {
+            n = n + got;
+        }
+    }
+    if ended == 0 {
+        let extra: i64 = __mind_read(0, input + 65536, 1, 0 - 1);
+        if extra < 0 {
+            __mind_free(input);
+            __mind_free(work);
+            return 2;
+        }
+        if extra != 0 {
+            __mind_free(input);
+            __mind_free(work);
+            if k5_emit("C5_BOUND_CERTIFICATE=FAIL\n") != 1 {
+                return 2;
+            }
+            return 1;
+        }
+    }
+    let accepted: i64 = k5_check(input, n, work, 65536);
+    __mind_free(input);
+    __mind_free(work);
+    if accepted == 1 {
+        if k5_emit("C5_BOUND_CERTIFICATE=PASS\nFORMAL_ACCEPTANCE=BLOCKED\n") != 1 {
+            return 2;
+        }
+        return 0;
+    }
+    if k5_emit("C5_BOUND_CERTIFICATE=FAIL\n") != 1 {
+        return 2;
+    }
+    return 1;
+}

@@ -1,0 +1,8 @@
+[package]
+name = "euler-sum-of-powers-k5"
+version = "0.1.0"
+authors = ["STARGA Inc."]
+description = "MIND candidate refutation of the fifth-power Euler conjecture"
+[build]
+target = "cpu"
+entry = "src/main.mind"

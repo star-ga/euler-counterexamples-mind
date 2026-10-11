@@ -1,0 +1,21 @@
+{
+  "schema": "EULER-FINAL-BINDING-AND-PAYLOAD-CONTROLS/1",
+  "cases": [
+    {
+      "id": "binding-correct",
+      "expected": 0,
+      "digest": "d3471291b15b9e3f6d43860d4525729098c628472f7812611c2ae522a1d83965"
+    },
+    {
+      "id": "binding-wrong",
+      "expected": 1,
+      "digest": "03471291b15b9e3f6d43860d4525729098c628472f7812611c2ae522a1d83965"
+    },
+    {
+      "id": "payload-tamper",
+      "expected": 1,
+      "path": "benchmarks/euler_sum_of_powers_k5/certificates/P01_c5_refutation.nd.txt",
+      "change": "append LF after exact certificate bytes"
+    }
+  ]
+}

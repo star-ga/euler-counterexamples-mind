@@ -77,6 +77,41 @@ certificate. Kernel soundness has not received the acceptance required by
 PROOF_POLICY.md; no NATIVE_VERIFIED decision is made by this publication.
 The compiler and runtime remain in the trusted computing base.
 
-The observed unsigned MIC artifact was a lossy IR summary and is not offered
-as semantic attestation of this checker. Signing is optional and would not
-close that gap. This work claims neither a new counterexample nor RH progress.
+The historical unsigned kernel MIC artifact was a lossy IR summary and is not
+offered as semantic attestation of this checker. The release's separate signed
+carrier instead binds a manifest of the actual source, certificates and
+evidence. Signing does not close the kernel-soundness or compiler-correctness
+obligations. This work claims neither a new counterexample nor RH progress.
+
+## K5 and signed-package extension
+
+The same kernel source checks the K5 certificate without any new inference
+rule. The added exact-goal wrapper and MIND test suite passed all 42 static
+paired tests and 2,090 parser corruptions. Two separately prelisted real source
+mutants exposed removal of fifth-power and positivity statement binding.
+The original compiler and all 88 protected K4 source artifacts remain unchanged.
+See the K5 benchmark's RESULTS.md and publication/k5-cross-host/RESULTS.md.
+
+The public-source compiler also built and ran both K5 programs and both MIND
+MAP-binding programs. K5 outputs match the historical profile, but ELF bytes
+differ; publication/k5-public-profile/RESULTS.md records that distinction.
+
+The hybrid signature uses both ML-DSA-87 and SLH-DSA-SHAKE-256s. Both public
+keys, fingerprints, the exact signed manifest, embedded signatures and
+commands are in signing/. A separate public compiler profile supplies the
+crypto verifier. Nine prelisted diagnostic controls exercised wrong key pins,
+each corrupted or removed signature, and modified signed attributes; every
+negative control was rejected with normal exit 1. Final-artifact checks and
+public-download verification are recorded under signing/execution/.
+
+The signer is a dedicated project key created for this release, with private
+seeds retained outside the repository. Signatures establish provenance under
+the selected key identity and do not approve mathematical soundness.
+
+The extension received separate automated implementation reviews in K5_REVIEW.md
+and SIGNING_REVIEW.md. Neither authorizes formal acceptance. A second local
+Repomix scan of the expanded tree exited 0 and found no suspicious files among
+1,487 eligible files; peak cgroup memory was 209.6 MiB, zero swap, one CPU.
+The first scan invocation failed to resolve its executable and was not counted;
+the corrected absolute-path invocation scanned the intended repository.
+Final key-material and manifest-coverage checks are recorded with the release.

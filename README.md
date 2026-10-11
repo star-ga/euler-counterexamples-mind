@@ -1,4 +1,4 @@
-# Euler K4 counterexample: a MIND proof-checker candidate
+# Euler K4 and K5 counterexamples: a MIND proof-checker candidate
 
 Author: STARGA Inc.
 
@@ -12,10 +12,12 @@ Public review copy. [Existing all-rights-reserved terms](LICENSE.md) are retaine
 publication does not select a new open-source license.
 
 This repository contains the complete MIND source of a small inference
-kernel, a structured certificate, executable tests and recorded verification
-evidence for the known identity
+kernel, structured certificates, executable tests and recorded verification
+evidence for two known identities:
 
 **95800^4 + 217519^4 + 414560^4 = 422481^4.**
+
+**27^5 + 84^5 + 110^5 + 133^5 = 144^5.**
 
 The certificate derives the negation of
 
@@ -26,6 +28,11 @@ instantiation and inference, tracks assumptions and discharges the assumed C4.
 It is a generic bounded natural-deduction checker, not a fixed Euler template.
 Quantifiers range over all integers; implementation bounds cause rejection
 rather than changing the mathematical domain.
+
+The [K5 certificate](benchmarks/euler_sum_of_powers_k5/README.md) refutes the
+analogous universally quantified positive-integer statement C5. It uses the
+**identical kernel source and inference rules**. Its MIND wrapper additionally
+checks that the accepted goal AST is exactly the stated negation of C5.
 
 **Status: FORMAL_PROOF_SUBMITTED.** Certificate acceptance was observed under
 the documented candidate rules. Kernel soundness has a prose argument and a
@@ -50,6 +57,8 @@ agreement or GitHub approval alone does not establish mathematical soundness.
   [how to submit a substantive review](REVIEWING.md).
 - [Historical attribution](PROVENANCE.md) and
   [publication transformations](publication/README.md).
+- [K5 theorem, certificate and results](benchmarks/euler_sum_of_powers_k5/README.md).
+- [PQC signatures, public keys and verification](signing/README.md).
 
 ## Executed checks
 
@@ -59,6 +68,13 @@ and exposed eight actual checker-source mutations with valid positive controls.
 The earlier arithmetic/template benchmark and its 1,240 negative tests are
 retained unchanged as [regression evidence](benchmarks/euler_sum_of_powers_k4/README.md).
 That earlier recognizer is not the inference kernel.
+
+The K5 suite passed 42 static paired checks plus 1,045 truncations and 1,045
+single-byte corruptions: 2,122 generic rejections and 2,129 C5-bound rejections.
+Seven valid proofs of other goals pass the generic kernel and fail the exact
+C5 wrapper. Two actual wrapper-source mutants exposed removal of fifth-power
+and positivity binding. [Second-machine replay](publication/k5-cross-host/RESULTS.md)
+matched the historical K5 suite and CLI outputs and exit codes.
 
 These counts describe finite executed checks, not a proof of all possible
 kernel executions. The reported source review used another AI agent working
@@ -84,15 +100,16 @@ stdout, stderr and exit codes on a [second Linux machine](toolchain/public-sourc
 These are measured results for the documented hosts/backend, not a claim about
 every architecture or a formally verified compiler.
 
-MIND supports optional hybrid post-quantum evidence signing with
-**ML-DSA-87 + SLH-DSA-SHAKE-256s**, as documented in the
-[official roadmap](https://mindlang.dev/roadmap). This published Euler package
-is unsigned. [MIC/MAP capabilities and this artifact's scope](MIC_EVIDENCE.md)
-explain the signing options and the limits observed with the benchmark's
-specific historical compiler. Those observations do not imply that MIND lacks
-PQC signing.
+The package uses MIND's optional hybrid post-quantum provenance facility,
+**ML-DSA-87 + SLH-DSA-SHAKE-256s**. Both signatures are carried in a MIC/MAP
+artifact that binds the payload manifest. See the [public keys and commands](signing/README.md)
+and [execution evidence](signing/execution/RESULTS.md) to verify the signatures
+and all listed files. [MIC/MAP scope](MIC_EVIDENCE.md) distinguishes this
+package-provenance carrier from an attestation of the kernel's semantics.
+Signatures do not validate the mathematical inference rules.
 
-This is STARGA's implementation and formalization of Roger Frye's published
-counterexample, not a new mathematical discovery. It makes no RH progress claim.
+This is STARGA's implementation and formalization of the published Frye (K4)
+and Lander–Parkin (K5) counterexamples, not a new mathematical discovery.
+It makes no RH progress claim.
 Only this isolated artifact is authorized for public release; other research
 repositories and their histories are not included.

@@ -1,4 +1,5 @@
 # Preserve mathematical inputs, including deliberately malformed byte fixtures.
+* -text
 *.mind -text
 *.nd.txt -text
 *.diff.txt -text
@@ -9,3 +10,14 @@ benchmarks/euler_sum_of_powers_k4/arithmetic.txt -text
 benchmarks/euler_sum_of_powers_k4/refutation.txt -text
 benchmarks/euler_sum_of_powers_k4/zero-arithmetic.txt -text
 benchmarks/euler_sum_of_powers_k4/zero-refutation.txt -text
+# These exact malformed fixtures and raw tool receipts intentionally retain
+# trailing whitespace. Never rewrite their bytes to satisfy an editorial gate.
+benchmarks/euler_sum_of_powers_k5/certificates/N26_trailing_lf.nd.txt whitespace=-blank-at-eof
+benchmarks/euler_sum_of_powers_k5/certificates/N31_crlf.nd.txt whitespace=-blank-at-eol
+benchmarks/euler_sum_of_powers_k5/evidence/cli-elf.txt whitespace=-blank-at-eol
+benchmarks/euler_sum_of_powers_k5/evidence/cli-versions.txt whitespace=-blank-at-eol
+benchmarks/euler_sum_of_powers_k5/evidence/suite-elf.txt whitespace=-blank-at-eol
+signing/map-binding/receipts/checker-elf.txt whitespace=-blank-at-eol
+toolchain/public-pqc/receipts/cc.version whitespace=-blank-at-eof
+toolchain/public-pqc/receipts/compiler.elf-header whitespace=-blank-at-eol
+toolchain/public-pqc/receipts/compiler.elf-versions whitespace=-blank-at-eol

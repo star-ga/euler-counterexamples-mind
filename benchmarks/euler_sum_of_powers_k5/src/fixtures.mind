@@ -1,0 +1,520 @@
+// Author: STARGA Inc. Static MIND certificate fixtures; no generator runtime.
+pub fn k5_fixture_count() -> i64 {
+    return 42;
+}
+pub fn k5_fixture_name(i: i64) -> String {
+    if i == 0 {
+        return "P01_c5_refutation";
+    }
+    if i == 1 {
+        return "P02_redundant_ground_premise";
+    }
+    if i == 2 {
+        return "P03_unused_ground_term";
+    }
+    if i == 3 {
+        return "B01_arithmetic_only";
+    }
+    if i == 4 {
+        return "B02_unrelated_positive";
+    }
+    if i == 5 {
+        return "B03_fourth_power_refutation";
+    }
+    if i == 6 {
+        return "B04_missing_positive_hypothesis";
+    }
+    if i == 7 {
+        return "B05_scaled_equation";
+    }
+    if i == 8 {
+        return "B06_valid_square_refutation";
+    }
+    if i == 9 {
+        return "B07_missing_quantifier";
+    }
+    if i == 10 {
+        return "N01_changed_first_witness";
+    }
+    if i == 11 {
+        return "N02_changed_rhs_witness";
+    }
+    if i == 12 {
+        return "N03_fourth_powers";
+    }
+    if i == 13 {
+        return "N04_sixth_powers";
+    }
+    if i == 14 {
+        return "N05_double_left_coefficient";
+    }
+    if i == 15 {
+        return "N06_wrong_first_substitution";
+    }
+    if i == 16 {
+        return "N07_wrong_fifth_substitution";
+    }
+    if i == 17 {
+        return "N08_open_witness";
+    }
+    if i == 18 {
+        return "N09_assumed_positivity";
+    }
+    if i == 19 {
+        return "N10_zero_positive";
+    }
+    if i == 20 {
+        return "N11_forged_equality";
+    }
+    if i == 21 {
+        return "N12_swapped_conjunction";
+    }
+    if i == 22 {
+        return "N13_wrong_implication_argument";
+    }
+    if i == 23 {
+        return "N14_forged_bottom";
+    }
+    if i == 24 {
+        return "N15_wrong_discharge_occurrence";
+    }
+    if i == 25 {
+        return "N16_wrong_discharge_formula";
+    }
+    if i == 26 {
+        return "N17_undischarged_assumption";
+    }
+    if i == 27 {
+        return "N18_popped_creation_scope";
+    }
+    if i == 28 {
+        return "N19_self_premise";
+    }
+    if i == 29 {
+        return "N20_future_premise";
+    }
+    if i == 30 {
+        return "N21_declared_goal_mismatch";
+    }
+    if i == 31 {
+        return "N22_free_goal";
+    }
+    if i == 32 {
+        return "N23_wrong_magic";
+    }
+    if i == 33 {
+        return "N24_wrong_version";
+    }
+    if i == 34 {
+        return "N25_leading_zero";
+    }
+    if i == 35 {
+        return "N26_trailing_lf";
+    }
+    if i == 36 {
+        return "N27_missing_final_lf";
+    }
+    if i == 37 {
+        return "N28_oversized_decimal";
+    }
+    if i == 38 {
+        return "N29_term_self_reference";
+    }
+    if i == 39 {
+        return "N30_unknown_formula_tag";
+    }
+    if i == 40 {
+        return "N31_crlf";
+    }
+    if i == 41 {
+        return "N32_negative_token";
+    }
+    return "INVALID";
+}
+pub fn k5_fixture_text(i: i64) -> String {
+    if i == 0 {
+        return "74123\n1\n52\n1\n27\n0\n1\n84\n0\n1\n110\n0\n1\n133\n0\n1\n144\n0\n2\n4\n0\n2\n3\n0\n2\n2\n0\n2\n1\n0\n2\n0\n0\n4\n6\n6\n4\n11\n11\n4\n12\n6\n4\n7\n7\n4\n14\n14\n4\n15\n7\n4\n8\n8\n4\n17\n17\n4\n18\n8\n4\n9\n9\n4\n20\n20\n4\n21\n9\n4\n10\n10\n4\n23\n23\n4\n24\n10\n3\n13\n16\n3\n26\n19\n3\n27\n22\n4\n1\n1\n4\n29\n29\n4\n30\n1\n3\n31\n16\n3\n32\n19\n3\n33\n22\n4\n2\n2\n4\n35\n35\n4\n36\n2\n3\n31\n37\n3\n38\n19\n3\n39\n22\n4\n3\n3\n4\n41\n41\n4\n42\n3\n3\n38\n43\n3\n44\n22\n4\n4\n4\n4\n46\n46\n4\n47\n4\n3\n44\n48\n4\n5\n5\n4\n50\n50\n4\n51\n5\n61\n3\n0\n0\n1\n6\n0\n1\n7\n0\n1\n8\n0\n1\n9\n0\n1\n10\n0\n4\n2\n3\n4\n4\n5\n4\n8\n6\n4\n7\n9\n2\n28\n25\n5\n11\n1\n5\n10\n12\n6\n13\n0\n6\n14\n0\n6\n15\n0\n6\n16\n0\n6\n17\n0\n1\n1\n0\n4\n19\n3\n4\n20\n9\n2\n34\n25\n5\n22\n1\n5\n21\n23\n6\n24\n0\n6\n25\n0\n6\n26\n0\n6\n27\n0\n1\n2\n0\n4\n19\n29\n4\n30\n9\n2\n40\n25\n5\n32\n1\n5\n31\n33\n6\n34\n0\n6\n35\n0\n6\n36\n0\n1\n3\n0\n4\n38\n5\n4\n39\n6\n4\n30\n40\n2\n45\n25\n5\n42\n1\n5\n41\n43\n6\n44\n0\n6\n45\n0\n1\n4\n0\n4\n38\n47\n4\n48\n6\n4\n30\n49\n2\n49\n25\n5\n51\n1\n5\n50\n52\n6\n53\n0\n1\n5\n0\n4\n48\n55\n4\n30\n56\n2\n49\n52\n5\n58\n1\n5\n57\n59\n5\n18\n1\n61\n19\n1\n18\n0\n0\n0\n8\n28\n1\n0\n1\n8\n37\n2\n0\n2\n8\n46\n3\n0\n3\n8\n54\n4\n0\n4\n8\n60\n5\n0\n5\n2\n19\n0\n0\n0\n2\n29\n0\n0\n0\n2\n38\n0\n0\n0\n2\n47\n0\n0\n0\n2\n55\n0\n0\n0\n4\n30\n7\n8\n0\n4\n48\n9\n10\n0\n4\n56\n13\n11\n0\n4\n57\n12\n14\n0\n3\n58\n0\n0\n0\n7\n59\n6\n15\n0\n7\n1\n17\n16\n0\n9\n61\n1\n18\n0\n";
+    }
+    if i == 1 {
+        return "74123\n1\n52\n1\n27\n0\n1\n84\n0\n1\n110\n0\n1\n133\n0\n1\n144\n0\n2\n4\n0\n2\n3\n0\n2\n2\n0\n2\n1\n0\n2\n0\n0\n4\n6\n6\n4\n11\n11\n4\n12\n6\n4\n7\n7\n4\n14\n14\n4\n15\n7\n4\n8\n8\n4\n17\n17\n4\n18\n8\n4\n9\n9\n4\n20\n20\n4\n21\n9\n4\n10\n10\n4\n23\n23\n4\n24\n10\n3\n13\n16\n3\n26\n19\n3\n27\n22\n4\n1\n1\n4\n29\n29\n4\n30\n1\n3\n31\n16\n3\n32\n19\n3\n33\n22\n4\n2\n2\n4\n35\n35\n4\n36\n2\n3\n31\n37\n3\n38\n19\n3\n39\n22\n4\n3\n3\n4\n41\n41\n4\n42\n3\n3\n38\n43\n3\n44\n22\n4\n4\n4\n4\n46\n46\n4\n47\n4\n3\n44\n48\n4\n5\n5\n4\n50\n50\n4\n51\n5\n61\n3\n0\n0\n1\n6\n0\n1\n7\n0\n1\n8\n0\n1\n9\n0\n1\n10\n0\n4\n2\n3\n4\n4\n5\n4\n8\n6\n4\n7\n9\n2\n28\n25\n5\n11\n1\n5\n10\n12\n6\n13\n0\n6\n14\n0\n6\n15\n0\n6\n16\n0\n6\n17\n0\n1\n1\n0\n4\n19\n3\n4\n20\n9\n2\n34\n25\n5\n22\n1\n5\n21\n23\n6\n24\n0\n6\n25\n0\n6\n26\n0\n6\n27\n0\n1\n2\n0\n4\n19\n29\n4\n30\n9\n2\n40\n25\n5\n32\n1\n5\n31\n33\n6\n34\n0\n6\n35\n0\n6\n36\n0\n1\n3\n0\n4\n38\n5\n4\n39\n6\n4\n30\n40\n2\n45\n25\n5\n42\n1\n5\n41\n43\n6\n44\n0\n6\n45\n0\n1\n4\n0\n4\n38\n47\n4\n48\n6\n4\n30\n49\n2\n49\n25\n5\n51\n1\n5\n50\n52\n6\n53\n0\n1\n5\n0\n4\n48\n55\n4\n30\n56\n2\n49\n52\n5\n58\n1\n5\n57\n59\n5\n18\n1\n61\n20\n3\n58\n0\n0\n0\n1\n18\n0\n0\n0\n8\n28\n2\n0\n1\n8\n37\n3\n0\n2\n8\n46\n4\n0\n3\n8\n54\n5\n0\n4\n8\n60\n6\n0\n5\n2\n19\n0\n0\n0\n2\n29\n0\n0\n0\n2\n38\n0\n0\n0\n2\n47\n0\n0\n0\n2\n55\n0\n0\n0\n4\n30\n8\n9\n0\n4\n48\n10\n11\n0\n4\n56\n14\n12\n0\n4\n57\n13\n15\n0\n3\n58\n0\n0\n0\n7\n59\n7\n16\n0\n7\n1\n18\n17\n0\n9\n61\n2\n19\n0\n";
+    }
+    if i == 2 {
+        return "74123\n1\n53\n1\n27\n0\n1\n84\n0\n1\n110\n0\n1\n133\n0\n1\n144\n0\n2\n4\n0\n2\n3\n0\n2\n2\n0\n2\n1\n0\n2\n0\n0\n4\n6\n6\n4\n11\n11\n4\n12\n6\n4\n7\n7\n4\n14\n14\n4\n15\n7\n4\n8\n8\n4\n17\n17\n4\n18\n8\n4\n9\n9\n4\n20\n20\n4\n21\n9\n4\n10\n10\n4\n23\n23\n4\n24\n10\n3\n13\n16\n3\n26\n19\n3\n27\n22\n4\n1\n1\n4\n29\n29\n4\n30\n1\n3\n31\n16\n3\n32\n19\n3\n33\n22\n4\n2\n2\n4\n35\n35\n4\n36\n2\n3\n31\n37\n3\n38\n19\n3\n39\n22\n4\n3\n3\n4\n41\n41\n4\n42\n3\n3\n38\n43\n3\n44\n22\n4\n4\n4\n4\n46\n46\n4\n47\n4\n3\n44\n48\n4\n5\n5\n4\n50\n50\n4\n51\n5\n1\n999\n0\n61\n3\n0\n0\n1\n6\n0\n1\n7\n0\n1\n8\n0\n1\n9\n0\n1\n10\n0\n4\n2\n3\n4\n4\n5\n4\n8\n6\n4\n7\n9\n2\n28\n25\n5\n11\n1\n5\n10\n12\n6\n13\n0\n6\n14\n0\n6\n15\n0\n6\n16\n0\n6\n17\n0\n1\n1\n0\n4\n19\n3\n4\n20\n9\n2\n34\n25\n5\n22\n1\n5\n21\n23\n6\n24\n0\n6\n25\n0\n6\n26\n0\n6\n27\n0\n1\n2\n0\n4\n19\n29\n4\n30\n9\n2\n40\n25\n5\n32\n1\n5\n31\n33\n6\n34\n0\n6\n35\n0\n6\n36\n0\n1\n3\n0\n4\n38\n5\n4\n39\n6\n4\n30\n40\n2\n45\n25\n5\n42\n1\n5\n41\n43\n6\n44\n0\n6\n45\n0\n1\n4\n0\n4\n38\n47\n4\n48\n6\n4\n30\n49\n2\n49\n25\n5\n51\n1\n5\n50\n52\n6\n53\n0\n1\n5\n0\n4\n48\n55\n4\n30\n56\n2\n49\n52\n5\n58\n1\n5\n57\n59\n5\n18\n1\n61\n19\n1\n18\n0\n0\n0\n8\n28\n1\n0\n1\n8\n37\n2\n0\n2\n8\n46\n3\n0\n3\n8\n54\n4\n0\n4\n8\n60\n5\n0\n5\n2\n19\n0\n0\n0\n2\n29\n0\n0\n0\n2\n38\n0\n0\n0\n2\n47\n0\n0\n0\n2\n55\n0\n0\n0\n4\n30\n7\n8\n0\n4\n48\n9\n10\n0\n4\n56\n13\n11\n0\n4\n57\n12\n14\n0\n3\n58\n0\n0\n0\n7\n59\n6\n15\n0\n7\n1\n17\n16\n0\n9\n61\n1\n18\n0\n";
+    }
+    if i == 3 {
+        return "74123\n1\n52\n1\n27\n0\n1\n84\n0\n1\n110\n0\n1\n133\n0\n1\n144\n0\n2\n4\n0\n2\n3\n0\n2\n2\n0\n2\n1\n0\n2\n0\n0\n4\n6\n6\n4\n11\n11\n4\n12\n6\n4\n7\n7\n4\n14\n14\n4\n15\n7\n4\n8\n8\n4\n17\n17\n4\n18\n8\n4\n9\n9\n4\n20\n20\n4\n21\n9\n4\n10\n10\n4\n23\n23\n4\n24\n10\n3\n13\n16\n3\n26\n19\n3\n27\n22\n4\n1\n1\n4\n29\n29\n4\n30\n1\n3\n31\n16\n3\n32\n19\n3\n33\n22\n4\n2\n2\n4\n35\n35\n4\n36\n2\n3\n31\n37\n3\n38\n19\n3\n39\n22\n4\n3\n3\n4\n41\n41\n4\n42\n3\n3\n38\n43\n3\n44\n22\n4\n4\n4\n4\n46\n46\n4\n47\n4\n3\n44\n48\n4\n5\n5\n4\n50\n50\n4\n51\n5\n61\n3\n0\n0\n1\n6\n0\n1\n7\n0\n1\n8\n0\n1\n9\n0\n1\n10\n0\n4\n2\n3\n4\n4\n5\n4\n8\n6\n4\n7\n9\n2\n28\n25\n5\n11\n1\n5\n10\n12\n6\n13\n0\n6\n14\n0\n6\n15\n0\n6\n16\n0\n6\n17\n0\n1\n1\n0\n4\n19\n3\n4\n20\n9\n2\n34\n25\n5\n22\n1\n5\n21\n23\n6\n24\n0\n6\n25\n0\n6\n26\n0\n6\n27\n0\n1\n2\n0\n4\n19\n29\n4\n30\n9\n2\n40\n25\n5\n32\n1\n5\n31\n33\n6\n34\n0\n6\n35\n0\n6\n36\n0\n1\n3\n0\n4\n38\n5\n4\n39\n6\n4\n30\n40\n2\n45\n25\n5\n42\n1\n5\n41\n43\n6\n44\n0\n6\n45\n0\n1\n4\n0\n4\n38\n47\n4\n48\n6\n4\n30\n49\n2\n49\n25\n5\n51\n1\n5\n50\n52\n6\n53\n0\n1\n5\n0\n4\n48\n55\n4\n30\n56\n2\n49\n52\n5\n58\n1\n5\n57\n59\n5\n18\n1\n58\n1\n3\n58\n0\n0\n0\n";
+    }
+    if i == 4 {
+        return "74123\n1\n1\n1\n7\n0\n1\n1\n1\n0\n1\n1\n2\n1\n0\n0\n0\n";
+    }
+    if i == 5 {
+        return "74123\n1\n31\n2\n3\n0\n2\n2\n0\n2\n1\n0\n2\n0\n0\n4\n1\n1\n4\n5\n5\n4\n2\n2\n4\n7\n7\n4\n3\n3\n4\n9\n9\n4\n4\n4\n4\n11\n11\n3\n6\n8\n3\n13\n10\n1\n95800\n0\n1\n217519\n0\n1\n414560\n0\n1\n422481\n0\n4\n15\n15\n4\n19\n19\n3\n20\n8\n3\n21\n10\n4\n16\n16\n4\n23\n23\n3\n20\n24\n3\n25\n10\n4\n17\n17\n4\n27\n27\n3\n25\n28\n4\n18\n18\n4\n30\n30\n46\n1\n1\n0\n1\n2\n0\n1\n3\n0\n1\n4\n0\n4\n1\n2\n4\n3\n4\n4\n5\n6\n2\n14\n12\n3\n0\n0\n5\n8\n9\n5\n7\n10\n6\n11\n0\n6\n12\n0\n6\n13\n0\n6\n14\n0\n1\n15\n0\n4\n16\n2\n4\n17\n6\n2\n22\n12\n5\n19\n9\n5\n18\n20\n6\n21\n0\n6\n22\n0\n6\n23\n0\n1\n16\n0\n4\n16\n25\n4\n26\n6\n2\n26\n12\n5\n28\n9\n5\n27\n29\n6\n30\n0\n6\n31\n0\n1\n17\n0\n4\n33\n4\n4\n26\n34\n2\n29\n12\n5\n36\n9\n5\n35\n37\n6\n38\n0\n1\n18\n0\n4\n33\n40\n4\n26\n41\n2\n29\n31\n5\n43\n9\n5\n42\n44\n5\n15\n9\n46\n16\n1\n15\n0\n0\n0\n8\n24\n1\n0\n15\n8\n32\n2\n0\n16\n8\n39\n3\n0\n17\n8\n45\n4\n0\n18\n2\n16\n0\n0\n0\n2\n25\n0\n0\n0\n2\n33\n0\n0\n0\n2\n40\n0\n0\n0\n4\n26\n6\n7\n0\n4\n41\n8\n9\n0\n4\n42\n10\n11\n0\n3\n43\n0\n0\n0\n7\n44\n5\n12\n0\n7\n9\n14\n13\n0\n9\n46\n1\n15\n0\n";
+    }
+    if i == 6 {
+        return "74123\n1\n52\n1\n27\n0\n1\n84\n0\n1\n110\n0\n1\n133\n0\n1\n144\n0\n2\n4\n0\n2\n3\n0\n2\n2\n0\n2\n1\n0\n2\n0\n0\n4\n6\n6\n4\n11\n11\n4\n12\n6\n4\n7\n7\n4\n14\n14\n4\n15\n7\n4\n8\n8\n4\n17\n17\n4\n18\n8\n4\n9\n9\n4\n20\n20\n4\n21\n9\n4\n10\n10\n4\n23\n23\n4\n24\n10\n3\n13\n16\n3\n26\n19\n3\n27\n22\n4\n1\n1\n4\n29\n29\n4\n30\n1\n3\n31\n16\n3\n32\n19\n3\n33\n22\n4\n2\n2\n4\n35\n35\n4\n36\n2\n3\n31\n37\n3\n38\n19\n3\n39\n22\n4\n3\n3\n4\n41\n41\n4\n42\n3\n3\n38\n43\n3\n44\n22\n4\n4\n4\n4\n46\n46\n4\n47\n4\n3\n44\n48\n4\n5\n5\n4\n50\n50\n4\n51\n5\n57\n3\n0\n0\n1\n6\n0\n1\n7\n0\n1\n8\n0\n1\n9\n0\n1\n10\n0\n4\n4\n5\n4\n7\n6\n4\n3\n8\n2\n28\n25\n5\n10\n1\n5\n9\n11\n6\n12\n0\n6\n13\n0\n6\n14\n0\n6\n15\n0\n6\n16\n0\n1\n1\n0\n2\n34\n25\n5\n19\n1\n5\n9\n20\n6\n21\n0\n6\n22\n0\n6\n23\n0\n6\n24\n0\n1\n2\n0\n4\n26\n8\n2\n40\n25\n5\n28\n1\n5\n27\n29\n6\n30\n0\n6\n31\n0\n6\n32\n0\n1\n3\n0\n4\n34\n5\n4\n35\n6\n4\n26\n36\n2\n45\n25\n5\n38\n1\n5\n37\n39\n6\n40\n0\n6\n41\n0\n1\n4\n0\n4\n34\n43\n4\n44\n6\n4\n26\n45\n2\n49\n25\n5\n47\n1\n5\n46\n48\n6\n49\n0\n1\n5\n0\n4\n44\n51\n4\n26\n52\n2\n49\n52\n5\n54\n1\n5\n53\n55\n5\n17\n1\n57\n18\n1\n17\n0\n0\n0\n8\n25\n1\n0\n1\n8\n33\n2\n0\n2\n8\n42\n3\n0\n3\n8\n50\n4\n0\n4\n8\n56\n5\n0\n5\n2\n18\n0\n0\n0\n2\n26\n0\n0\n0\n2\n34\n0\n0\n0\n2\n43\n0\n0\n0\n2\n51\n0\n0\n0\n4\n44\n9\n10\n0\n4\n52\n12\n11\n0\n4\n53\n8\n13\n0\n3\n54\n0\n0\n0\n7\n55\n6\n14\n0\n7\n1\n16\n15\n0\n9\n57\n1\n17\n0\n";
+    }
+    if i == 7 {
+        return "74123\n1\n60\n1\n27\n0\n1\n84\n0\n1\n110\n0\n1\n133\n0\n1\n144\n0\n2\n4\n0\n2\n3\n0\n2\n2\n0\n2\n1\n0\n2\n0\n0\n4\n6\n6\n4\n11\n11\n4\n12\n6\n4\n7\n7\n4\n14\n14\n4\n15\n7\n4\n8\n8\n4\n17\n17\n4\n18\n8\n4\n9\n9\n4\n20\n20\n4\n21\n9\n4\n10\n10\n4\n23\n23\n4\n24\n10\n3\n13\n16\n3\n26\n19\n3\n27\n22\n1\n2\n0\n4\n29\n28\n4\n29\n25\n4\n1\n1\n4\n32\n32\n4\n33\n1\n3\n34\n16\n3\n35\n19\n3\n36\n22\n4\n29\n37\n4\n2\n2\n4\n39\n39\n4\n40\n2\n3\n34\n41\n3\n42\n19\n3\n43\n22\n4\n29\n44\n4\n3\n3\n4\n46\n46\n4\n47\n3\n3\n42\n48\n3\n49\n22\n4\n29\n50\n4\n4\n4\n4\n52\n52\n4\n53\n4\n3\n49\n54\n4\n29\n55\n4\n5\n5\n4\n57\n57\n4\n58\n5\n4\n29\n59\n61\n3\n0\n0\n1\n6\n0\n1\n7\n0\n1\n8\n0\n1\n9\n0\n1\n10\n0\n4\n2\n3\n4\n4\n5\n4\n8\n6\n4\n7\n9\n2\n30\n31\n5\n11\n1\n5\n10\n12\n6\n13\n0\n6\n14\n0\n6\n15\n0\n6\n16\n0\n6\n17\n0\n1\n1\n0\n4\n19\n3\n4\n20\n9\n2\n38\n31\n5\n22\n1\n5\n21\n23\n6\n24\n0\n6\n25\n0\n6\n26\n0\n6\n27\n0\n1\n2\n0\n4\n19\n29\n4\n30\n9\n2\n45\n31\n5\n32\n1\n5\n31\n33\n6\n34\n0\n6\n35\n0\n6\n36\n0\n1\n3\n0\n4\n38\n5\n4\n39\n6\n4\n30\n40\n2\n51\n31\n5\n42\n1\n5\n41\n43\n6\n44\n0\n6\n45\n0\n1\n4\n0\n4\n38\n47\n4\n48\n6\n4\n30\n49\n2\n56\n31\n5\n51\n1\n5\n50\n52\n6\n53\n0\n1\n5\n0\n4\n48\n55\n4\n30\n56\n2\n56\n60\n5\n58\n1\n5\n57\n59\n5\n18\n1\n61\n19\n1\n18\n0\n0\n0\n8\n28\n1\n0\n1\n8\n37\n2\n0\n2\n8\n46\n3\n0\n3\n8\n54\n4\n0\n4\n8\n60\n5\n0\n5\n2\n19\n0\n0\n0\n2\n29\n0\n0\n0\n2\n38\n0\n0\n0\n2\n47\n0\n0\n0\n2\n55\n0\n0\n0\n4\n30\n7\n8\n0\n4\n48\n9\n10\n0\n4\n56\n13\n11\n0\n4\n57\n12\n14\n0\n3\n58\n0\n0\n0\n7\n59\n6\n15\n0\n7\n1\n17\n16\n0\n9\n61\n1\n18\n0\n";
+    }
+    if i == 8 {
+        return "74123\n1\n30\n1\n1\n0\n1\n2\n0\n1\n4\n0\n1\n5\n0\n2\n4\n0\n2\n3\n0\n2\n2\n0\n2\n1\n0\n2\n0\n0\n4\n5\n5\n4\n6\n6\n4\n7\n7\n4\n8\n8\n4\n9\n9\n3\n10\n11\n3\n15\n12\n3\n16\n13\n4\n1\n1\n3\n18\n11\n3\n19\n12\n3\n20\n13\n4\n2\n2\n3\n18\n22\n3\n23\n12\n3\n24\n13\n3\n23\n22\n3\n26\n13\n4\n3\n3\n3\n26\n28\n4\n4\n4\n60\n3\n0\n0\n1\n5\n0\n1\n6\n0\n1\n7\n0\n1\n8\n0\n1\n9\n0\n4\n2\n3\n4\n4\n5\n4\n8\n6\n4\n7\n9\n2\n17\n14\n5\n11\n1\n5\n10\n12\n6\n13\n0\n6\n14\n0\n6\n15\n0\n6\n16\n0\n6\n17\n0\n1\n1\n0\n4\n19\n3\n4\n20\n9\n2\n21\n14\n5\n22\n1\n5\n21\n23\n6\n24\n0\n6\n25\n0\n6\n26\n0\n6\n27\n0\n1\n2\n0\n4\n19\n29\n4\n30\n9\n2\n25\n14\n5\n32\n1\n5\n31\n33\n6\n34\n0\n6\n35\n0\n6\n36\n0\n4\n29\n5\n4\n38\n6\n4\n30\n39\n2\n27\n14\n5\n41\n1\n5\n40\n42\n6\n43\n0\n6\n44\n0\n1\n3\n0\n4\n29\n46\n4\n47\n6\n4\n30\n48\n2\n29\n14\n5\n50\n1\n5\n49\n51\n6\n52\n0\n1\n4\n0\n4\n47\n54\n4\n30\n55\n2\n29\n30\n5\n57\n1\n5\n56\n58\n5\n18\n1\n60\n19\n1\n18\n0\n0\n0\n8\n28\n1\n0\n1\n8\n37\n2\n0\n2\n8\n45\n3\n0\n2\n8\n53\n4\n0\n3\n8\n59\n5\n0\n4\n2\n19\n0\n0\n0\n2\n29\n0\n0\n0\n2\n29\n0\n0\n0\n2\n46\n0\n0\n0\n2\n54\n0\n0\n0\n4\n30\n7\n9\n0\n4\n47\n9\n10\n0\n4\n55\n13\n11\n0\n4\n56\n12\n14\n0\n3\n57\n0\n0\n0\n7\n58\n6\n15\n0\n7\n1\n17\n16\n0\n9\n60\n1\n18\n0\n";
+    }
+    if i == 9 {
+        return "74123\n1\n52\n1\n27\n0\n1\n84\n0\n1\n110\n0\n1\n133\n0\n1\n144\n0\n2\n4\n0\n2\n3\n0\n2\n2\n0\n2\n1\n0\n2\n0\n0\n4\n6\n6\n4\n11\n11\n4\n12\n6\n4\n7\n7\n4\n14\n14\n4\n15\n7\n4\n8\n8\n4\n17\n17\n4\n18\n8\n4\n9\n9\n4\n20\n20\n4\n21\n9\n4\n10\n10\n4\n23\n23\n4\n24\n10\n3\n13\n16\n3\n26\n19\n3\n27\n22\n4\n1\n1\n4\n29\n29\n4\n30\n1\n3\n31\n16\n3\n32\n19\n3\n33\n22\n4\n2\n2\n4\n35\n35\n4\n36\n2\n3\n31\n37\n3\n38\n19\n3\n39\n22\n4\n3\n3\n4\n41\n41\n4\n42\n3\n3\n38\n43\n3\n44\n22\n4\n4\n4\n4\n46\n46\n4\n47\n4\n3\n44\n48\n4\n5\n5\n4\n50\n50\n4\n51\n5\n62\n3\n0\n0\n1\n6\n0\n1\n7\n0\n1\n8\n0\n1\n9\n0\n1\n10\n0\n4\n2\n3\n4\n4\n5\n4\n8\n6\n4\n7\n9\n2\n28\n25\n5\n11\n1\n5\n10\n12\n6\n13\n0\n6\n14\n0\n6\n15\n0\n6\n16\n0\n6\n17\n0\n1\n1\n0\n4\n19\n3\n4\n20\n9\n2\n34\n25\n5\n22\n1\n5\n21\n23\n6\n24\n0\n6\n25\n0\n6\n26\n0\n6\n27\n0\n1\n2\n0\n4\n19\n29\n4\n30\n9\n2\n40\n25\n5\n32\n1\n5\n31\n33\n6\n34\n0\n6\n35\n0\n6\n36\n0\n1\n3\n0\n4\n38\n5\n4\n39\n6\n4\n30\n40\n2\n45\n25\n5\n42\n1\n5\n41\n43\n6\n44\n0\n6\n45\n0\n1\n4\n0\n4\n38\n47\n4\n48\n6\n4\n30\n49\n2\n49\n25\n5\n51\n1\n5\n50\n52\n6\n53\n0\n1\n5\n0\n4\n48\n55\n4\n30\n56\n2\n49\n52\n5\n58\n1\n5\n57\n59\n5\n18\n1\n5\n28\n1\n62\n18\n1\n28\n0\n0\n0\n8\n37\n1\n0\n2\n8\n46\n2\n0\n3\n8\n54\n3\n0\n4\n8\n60\n4\n0\n5\n2\n19\n0\n0\n0\n2\n29\n0\n0\n0\n2\n38\n0\n0\n0\n2\n47\n0\n0\n0\n2\n55\n0\n0\n0\n4\n30\n6\n7\n0\n4\n48\n8\n9\n0\n4\n56\n12\n10\n0\n4\n57\n11\n13\n0\n3\n58\n0\n0\n0\n7\n59\n5\n14\n0\n7\n1\n16\n15\n0\n9\n62\n1\n17\n0\n";
+    }
+    if i == 10 {
+        return "74123\n1\n52\n1\n28\n0\n1\n84\n0\n1\n110\n0\n1\n133\n0\n1\n144\n0\n2\n4\n0\n2\n3\n0\n2\n2\n0\n2\n1\n0\n2\n0\n0\n4\n6\n6\n4\n11\n11\n4\n12\n6\n4\n7\n7\n4\n14\n14\n4\n15\n7\n4\n8\n8\n4\n17\n17\n4\n18\n8\n4\n9\n9\n4\n20\n20\n4\n21\n9\n4\n10\n10\n4\n23\n23\n4\n24\n10\n3\n13\n16\n3\n26\n19\n3\n27\n22\n4\n1\n1\n4\n29\n29\n4\n30\n1\n3\n31\n16\n3\n32\n19\n3\n33\n22\n4\n2\n2\n4\n35\n35\n4\n36\n2\n3\n31\n37\n3\n38\n19\n3\n39\n22\n4\n3\n3\n4\n41\n41\n4\n42\n3\n3\n38\n43\n3\n44\n22\n4\n4\n4\n4\n46\n46\n4\n47\n4\n3\n44\n48\n4\n5\n5\n4\n50\n50\n4\n51\n5\n61\n3\n0\n0\n1\n6\n0\n1\n7\n0\n1\n8\n0\n1\n9\n0\n1\n10\n0\n4\n2\n3\n4\n4\n5\n4\n8\n6\n4\n7\n9\n2\n28\n25\n5\n11\n1\n5\n10\n12\n6\n13\n0\n6\n14\n0\n6\n15\n0\n6\n16\n0\n6\n17\n0\n1\n1\n0\n4\n19\n3\n4\n20\n9\n2\n34\n25\n5\n22\n1\n5\n21\n23\n6\n24\n0\n6\n25\n0\n6\n26\n0\n6\n27\n0\n1\n2\n0\n4\n19\n29\n4\n30\n9\n2\n40\n25\n5\n32\n1\n5\n31\n33\n6\n34\n0\n6\n35\n0\n6\n36\n0\n1\n3\n0\n4\n38\n5\n4\n39\n6\n4\n30\n40\n2\n45\n25\n5\n42\n1\n5\n41\n43\n6\n44\n0\n6\n45\n0\n1\n4\n0\n4\n38\n47\n4\n48\n6\n4\n30\n49\n2\n49\n25\n5\n51\n1\n5\n50\n52\n6\n53\n0\n1\n5\n0\n4\n48\n55\n4\n30\n56\n2\n49\n52\n5\n58\n1\n5\n57\n59\n5\n18\n1\n61\n19\n1\n18\n0\n0\n0\n8\n28\n1\n0\n1\n8\n37\n2\n0\n2\n8\n46\n3\n0\n3\n8\n54\n4\n0\n4\n8\n60\n5\n0\n5\n2\n19\n0\n0\n0\n2\n29\n0\n0\n0\n2\n38\n0\n0\n0\n2\n47\n0\n0\n0\n2\n55\n0\n0\n0\n4\n30\n7\n8\n0\n4\n48\n9\n10\n0\n4\n56\n13\n11\n0\n4\n57\n12\n14\n0\n3\n58\n0\n0\n0\n7\n59\n6\n15\n0\n7\n1\n17\n16\n0\n9\n61\n1\n18\n0\n";
+    }
+    if i == 11 {
+        return "74123\n1\n52\n1\n27\n0\n1\n84\n0\n1\n110\n0\n1\n133\n0\n1\n145\n0\n2\n4\n0\n2\n3\n0\n2\n2\n0\n2\n1\n0\n2\n0\n0\n4\n6\n6\n4\n11\n11\n4\n12\n6\n4\n7\n7\n4\n14\n14\n4\n15\n7\n4\n8\n8\n4\n17\n17\n4\n18\n8\n4\n9\n9\n4\n20\n20\n4\n21\n9\n4\n10\n10\n4\n23\n23\n4\n24\n10\n3\n13\n16\n3\n26\n19\n3\n27\n22\n4\n1\n1\n4\n29\n29\n4\n30\n1\n3\n31\n16\n3\n32\n19\n3\n33\n22\n4\n2\n2\n4\n35\n35\n4\n36\n2\n3\n31\n37\n3\n38\n19\n3\n39\n22\n4\n3\n3\n4\n41\n41\n4\n42\n3\n3\n38\n43\n3\n44\n22\n4\n4\n4\n4\n46\n46\n4\n47\n4\n3\n44\n48\n4\n5\n5\n4\n50\n50\n4\n51\n5\n61\n3\n0\n0\n1\n6\n0\n1\n7\n0\n1\n8\n0\n1\n9\n0\n1\n10\n0\n4\n2\n3\n4\n4\n5\n4\n8\n6\n4\n7\n9\n2\n28\n25\n5\n11\n1\n5\n10\n12\n6\n13\n0\n6\n14\n0\n6\n15\n0\n6\n16\n0\n6\n17\n0\n1\n1\n0\n4\n19\n3\n4\n20\n9\n2\n34\n25\n5\n22\n1\n5\n21\n23\n6\n24\n0\n6\n25\n0\n6\n26\n0\n6\n27\n0\n1\n2\n0\n4\n19\n29\n4\n30\n9\n2\n40\n25\n5\n32\n1\n5\n31\n33\n6\n34\n0\n6\n35\n0\n6\n36\n0\n1\n3\n0\n4\n38\n5\n4\n39\n6\n4\n30\n40\n2\n45\n25\n5\n42\n1\n5\n41\n43\n6\n44\n0\n6\n45\n0\n1\n4\n0\n4\n38\n47\n4\n48\n6\n4\n30\n49\n2\n49\n25\n5\n51\n1\n5\n50\n52\n6\n53\n0\n1\n5\n0\n4\n48\n55\n4\n30\n56\n2\n49\n52\n5\n58\n1\n5\n57\n59\n5\n18\n1\n61\n19\n1\n18\n0\n0\n0\n8\n28\n1\n0\n1\n8\n37\n2\n0\n2\n8\n46\n3\n0\n3\n8\n54\n4\n0\n4\n8\n60\n5\n0\n5\n2\n19\n0\n0\n0\n2\n29\n0\n0\n0\n2\n38\n0\n0\n0\n2\n47\n0\n0\n0\n2\n55\n0\n0\n0\n4\n30\n7\n8\n0\n4\n48\n9\n10\n0\n4\n56\n13\n11\n0\n4\n57\n12\n14\n0\n3\n58\n0\n0\n0\n7\n59\n6\n15\n0\n7\n1\n17\n16\n0\n9\n61\n1\n18\n0\n";
+    }
+    if i == 12 {
+        return "74123\n1\n42\n1\n27\n0\n1\n84\n0\n1\n110\n0\n1\n133\n0\n1\n144\n0\n2\n4\n0\n2\n3\n0\n2\n2\n0\n2\n1\n0\n2\n0\n0\n4\n6\n6\n4\n11\n11\n4\n7\n7\n4\n13\n13\n4\n8\n8\n4\n15\n15\n4\n9\n9\n4\n17\n17\n4\n10\n10\n4\n19\n19\n3\n12\n14\n3\n21\n16\n3\n22\n18\n4\n1\n1\n4\n24\n24\n3\n25\n14\n3\n26\n16\n3\n27\n18\n4\n2\n2\n4\n29\n29\n3\n25\n30\n3\n31\n16\n3\n32\n18\n4\n3\n3\n4\n34\n34\n3\n31\n35\n3\n36\n18\n4\n4\n4\n4\n38\n38\n3\n36\n39\n4\n5\n5\n4\n41\n41\n61\n3\n0\n0\n1\n6\n0\n1\n7\n0\n1\n8\n0\n1\n9\n0\n1\n10\n0\n4\n2\n3\n4\n4\n5\n4\n8\n6\n4\n7\n9\n2\n23\n20\n5\n11\n1\n5\n10\n12\n6\n13\n0\n6\n14\n0\n6\n15\n0\n6\n16\n0\n6\n17\n0\n1\n1\n0\n4\n19\n3\n4\n20\n9\n2\n28\n20\n5\n22\n1\n5\n21\n23\n6\n24\n0\n6\n25\n0\n6\n26\n0\n6\n27\n0\n1\n2\n0\n4\n19\n29\n4\n30\n9\n2\n33\n20\n5\n32\n1\n5\n31\n33\n6\n34\n0\n6\n35\n0\n6\n36\n0\n1\n3\n0\n4\n38\n5\n4\n39\n6\n4\n30\n40\n2\n37\n20\n5\n42\n1\n5\n41\n43\n6\n44\n0\n6\n45\n0\n1\n4\n0\n4\n38\n47\n4\n48\n6\n4\n30\n49\n2\n40\n20\n5\n51\n1\n5\n50\n52\n6\n53\n0\n1\n5\n0\n4\n48\n55\n4\n30\n56\n2\n40\n42\n5\n58\n1\n5\n57\n59\n5\n18\n1\n61\n19\n1\n18\n0\n0\n0\n8\n28\n1\n0\n1\n8\n37\n2\n0\n2\n8\n46\n3\n0\n3\n8\n54\n4\n0\n4\n8\n60\n5\n0\n5\n2\n19\n0\n0\n0\n2\n29\n0\n0\n0\n2\n38\n0\n0\n0\n2\n47\n0\n0\n0\n2\n55\n0\n0\n0\n4\n30\n7\n8\n0\n4\n48\n9\n10\n0\n4\n56\n13\n11\n0\n4\n57\n12\n14\n0\n3\n58\n0\n0\n0\n7\n59\n6\n15\n0\n7\n1\n17\n16\n0\n9\n61\n1\n18\n0\n";
+    }
+    if i == 13 {
+        return "74123\n1\n52\n1\n27\n0\n1\n84\n0\n1\n110\n0\n1\n133\n0\n1\n144\n0\n2\n4\n0\n2\n3\n0\n2\n2\n0\n2\n1\n0\n2\n0\n0\n4\n6\n6\n4\n11\n11\n4\n12\n11\n4\n7\n7\n4\n14\n14\n4\n15\n14\n4\n8\n8\n4\n17\n17\n4\n18\n17\n4\n9\n9\n4\n20\n20\n4\n21\n20\n4\n10\n10\n4\n23\n23\n4\n24\n23\n3\n13\n16\n3\n26\n19\n3\n27\n22\n4\n1\n1\n4\n29\n29\n4\n30\n29\n3\n31\n16\n3\n32\n19\n3\n33\n22\n4\n2\n2\n4\n35\n35\n4\n36\n35\n3\n31\n37\n3\n38\n19\n3\n39\n22\n4\n3\n3\n4\n41\n41\n4\n42\n41\n3\n38\n43\n3\n44\n22\n4\n4\n4\n4\n46\n46\n4\n47\n46\n3\n44\n48\n4\n5\n5\n4\n50\n50\n4\n51\n50\n61\n3\n0\n0\n1\n6\n0\n1\n7\n0\n1\n8\n0\n1\n9\n0\n1\n10\n0\n4\n2\n3\n4\n4\n5\n4\n8\n6\n4\n7\n9\n2\n28\n25\n5\n11\n1\n5\n10\n12\n6\n13\n0\n6\n14\n0\n6\n15\n0\n6\n16\n0\n6\n17\n0\n1\n1\n0\n4\n19\n3\n4\n20\n9\n2\n34\n25\n5\n22\n1\n5\n21\n23\n6\n24\n0\n6\n25\n0\n6\n26\n0\n6\n27\n0\n1\n2\n0\n4\n19\n29\n4\n30\n9\n2\n40\n25\n5\n32\n1\n5\n31\n33\n6\n34\n0\n6\n35\n0\n6\n36\n0\n1\n3\n0\n4\n38\n5\n4\n39\n6\n4\n30\n40\n2\n45\n25\n5\n42\n1\n5\n41\n43\n6\n44\n0\n6\n45\n0\n1\n4\n0\n4\n38\n47\n4\n48\n6\n4\n30\n49\n2\n49\n25\n5\n51\n1\n5\n50\n52\n6\n53\n0\n1\n5\n0\n4\n48\n55\n4\n30\n56\n2\n49\n52\n5\n58\n1\n5\n57\n59\n5\n18\n1\n61\n19\n1\n18\n0\n0\n0\n8\n28\n1\n0\n1\n8\n37\n2\n0\n2\n8\n46\n3\n0\n3\n8\n54\n4\n0\n4\n8\n60\n5\n0\n5\n2\n19\n0\n0\n0\n2\n29\n0\n0\n0\n2\n38\n0\n0\n0\n2\n47\n0\n0\n0\n2\n55\n0\n0\n0\n4\n30\n7\n8\n0\n4\n48\n9\n10\n0\n4\n56\n13\n11\n0\n4\n57\n12\n14\n0\n3\n58\n0\n0\n0\n7\n59\n6\n15\n0\n7\n1\n17\n16\n0\n9\n61\n1\n18\n0\n";
+    }
+    if i == 14 {
+        return "74123\n1\n58\n1\n27\n0\n1\n84\n0\n1\n110\n0\n1\n133\n0\n1\n144\n0\n2\n4\n0\n2\n3\n0\n2\n2\n0\n2\n1\n0\n2\n0\n0\n4\n6\n6\n4\n11\n11\n4\n12\n6\n4\n7\n7\n4\n14\n14\n4\n15\n7\n4\n8\n8\n4\n17\n17\n4\n18\n8\n4\n9\n9\n4\n20\n20\n4\n21\n9\n4\n10\n10\n4\n23\n23\n4\n24\n10\n3\n13\n16\n3\n26\n19\n3\n27\n22\n1\n2\n0\n4\n29\n28\n4\n1\n1\n4\n31\n31\n4\n32\n1\n3\n33\n16\n3\n34\n19\n3\n35\n22\n4\n29\n36\n4\n2\n2\n4\n38\n38\n4\n39\n2\n3\n33\n40\n3\n41\n19\n3\n42\n22\n4\n29\n43\n4\n3\n3\n4\n45\n45\n4\n46\n3\n3\n41\n47\n3\n48\n22\n4\n29\n49\n4\n4\n4\n4\n51\n51\n4\n52\n4\n3\n48\n53\n4\n29\n54\n4\n5\n5\n4\n56\n56\n4\n57\n5\n61\n3\n0\n0\n1\n6\n0\n1\n7\n0\n1\n8\n0\n1\n9\n0\n1\n10\n0\n4\n2\n3\n4\n4\n5\n4\n8\n6\n4\n7\n9\n2\n30\n25\n5\n11\n1\n5\n10\n12\n6\n13\n0\n6\n14\n0\n6\n15\n0\n6\n16\n0\n6\n17\n0\n1\n1\n0\n4\n19\n3\n4\n20\n9\n2\n37\n25\n5\n22\n1\n5\n21\n23\n6\n24\n0\n6\n25\n0\n6\n26\n0\n6\n27\n0\n1\n2\n0\n4\n19\n29\n4\n30\n9\n2\n44\n25\n5\n32\n1\n5\n31\n33\n6\n34\n0\n6\n35\n0\n6\n36\n0\n1\n3\n0\n4\n38\n5\n4\n39\n6\n4\n30\n40\n2\n50\n25\n5\n42\n1\n5\n41\n43\n6\n44\n0\n6\n45\n0\n1\n4\n0\n4\n38\n47\n4\n48\n6\n4\n30\n49\n2\n55\n25\n5\n51\n1\n5\n50\n52\n6\n53\n0\n1\n5\n0\n4\n48\n55\n4\n30\n56\n2\n55\n58\n5\n58\n1\n5\n57\n59\n5\n18\n1\n61\n19\n1\n18\n0\n0\n0\n8\n28\n1\n0\n1\n8\n37\n2\n0\n2\n8\n46\n3\n0\n3\n8\n54\n4\n0\n4\n8\n60\n5\n0\n5\n2\n19\n0\n0\n0\n2\n29\n0\n0\n0\n2\n38\n0\n0\n0\n2\n47\n0\n0\n0\n2\n55\n0\n0\n0\n4\n30\n7\n8\n0\n4\n48\n9\n10\n0\n4\n56\n13\n11\n0\n4\n57\n12\n14\n0\n3\n58\n0\n0\n0\n7\n59\n6\n15\n0\n7\n1\n17\n16\n0\n9\n61\n1\n18\n0\n";
+    }
+    if i == 15 {
+        return "74123\n1\n52\n1\n27\n0\n1\n84\n0\n1\n110\n0\n1\n133\n0\n1\n144\n0\n2\n4\n0\n2\n3\n0\n2\n2\n0\n2\n1\n0\n2\n0\n0\n4\n6\n6\n4\n11\n11\n4\n12\n6\n4\n7\n7\n4\n14\n14\n4\n15\n7\n4\n8\n8\n4\n17\n17\n4\n18\n8\n4\n9\n9\n4\n20\n20\n4\n21\n9\n4\n10\n10\n4\n23\n23\n4\n24\n10\n3\n13\n16\n3\n26\n19\n3\n27\n22\n4\n1\n1\n4\n29\n29\n4\n30\n1\n3\n31\n16\n3\n32\n19\n3\n33\n22\n4\n2\n2\n4\n35\n35\n4\n36\n2\n3\n31\n37\n3\n38\n19\n3\n39\n22\n4\n3\n3\n4\n41\n41\n4\n42\n3\n3\n38\n43\n3\n44\n22\n4\n4\n4\n4\n46\n46\n4\n47\n4\n3\n44\n48\n4\n5\n5\n4\n50\n50\n4\n51\n5\n61\n3\n0\n0\n1\n6\n0\n1\n7\n0\n1\n8\n0\n1\n9\n0\n1\n10\n0\n4\n2\n3\n4\n4\n5\n4\n8\n6\n4\n7\n9\n2\n28\n25\n5\n11\n1\n5\n10\n12\n6\n13\n0\n6\n14\n0\n6\n15\n0\n6\n16\n0\n6\n17\n0\n1\n1\n0\n4\n19\n3\n4\n20\n9\n2\n34\n25\n5\n22\n1\n5\n21\n23\n6\n24\n0\n6\n25\n0\n6\n26\n0\n6\n27\n0\n1\n2\n0\n4\n19\n29\n4\n30\n9\n2\n40\n25\n5\n32\n1\n5\n31\n33\n6\n34\n0\n6\n35\n0\n6\n36\n0\n1\n3\n0\n4\n38\n5\n4\n39\n6\n4\n30\n40\n2\n45\n25\n5\n42\n1\n5\n41\n43\n6\n44\n0\n6\n45\n0\n1\n4\n0\n4\n38\n47\n4\n48\n6\n4\n30\n49\n2\n49\n25\n5\n51\n1\n5\n50\n52\n6\n53\n0\n1\n5\n0\n4\n48\n55\n4\n30\n56\n2\n49\n52\n5\n58\n1\n5\n57\n59\n5\n18\n1\n61\n19\n1\n18\n0\n0\n0\n8\n28\n1\n0\n2\n8\n37\n2\n0\n2\n8\n46\n3\n0\n3\n8\n54\n4\n0\n4\n8\n60\n5\n0\n5\n2\n19\n0\n0\n0\n2\n29\n0\n0\n0\n2\n38\n0\n0\n0\n2\n47\n0\n0\n0\n2\n55\n0\n0\n0\n4\n30\n7\n8\n0\n4\n48\n9\n10\n0\n4\n56\n13\n11\n0\n4\n57\n12\n14\n0\n3\n58\n0\n0\n0\n7\n59\n6\n15\n0\n7\n1\n17\n16\n0\n9\n61\n1\n18\n0\n";
+    }
+    if i == 16 {
+        return "74123\n1\n52\n1\n27\n0\n1\n84\n0\n1\n110\n0\n1\n133\n0\n1\n144\n0\n2\n4\n0\n2\n3\n0\n2\n2\n0\n2\n1\n0\n2\n0\n0\n4\n6\n6\n4\n11\n11\n4\n12\n6\n4\n7\n7\n4\n14\n14\n4\n15\n7\n4\n8\n8\n4\n17\n17\n4\n18\n8\n4\n9\n9\n4\n20\n20\n4\n21\n9\n4\n10\n10\n4\n23\n23\n4\n24\n10\n3\n13\n16\n3\n26\n19\n3\n27\n22\n4\n1\n1\n4\n29\n29\n4\n30\n1\n3\n31\n16\n3\n32\n19\n3\n33\n22\n4\n2\n2\n4\n35\n35\n4\n36\n2\n3\n31\n37\n3\n38\n19\n3\n39\n22\n4\n3\n3\n4\n41\n41\n4\n42\n3\n3\n38\n43\n3\n44\n22\n4\n4\n4\n4\n46\n46\n4\n47\n4\n3\n44\n48\n4\n5\n5\n4\n50\n50\n4\n51\n5\n61\n3\n0\n0\n1\n6\n0\n1\n7\n0\n1\n8\n0\n1\n9\n0\n1\n10\n0\n4\n2\n3\n4\n4\n5\n4\n8\n6\n4\n7\n9\n2\n28\n25\n5\n11\n1\n5\n10\n12\n6\n13\n0\n6\n14\n0\n6\n15\n0\n6\n16\n0\n6\n17\n0\n1\n1\n0\n4\n19\n3\n4\n20\n9\n2\n34\n25\n5\n22\n1\n5\n21\n23\n6\n24\n0\n6\n25\n0\n6\n26\n0\n6\n27\n0\n1\n2\n0\n4\n19\n29\n4\n30\n9\n2\n40\n25\n5\n32\n1\n5\n31\n33\n6\n34\n0\n6\n35\n0\n6\n36\n0\n1\n3\n0\n4\n38\n5\n4\n39\n6\n4\n30\n40\n2\n45\n25\n5\n42\n1\n5\n41\n43\n6\n44\n0\n6\n45\n0\n1\n4\n0\n4\n38\n47\n4\n48\n6\n4\n30\n49\n2\n49\n25\n5\n51\n1\n5\n50\n52\n6\n53\n0\n1\n5\n0\n4\n48\n55\n4\n30\n56\n2\n49\n52\n5\n58\n1\n5\n57\n59\n5\n18\n1\n61\n19\n1\n18\n0\n0\n0\n8\n28\n1\n0\n1\n8\n37\n2\n0\n2\n8\n46\n3\n0\n3\n8\n54\n4\n0\n4\n8\n60\n5\n0\n1\n2\n19\n0\n0\n0\n2\n29\n0\n0\n0\n2\n38\n0\n0\n0\n2\n47\n0\n0\n0\n2\n55\n0\n0\n0\n4\n30\n7\n8\n0\n4\n48\n9\n10\n0\n4\n56\n13\n11\n0\n4\n57\n12\n14\n0\n3\n58\n0\n0\n0\n7\n59\n6\n15\n0\n7\n1\n17\n16\n0\n9\n61\n1\n18\n0\n";
+    }
+    if i == 17 {
+        return "74123\n1\n52\n1\n27\n0\n1\n84\n0\n1\n110\n0\n1\n133\n0\n1\n144\n0\n2\n4\n0\n2\n3\n0\n2\n2\n0\n2\n1\n0\n2\n0\n0\n4\n6\n6\n4\n11\n11\n4\n12\n6\n4\n7\n7\n4\n14\n14\n4\n15\n7\n4\n8\n8\n4\n17\n17\n4\n18\n8\n4\n9\n9\n4\n20\n20\n4\n21\n9\n4\n10\n10\n4\n23\n23\n4\n24\n10\n3\n13\n16\n3\n26\n19\n3\n27\n22\n4\n1\n1\n4\n29\n29\n4\n30\n1\n3\n31\n16\n3\n32\n19\n3\n33\n22\n4\n2\n2\n4\n35\n35\n4\n36\n2\n3\n31\n37\n3\n38\n19\n3\n39\n22\n4\n3\n3\n4\n41\n41\n4\n42\n3\n3\n38\n43\n3\n44\n22\n4\n4\n4\n4\n46\n46\n4\n47\n4\n3\n44\n48\n4\n5\n5\n4\n50\n50\n4\n51\n5\n61\n3\n0\n0\n1\n6\n0\n1\n7\n0\n1\n8\n0\n1\n9\n0\n1\n10\n0\n4\n2\n3\n4\n4\n5\n4\n8\n6\n4\n7\n9\n2\n28\n25\n5\n11\n1\n5\n10\n12\n6\n13\n0\n6\n14\n0\n6\n15\n0\n6\n16\n0\n6\n17\n0\n1\n1\n0\n4\n19\n3\n4\n20\n9\n2\n34\n25\n5\n22\n1\n5\n21\n23\n6\n24\n0\n6\n25\n0\n6\n26\n0\n6\n27\n0\n1\n2\n0\n4\n19\n29\n4\n30\n9\n2\n40\n25\n5\n32\n1\n5\n31\n33\n6\n34\n0\n6\n35\n0\n6\n36\n0\n1\n3\n0\n4\n38\n5\n4\n39\n6\n4\n30\n40\n2\n45\n25\n5\n42\n1\n5\n41\n43\n6\n44\n0\n6\n45\n0\n1\n4\n0\n4\n38\n47\n4\n48\n6\n4\n30\n49\n2\n49\n25\n5\n51\n1\n5\n50\n52\n6\n53\n0\n1\n5\n0\n4\n48\n55\n4\n30\n56\n2\n49\n52\n5\n58\n1\n5\n57\n59\n5\n18\n1\n61\n19\n1\n18\n0\n0\n0\n8\n28\n1\n0\n6\n8\n37\n2\n0\n2\n8\n46\n3\n0\n3\n8\n54\n4\n0\n4\n8\n60\n5\n0\n5\n2\n19\n0\n0\n0\n2\n29\n0\n0\n0\n2\n38\n0\n0\n0\n2\n47\n0\n0\n0\n2\n55\n0\n0\n0\n4\n30\n7\n8\n0\n4\n48\n9\n10\n0\n4\n56\n13\n11\n0\n4\n57\n12\n14\n0\n3\n58\n0\n0\n0\n7\n59\n6\n15\n0\n7\n1\n17\n16\n0\n9\n61\n1\n18\n0\n";
+    }
+    if i == 18 {
+        return "74123\n1\n52\n1\n27\n0\n1\n84\n0\n1\n110\n0\n1\n133\n0\n1\n144\n0\n2\n4\n0\n2\n3\n0\n2\n2\n0\n2\n1\n0\n2\n0\n0\n4\n6\n6\n4\n11\n11\n4\n12\n6\n4\n7\n7\n4\n14\n14\n4\n15\n7\n4\n8\n8\n4\n17\n17\n4\n18\n8\n4\n9\n9\n4\n20\n20\n4\n21\n9\n4\n10\n10\n4\n23\n23\n4\n24\n10\n3\n13\n16\n3\n26\n19\n3\n27\n22\n4\n1\n1\n4\n29\n29\n4\n30\n1\n3\n31\n16\n3\n32\n19\n3\n33\n22\n4\n2\n2\n4\n35\n35\n4\n36\n2\n3\n31\n37\n3\n38\n19\n3\n39\n22\n4\n3\n3\n4\n41\n41\n4\n42\n3\n3\n38\n43\n3\n44\n22\n4\n4\n4\n4\n46\n46\n4\n47\n4\n3\n44\n48\n4\n5\n5\n4\n50\n50\n4\n51\n5\n61\n3\n0\n0\n1\n6\n0\n1\n7\n0\n1\n8\n0\n1\n9\n0\n1\n10\n0\n4\n2\n3\n4\n4\n5\n4\n8\n6\n4\n7\n9\n2\n28\n25\n5\n11\n1\n5\n10\n12\n6\n13\n0\n6\n14\n0\n6\n15\n0\n6\n16\n0\n6\n17\n0\n1\n1\n0\n4\n19\n3\n4\n20\n9\n2\n34\n25\n5\n22\n1\n5\n21\n23\n6\n24\n0\n6\n25\n0\n6\n26\n0\n6\n27\n0\n1\n2\n0\n4\n19\n29\n4\n30\n9\n2\n40\n25\n5\n32\n1\n5\n31\n33\n6\n34\n0\n6\n35\n0\n6\n36\n0\n1\n3\n0\n4\n38\n5\n4\n39\n6\n4\n30\n40\n2\n45\n25\n5\n42\n1\n5\n41\n43\n6\n44\n0\n6\n45\n0\n1\n4\n0\n4\n38\n47\n4\n48\n6\n4\n30\n49\n2\n49\n25\n5\n51\n1\n5\n50\n52\n6\n53\n0\n1\n5\n0\n4\n48\n55\n4\n30\n56\n2\n49\n52\n5\n58\n1\n5\n57\n59\n5\n18\n1\n61\n19\n1\n18\n0\n0\n0\n8\n28\n1\n0\n1\n8\n37\n2\n0\n2\n8\n46\n3\n0\n3\n8\n54\n4\n0\n4\n8\n60\n5\n0\n5\n1\n19\n0\n0\n0\n2\n29\n0\n0\n0\n2\n38\n0\n0\n0\n2\n47\n0\n0\n0\n2\n55\n0\n0\n0\n4\n30\n7\n8\n0\n4\n48\n9\n10\n0\n4\n56\n13\n11\n0\n4\n57\n12\n14\n0\n3\n58\n0\n0\n0\n7\n59\n6\n15\n0\n7\n1\n17\n16\n0\n9\n61\n1\n18\n0\n";
+    }
+    if i == 19 {
+        return "74123\n1\n1\n1\n0\n0\n1\n1\n1\n0\n1\n1\n2\n1\n0\n0\n0\n";
+    }
+    if i == 20 {
+        return "74123\n1\n2\n1\n0\n0\n1\n1\n0\n1\n2\n1\n2\n1\n1\n3\n1\n0\n0\n0\n";
+    }
+    if i == 21 {
+        return "74123\n1\n52\n1\n27\n0\n1\n84\n0\n1\n110\n0\n1\n133\n0\n1\n144\n0\n2\n4\n0\n2\n3\n0\n2\n2\n0\n2\n1\n0\n2\n0\n0\n4\n6\n6\n4\n11\n11\n4\n12\n6\n4\n7\n7\n4\n14\n14\n4\n15\n7\n4\n8\n8\n4\n17\n17\n4\n18\n8\n4\n9\n9\n4\n20\n20\n4\n21\n9\n4\n10\n10\n4\n23\n23\n4\n24\n10\n3\n13\n16\n3\n26\n19\n3\n27\n22\n4\n1\n1\n4\n29\n29\n4\n30\n1\n3\n31\n16\n3\n32\n19\n3\n33\n22\n4\n2\n2\n4\n35\n35\n4\n36\n2\n3\n31\n37\n3\n38\n19\n3\n39\n22\n4\n3\n3\n4\n41\n41\n4\n42\n3\n3\n38\n43\n3\n44\n22\n4\n4\n4\n4\n46\n46\n4\n47\n4\n3\n44\n48\n4\n5\n5\n4\n50\n50\n4\n51\n5\n61\n3\n0\n0\n1\n6\n0\n1\n7\n0\n1\n8\n0\n1\n9\n0\n1\n10\n0\n4\n2\n3\n4\n4\n5\n4\n8\n6\n4\n7\n9\n2\n28\n25\n5\n11\n1\n5\n10\n12\n6\n13\n0\n6\n14\n0\n6\n15\n0\n6\n16\n0\n6\n17\n0\n1\n1\n0\n4\n19\n3\n4\n20\n9\n2\n34\n25\n5\n22\n1\n5\n21\n23\n6\n24\n0\n6\n25\n0\n6\n26\n0\n6\n27\n0\n1\n2\n0\n4\n19\n29\n4\n30\n9\n2\n40\n25\n5\n32\n1\n5\n31\n33\n6\n34\n0\n6\n35\n0\n6\n36\n0\n1\n3\n0\n4\n38\n5\n4\n39\n6\n4\n30\n40\n2\n45\n25\n5\n42\n1\n5\n41\n43\n6\n44\n0\n6\n45\n0\n1\n4\n0\n4\n38\n47\n4\n48\n6\n4\n30\n49\n2\n49\n25\n5\n51\n1\n5\n50\n52\n6\n53\n0\n1\n5\n0\n4\n48\n55\n4\n30\n56\n2\n49\n52\n5\n58\n1\n5\n57\n59\n5\n18\n1\n61\n19\n1\n18\n0\n0\n0\n8\n28\n1\n0\n1\n8\n37\n2\n0\n2\n8\n46\n3\n0\n3\n8\n54\n4\n0\n4\n8\n60\n5\n0\n5\n2\n19\n0\n0\n0\n2\n29\n0\n0\n0\n2\n38\n0\n0\n0\n2\n47\n0\n0\n0\n2\n55\n0\n0\n0\n4\n30\n8\n7\n0\n4\n48\n9\n10\n0\n4\n56\n13\n11\n0\n4\n57\n12\n14\n0\n3\n58\n0\n0\n0\n7\n59\n6\n15\n0\n7\n1\n17\n16\n0\n9\n61\n1\n18\n0\n";
+    }
+    if i == 22 {
+        return "74123\n1\n52\n1\n27\n0\n1\n84\n0\n1\n110\n0\n1\n133\n0\n1\n144\n0\n2\n4\n0\n2\n3\n0\n2\n2\n0\n2\n1\n0\n2\n0\n0\n4\n6\n6\n4\n11\n11\n4\n12\n6\n4\n7\n7\n4\n14\n14\n4\n15\n7\n4\n8\n8\n4\n17\n17\n4\n18\n8\n4\n9\n9\n4\n20\n20\n4\n21\n9\n4\n10\n10\n4\n23\n23\n4\n24\n10\n3\n13\n16\n3\n26\n19\n3\n27\n22\n4\n1\n1\n4\n29\n29\n4\n30\n1\n3\n31\n16\n3\n32\n19\n3\n33\n22\n4\n2\n2\n4\n35\n35\n4\n36\n2\n3\n31\n37\n3\n38\n19\n3\n39\n22\n4\n3\n3\n4\n41\n41\n4\n42\n3\n3\n38\n43\n3\n44\n22\n4\n4\n4\n4\n46\n46\n4\n47\n4\n3\n44\n48\n4\n5\n5\n4\n50\n50\n4\n51\n5\n61\n3\n0\n0\n1\n6\n0\n1\n7\n0\n1\n8\n0\n1\n9\n0\n1\n10\n0\n4\n2\n3\n4\n4\n5\n4\n8\n6\n4\n7\n9\n2\n28\n25\n5\n11\n1\n5\n10\n12\n6\n13\n0\n6\n14\n0\n6\n15\n0\n6\n16\n0\n6\n17\n0\n1\n1\n0\n4\n19\n3\n4\n20\n9\n2\n34\n25\n5\n22\n1\n5\n21\n23\n6\n24\n0\n6\n25\n0\n6\n26\n0\n6\n27\n0\n1\n2\n0\n4\n19\n29\n4\n30\n9\n2\n40\n25\n5\n32\n1\n5\n31\n33\n6\n34\n0\n6\n35\n0\n6\n36\n0\n1\n3\n0\n4\n38\n5\n4\n39\n6\n4\n30\n40\n2\n45\n25\n5\n42\n1\n5\n41\n43\n6\n44\n0\n6\n45\n0\n1\n4\n0\n4\n38\n47\n4\n48\n6\n4\n30\n49\n2\n49\n25\n5\n51\n1\n5\n50\n52\n6\n53\n0\n1\n5\n0\n4\n48\n55\n4\n30\n56\n2\n49\n52\n5\n58\n1\n5\n57\n59\n5\n18\n1\n61\n19\n1\n18\n0\n0\n0\n8\n28\n1\n0\n1\n8\n37\n2\n0\n2\n8\n46\n3\n0\n3\n8\n54\n4\n0\n4\n8\n60\n5\n0\n5\n2\n19\n0\n0\n0\n2\n29\n0\n0\n0\n2\n38\n0\n0\n0\n2\n47\n0\n0\n0\n2\n55\n0\n0\n0\n4\n30\n7\n8\n0\n4\n48\n9\n10\n0\n4\n56\n13\n11\n0\n4\n57\n12\n14\n0\n3\n58\n0\n0\n0\n7\n59\n6\n16\n0\n7\n1\n17\n16\n0\n9\n61\n1\n18\n0\n";
+    }
+    if i == 23 {
+        return "74123\n1\n52\n1\n27\n0\n1\n84\n0\n1\n110\n0\n1\n133\n0\n1\n144\n0\n2\n4\n0\n2\n3\n0\n2\n2\n0\n2\n1\n0\n2\n0\n0\n4\n6\n6\n4\n11\n11\n4\n12\n6\n4\n7\n7\n4\n14\n14\n4\n15\n7\n4\n8\n8\n4\n17\n17\n4\n18\n8\n4\n9\n9\n4\n20\n20\n4\n21\n9\n4\n10\n10\n4\n23\n23\n4\n24\n10\n3\n13\n16\n3\n26\n19\n3\n27\n22\n4\n1\n1\n4\n29\n29\n4\n30\n1\n3\n31\n16\n3\n32\n19\n3\n33\n22\n4\n2\n2\n4\n35\n35\n4\n36\n2\n3\n31\n37\n3\n38\n19\n3\n39\n22\n4\n3\n3\n4\n41\n41\n4\n42\n3\n3\n38\n43\n3\n44\n22\n4\n4\n4\n4\n46\n46\n4\n47\n4\n3\n44\n48\n4\n5\n5\n4\n50\n50\n4\n51\n5\n61\n3\n0\n0\n1\n6\n0\n1\n7\n0\n1\n8\n0\n1\n9\n0\n1\n10\n0\n4\n2\n3\n4\n4\n5\n4\n8\n6\n4\n7\n9\n2\n28\n25\n5\n11\n1\n5\n10\n12\n6\n13\n0\n6\n14\n0\n6\n15\n0\n6\n16\n0\n6\n17\n0\n1\n1\n0\n4\n19\n3\n4\n20\n9\n2\n34\n25\n5\n22\n1\n5\n21\n23\n6\n24\n0\n6\n25\n0\n6\n26\n0\n6\n27\n0\n1\n2\n0\n4\n19\n29\n4\n30\n9\n2\n40\n25\n5\n32\n1\n5\n31\n33\n6\n34\n0\n6\n35\n0\n6\n36\n0\n1\n3\n0\n4\n38\n5\n4\n39\n6\n4\n30\n40\n2\n45\n25\n5\n42\n1\n5\n41\n43\n6\n44\n0\n6\n45\n0\n1\n4\n0\n4\n38\n47\n4\n48\n6\n4\n30\n49\n2\n49\n25\n5\n51\n1\n5\n50\n52\n6\n53\n0\n1\n5\n0\n4\n48\n55\n4\n30\n56\n2\n49\n52\n5\n58\n1\n5\n57\n59\n5\n18\n1\n61\n19\n1\n18\n0\n0\n0\n8\n28\n1\n0\n1\n8\n37\n2\n0\n2\n8\n46\n3\n0\n3\n8\n54\n4\n0\n4\n8\n60\n5\n0\n5\n2\n19\n0\n0\n0\n2\n29\n0\n0\n0\n2\n38\n0\n0\n0\n2\n47\n0\n0\n0\n2\n55\n0\n0\n0\n4\n30\n7\n8\n0\n4\n48\n9\n10\n0\n4\n56\n13\n11\n0\n4\n57\n12\n14\n0\n3\n58\n0\n0\n0\n7\n59\n6\n15\n0\n7\n19\n17\n16\n0\n9\n61\n1\n18\n0\n";
+    }
+    if i == 24 {
+        return "74123\n1\n52\n1\n27\n0\n1\n84\n0\n1\n110\n0\n1\n133\n0\n1\n144\n0\n2\n4\n0\n2\n3\n0\n2\n2\n0\n2\n1\n0\n2\n0\n0\n4\n6\n6\n4\n11\n11\n4\n12\n6\n4\n7\n7\n4\n14\n14\n4\n15\n7\n4\n8\n8\n4\n17\n17\n4\n18\n8\n4\n9\n9\n4\n20\n20\n4\n21\n9\n4\n10\n10\n4\n23\n23\n4\n24\n10\n3\n13\n16\n3\n26\n19\n3\n27\n22\n4\n1\n1\n4\n29\n29\n4\n30\n1\n3\n31\n16\n3\n32\n19\n3\n33\n22\n4\n2\n2\n4\n35\n35\n4\n36\n2\n3\n31\n37\n3\n38\n19\n3\n39\n22\n4\n3\n3\n4\n41\n41\n4\n42\n3\n3\n38\n43\n3\n44\n22\n4\n4\n4\n4\n46\n46\n4\n47\n4\n3\n44\n48\n4\n5\n5\n4\n50\n50\n4\n51\n5\n61\n3\n0\n0\n1\n6\n0\n1\n7\n0\n1\n8\n0\n1\n9\n0\n1\n10\n0\n4\n2\n3\n4\n4\n5\n4\n8\n6\n4\n7\n9\n2\n28\n25\n5\n11\n1\n5\n10\n12\n6\n13\n0\n6\n14\n0\n6\n15\n0\n6\n16\n0\n6\n17\n0\n1\n1\n0\n4\n19\n3\n4\n20\n9\n2\n34\n25\n5\n22\n1\n5\n21\n23\n6\n24\n0\n6\n25\n0\n6\n26\n0\n6\n27\n0\n1\n2\n0\n4\n19\n29\n4\n30\n9\n2\n40\n25\n5\n32\n1\n5\n31\n33\n6\n34\n0\n6\n35\n0\n6\n36\n0\n1\n3\n0\n4\n38\n5\n4\n39\n6\n4\n30\n40\n2\n45\n25\n5\n42\n1\n5\n41\n43\n6\n44\n0\n6\n45\n0\n1\n4\n0\n4\n38\n47\n4\n48\n6\n4\n30\n49\n2\n49\n25\n5\n51\n1\n5\n50\n52\n6\n53\n0\n1\n5\n0\n4\n48\n55\n4\n30\n56\n2\n49\n52\n5\n58\n1\n5\n57\n59\n5\n18\n1\n61\n19\n1\n18\n0\n0\n0\n8\n28\n1\n0\n1\n8\n37\n2\n0\n2\n8\n46\n3\n0\n3\n8\n54\n4\n0\n4\n8\n60\n5\n0\n5\n2\n19\n0\n0\n0\n2\n29\n0\n0\n0\n2\n38\n0\n0\n0\n2\n47\n0\n0\n0\n2\n55\n0\n0\n0\n4\n30\n7\n8\n0\n4\n48\n9\n10\n0\n4\n56\n13\n11\n0\n4\n57\n12\n14\n0\n3\n58\n0\n0\n0\n7\n59\n6\n15\n0\n7\n1\n17\n16\n0\n9\n61\n7\n18\n0\n";
+    }
+    if i == 25 {
+        return "74123\n1\n52\n1\n27\n0\n1\n84\n0\n1\n110\n0\n1\n133\n0\n1\n144\n0\n2\n4\n0\n2\n3\n0\n2\n2\n0\n2\n1\n0\n2\n0\n0\n4\n6\n6\n4\n11\n11\n4\n12\n6\n4\n7\n7\n4\n14\n14\n4\n15\n7\n4\n8\n8\n4\n17\n17\n4\n18\n8\n4\n9\n9\n4\n20\n20\n4\n21\n9\n4\n10\n10\n4\n23\n23\n4\n24\n10\n3\n13\n16\n3\n26\n19\n3\n27\n22\n4\n1\n1\n4\n29\n29\n4\n30\n1\n3\n31\n16\n3\n32\n19\n3\n33\n22\n4\n2\n2\n4\n35\n35\n4\n36\n2\n3\n31\n37\n3\n38\n19\n3\n39\n22\n4\n3\n3\n4\n41\n41\n4\n42\n3\n3\n38\n43\n3\n44\n22\n4\n4\n4\n4\n46\n46\n4\n47\n4\n3\n44\n48\n4\n5\n5\n4\n50\n50\n4\n51\n5\n61\n3\n0\n0\n1\n6\n0\n1\n7\n0\n1\n8\n0\n1\n9\n0\n1\n10\n0\n4\n2\n3\n4\n4\n5\n4\n8\n6\n4\n7\n9\n2\n28\n25\n5\n11\n1\n5\n10\n12\n6\n13\n0\n6\n14\n0\n6\n15\n0\n6\n16\n0\n6\n17\n0\n1\n1\n0\n4\n19\n3\n4\n20\n9\n2\n34\n25\n5\n22\n1\n5\n21\n23\n6\n24\n0\n6\n25\n0\n6\n26\n0\n6\n27\n0\n1\n2\n0\n4\n19\n29\n4\n30\n9\n2\n40\n25\n5\n32\n1\n5\n31\n33\n6\n34\n0\n6\n35\n0\n6\n36\n0\n1\n3\n0\n4\n38\n5\n4\n39\n6\n4\n30\n40\n2\n45\n25\n5\n42\n1\n5\n41\n43\n6\n44\n0\n6\n45\n0\n1\n4\n0\n4\n38\n47\n4\n48\n6\n4\n30\n49\n2\n49\n25\n5\n51\n1\n5\n50\n52\n6\n53\n0\n1\n5\n0\n4\n48\n55\n4\n30\n56\n2\n49\n52\n5\n58\n1\n5\n57\n59\n5\n19\n1\n61\n19\n1\n18\n0\n0\n0\n8\n28\n1\n0\n1\n8\n37\n2\n0\n2\n8\n46\n3\n0\n3\n8\n54\n4\n0\n4\n8\n60\n5\n0\n5\n2\n19\n0\n0\n0\n2\n29\n0\n0\n0\n2\n38\n0\n0\n0\n2\n47\n0\n0\n0\n2\n55\n0\n0\n0\n4\n30\n7\n8\n0\n4\n48\n9\n10\n0\n4\n56\n13\n11\n0\n4\n57\n12\n14\n0\n3\n58\n0\n0\n0\n7\n59\n6\n15\n0\n7\n1\n17\n16\n0\n9\n61\n1\n18\n0\n";
+    }
+    if i == 26 {
+        return "74123\n1\n52\n1\n27\n0\n1\n84\n0\n1\n110\n0\n1\n133\n0\n1\n144\n0\n2\n4\n0\n2\n3\n0\n2\n2\n0\n2\n1\n0\n2\n0\n0\n4\n6\n6\n4\n11\n11\n4\n12\n6\n4\n7\n7\n4\n14\n14\n4\n15\n7\n4\n8\n8\n4\n17\n17\n4\n18\n8\n4\n9\n9\n4\n20\n20\n4\n21\n9\n4\n10\n10\n4\n23\n23\n4\n24\n10\n3\n13\n16\n3\n26\n19\n3\n27\n22\n4\n1\n1\n4\n29\n29\n4\n30\n1\n3\n31\n16\n3\n32\n19\n3\n33\n22\n4\n2\n2\n4\n35\n35\n4\n36\n2\n3\n31\n37\n3\n38\n19\n3\n39\n22\n4\n3\n3\n4\n41\n41\n4\n42\n3\n3\n38\n43\n3\n44\n22\n4\n4\n4\n4\n46\n46\n4\n47\n4\n3\n44\n48\n4\n5\n5\n4\n50\n50\n4\n51\n5\n61\n3\n0\n0\n1\n6\n0\n1\n7\n0\n1\n8\n0\n1\n9\n0\n1\n10\n0\n4\n2\n3\n4\n4\n5\n4\n8\n6\n4\n7\n9\n2\n28\n25\n5\n11\n1\n5\n10\n12\n6\n13\n0\n6\n14\n0\n6\n15\n0\n6\n16\n0\n6\n17\n0\n1\n1\n0\n4\n19\n3\n4\n20\n9\n2\n34\n25\n5\n22\n1\n5\n21\n23\n6\n24\n0\n6\n25\n0\n6\n26\n0\n6\n27\n0\n1\n2\n0\n4\n19\n29\n4\n30\n9\n2\n40\n25\n5\n32\n1\n5\n31\n33\n6\n34\n0\n6\n35\n0\n6\n36\n0\n1\n3\n0\n4\n38\n5\n4\n39\n6\n4\n30\n40\n2\n45\n25\n5\n42\n1\n5\n41\n43\n6\n44\n0\n6\n45\n0\n1\n4\n0\n4\n38\n47\n4\n48\n6\n4\n30\n49\n2\n49\n25\n5\n51\n1\n5\n50\n52\n6\n53\n0\n1\n5\n0\n4\n48\n55\n4\n30\n56\n2\n49\n52\n5\n58\n1\n5\n57\n59\n5\n18\n1\n1\n18\n1\n18\n0\n0\n0\n8\n28\n1\n0\n1\n8\n37\n2\n0\n2\n8\n46\n3\n0\n3\n8\n54\n4\n0\n4\n8\n60\n5\n0\n5\n2\n19\n0\n0\n0\n2\n29\n0\n0\n0\n2\n38\n0\n0\n0\n2\n47\n0\n0\n0\n2\n55\n0\n0\n0\n4\n30\n7\n8\n0\n4\n48\n9\n10\n0\n4\n56\n13\n11\n0\n4\n57\n12\n14\n0\n3\n58\n0\n0\n0\n7\n59\n6\n15\n0\n7\n1\n17\n16\n0\n";
+    }
+    if i == 27 {
+        return "74123\n1\n2\n1\n1\n0\n1\n2\n0\n6\n1\n1\n0\n3\n0\n0\n5\n1\n2\n1\n2\n0\n5\n4\n2\n5\n3\n2\n6\n6\n1\n3\n0\n0\n0\n1\n4\n0\n0\n0\n2\n1\n0\n0\n0\n7\n2\n1\n3\n0\n9\n5\n2\n4\n0\n9\n6\n1\n4\n0\n";
+    }
+    if i == 28 {
+        return "74123\n1\n52\n1\n27\n0\n1\n84\n0\n1\n110\n0\n1\n133\n0\n1\n144\n0\n2\n4\n0\n2\n3\n0\n2\n2\n0\n2\n1\n0\n2\n0\n0\n4\n6\n6\n4\n11\n11\n4\n12\n6\n4\n7\n7\n4\n14\n14\n4\n15\n7\n4\n8\n8\n4\n17\n17\n4\n18\n8\n4\n9\n9\n4\n20\n20\n4\n21\n9\n4\n10\n10\n4\n23\n23\n4\n24\n10\n3\n13\n16\n3\n26\n19\n3\n27\n22\n4\n1\n1\n4\n29\n29\n4\n30\n1\n3\n31\n16\n3\n32\n19\n3\n33\n22\n4\n2\n2\n4\n35\n35\n4\n36\n2\n3\n31\n37\n3\n38\n19\n3\n39\n22\n4\n3\n3\n4\n41\n41\n4\n42\n3\n3\n38\n43\n3\n44\n22\n4\n4\n4\n4\n46\n46\n4\n47\n4\n3\n44\n48\n4\n5\n5\n4\n50\n50\n4\n51\n5\n61\n3\n0\n0\n1\n6\n0\n1\n7\n0\n1\n8\n0\n1\n9\n0\n1\n10\n0\n4\n2\n3\n4\n4\n5\n4\n8\n6\n4\n7\n9\n2\n28\n25\n5\n11\n1\n5\n10\n12\n6\n13\n0\n6\n14\n0\n6\n15\n0\n6\n16\n0\n6\n17\n0\n1\n1\n0\n4\n19\n3\n4\n20\n9\n2\n34\n25\n5\n22\n1\n5\n21\n23\n6\n24\n0\n6\n25\n0\n6\n26\n0\n6\n27\n0\n1\n2\n0\n4\n19\n29\n4\n30\n9\n2\n40\n25\n5\n32\n1\n5\n31\n33\n6\n34\n0\n6\n35\n0\n6\n36\n0\n1\n3\n0\n4\n38\n5\n4\n39\n6\n4\n30\n40\n2\n45\n25\n5\n42\n1\n5\n41\n43\n6\n44\n0\n6\n45\n0\n1\n4\n0\n4\n38\n47\n4\n48\n6\n4\n30\n49\n2\n49\n25\n5\n51\n1\n5\n50\n52\n6\n53\n0\n1\n5\n0\n4\n48\n55\n4\n30\n56\n2\n49\n52\n5\n58\n1\n5\n57\n59\n5\n18\n1\n61\n19\n1\n18\n0\n0\n0\n8\n28\n2\n0\n1\n8\n37\n2\n0\n2\n8\n46\n3\n0\n3\n8\n54\n4\n0\n4\n8\n60\n5\n0\n5\n2\n19\n0\n0\n0\n2\n29\n0\n0\n0\n2\n38\n0\n0\n0\n2\n47\n0\n0\n0\n2\n55\n0\n0\n0\n4\n30\n7\n8\n0\n4\n48\n9\n10\n0\n4\n56\n13\n11\n0\n4\n57\n12\n14\n0\n3\n58\n0\n0\n0\n7\n59\n6\n15\n0\n7\n1\n17\n16\n0\n9\n61\n1\n18\n0\n";
+    }
+    if i == 29 {
+        return "74123\n1\n52\n1\n27\n0\n1\n84\n0\n1\n110\n0\n1\n133\n0\n1\n144\n0\n2\n4\n0\n2\n3\n0\n2\n2\n0\n2\n1\n0\n2\n0\n0\n4\n6\n6\n4\n11\n11\n4\n12\n6\n4\n7\n7\n4\n14\n14\n4\n15\n7\n4\n8\n8\n4\n17\n17\n4\n18\n8\n4\n9\n9\n4\n20\n20\n4\n21\n9\n4\n10\n10\n4\n23\n23\n4\n24\n10\n3\n13\n16\n3\n26\n19\n3\n27\n22\n4\n1\n1\n4\n29\n29\n4\n30\n1\n3\n31\n16\n3\n32\n19\n3\n33\n22\n4\n2\n2\n4\n35\n35\n4\n36\n2\n3\n31\n37\n3\n38\n19\n3\n39\n22\n4\n3\n3\n4\n41\n41\n4\n42\n3\n3\n38\n43\n3\n44\n22\n4\n4\n4\n4\n46\n46\n4\n47\n4\n3\n44\n48\n4\n5\n5\n4\n50\n50\n4\n51\n5\n61\n3\n0\n0\n1\n6\n0\n1\n7\n0\n1\n8\n0\n1\n9\n0\n1\n10\n0\n4\n2\n3\n4\n4\n5\n4\n8\n6\n4\n7\n9\n2\n28\n25\n5\n11\n1\n5\n10\n12\n6\n13\n0\n6\n14\n0\n6\n15\n0\n6\n16\n0\n6\n17\n0\n1\n1\n0\n4\n19\n3\n4\n20\n9\n2\n34\n25\n5\n22\n1\n5\n21\n23\n6\n24\n0\n6\n25\n0\n6\n26\n0\n6\n27\n0\n1\n2\n0\n4\n19\n29\n4\n30\n9\n2\n40\n25\n5\n32\n1\n5\n31\n33\n6\n34\n0\n6\n35\n0\n6\n36\n0\n1\n3\n0\n4\n38\n5\n4\n39\n6\n4\n30\n40\n2\n45\n25\n5\n42\n1\n5\n41\n43\n6\n44\n0\n6\n45\n0\n1\n4\n0\n4\n38\n47\n4\n48\n6\n4\n30\n49\n2\n49\n25\n5\n51\n1\n5\n50\n52\n6\n53\n0\n1\n5\n0\n4\n48\n55\n4\n30\n56\n2\n49\n52\n5\n58\n1\n5\n57\n59\n5\n18\n1\n61\n19\n1\n18\n0\n0\n0\n8\n28\n3\n0\n1\n8\n37\n2\n0\n2\n8\n46\n3\n0\n3\n8\n54\n4\n0\n4\n8\n60\n5\n0\n5\n2\n19\n0\n0\n0\n2\n29\n0\n0\n0\n2\n38\n0\n0\n0\n2\n47\n0\n0\n0\n2\n55\n0\n0\n0\n4\n30\n7\n8\n0\n4\n48\n9\n10\n0\n4\n56\n13\n11\n0\n4\n57\n12\n14\n0\n3\n58\n0\n0\n0\n7\n59\n6\n15\n0\n7\n1\n17\n16\n0\n9\n61\n1\n18\n0\n";
+    }
+    if i == 30 {
+        return "74123\n1\n52\n1\n27\n0\n1\n84\n0\n1\n110\n0\n1\n133\n0\n1\n144\n0\n2\n4\n0\n2\n3\n0\n2\n2\n0\n2\n1\n0\n2\n0\n0\n4\n6\n6\n4\n11\n11\n4\n12\n6\n4\n7\n7\n4\n14\n14\n4\n15\n7\n4\n8\n8\n4\n17\n17\n4\n18\n8\n4\n9\n9\n4\n20\n20\n4\n21\n9\n4\n10\n10\n4\n23\n23\n4\n24\n10\n3\n13\n16\n3\n26\n19\n3\n27\n22\n4\n1\n1\n4\n29\n29\n4\n30\n1\n3\n31\n16\n3\n32\n19\n3\n33\n22\n4\n2\n2\n4\n35\n35\n4\n36\n2\n3\n31\n37\n3\n38\n19\n3\n39\n22\n4\n3\n3\n4\n41\n41\n4\n42\n3\n3\n38\n43\n3\n44\n22\n4\n4\n4\n4\n46\n46\n4\n47\n4\n3\n44\n48\n4\n5\n5\n4\n50\n50\n4\n51\n5\n61\n3\n0\n0\n1\n6\n0\n1\n7\n0\n1\n8\n0\n1\n9\n0\n1\n10\n0\n4\n2\n3\n4\n4\n5\n4\n8\n6\n4\n7\n9\n2\n28\n25\n5\n11\n1\n5\n10\n12\n6\n13\n0\n6\n14\n0\n6\n15\n0\n6\n16\n0\n6\n17\n0\n1\n1\n0\n4\n19\n3\n4\n20\n9\n2\n34\n25\n5\n22\n1\n5\n21\n23\n6\n24\n0\n6\n25\n0\n6\n26\n0\n6\n27\n0\n1\n2\n0\n4\n19\n29\n4\n30\n9\n2\n40\n25\n5\n32\n1\n5\n31\n33\n6\n34\n0\n6\n35\n0\n6\n36\n0\n1\n3\n0\n4\n38\n5\n4\n39\n6\n4\n30\n40\n2\n45\n25\n5\n42\n1\n5\n41\n43\n6\n44\n0\n6\n45\n0\n1\n4\n0\n4\n38\n47\n4\n48\n6\n4\n30\n49\n2\n49\n25\n5\n51\n1\n5\n50\n52\n6\n53\n0\n1\n5\n0\n4\n48\n55\n4\n30\n56\n2\n49\n52\n5\n58\n1\n5\n57\n59\n5\n18\n1\n58\n19\n1\n18\n0\n0\n0\n8\n28\n1\n0\n1\n8\n37\n2\n0\n2\n8\n46\n3\n0\n3\n8\n54\n4\n0\n4\n8\n60\n5\n0\n5\n2\n19\n0\n0\n0\n2\n29\n0\n0\n0\n2\n38\n0\n0\n0\n2\n47\n0\n0\n0\n2\n55\n0\n0\n0\n4\n30\n7\n8\n0\n4\n48\n9\n10\n0\n4\n56\n13\n11\n0\n4\n57\n12\n14\n0\n3\n58\n0\n0\n0\n7\n59\n6\n15\n0\n7\n1\n17\n16\n0\n9\n61\n1\n18\n0\n";
+    }
+    if i == 31 {
+        return "74123\n1\n52\n1\n27\n0\n1\n84\n0\n1\n110\n0\n1\n133\n0\n1\n144\n0\n2\n4\n0\n2\n3\n0\n2\n2\n0\n2\n1\n0\n2\n0\n0\n4\n6\n6\n4\n11\n11\n4\n12\n6\n4\n7\n7\n4\n14\n14\n4\n15\n7\n4\n8\n8\n4\n17\n17\n4\n18\n8\n4\n9\n9\n4\n20\n20\n4\n21\n9\n4\n10\n10\n4\n23\n23\n4\n24\n10\n3\n13\n16\n3\n26\n19\n3\n27\n22\n4\n1\n1\n4\n29\n29\n4\n30\n1\n3\n31\n16\n3\n32\n19\n3\n33\n22\n4\n2\n2\n4\n35\n35\n4\n36\n2\n3\n31\n37\n3\n38\n19\n3\n39\n22\n4\n3\n3\n4\n41\n41\n4\n42\n3\n3\n38\n43\n3\n44\n22\n4\n4\n4\n4\n46\n46\n4\n47\n4\n3\n44\n48\n4\n5\n5\n4\n50\n50\n4\n51\n5\n61\n3\n0\n0\n1\n6\n0\n1\n7\n0\n1\n8\n0\n1\n9\n0\n1\n10\n0\n4\n2\n3\n4\n4\n5\n4\n8\n6\n4\n7\n9\n2\n28\n25\n5\n11\n1\n5\n10\n12\n6\n13\n0\n6\n14\n0\n6\n15\n0\n6\n16\n0\n6\n17\n0\n1\n1\n0\n4\n19\n3\n4\n20\n9\n2\n34\n25\n5\n22\n1\n5\n21\n23\n6\n24\n0\n6\n25\n0\n6\n26\n0\n6\n27\n0\n1\n2\n0\n4\n19\n29\n4\n30\n9\n2\n40\n25\n5\n32\n1\n5\n31\n33\n6\n34\n0\n6\n35\n0\n6\n36\n0\n1\n3\n0\n4\n38\n5\n4\n39\n6\n4\n30\n40\n2\n45\n25\n5\n42\n1\n5\n41\n43\n6\n44\n0\n6\n45\n0\n1\n4\n0\n4\n38\n47\n4\n48\n6\n4\n30\n49\n2\n49\n25\n5\n51\n1\n5\n50\n52\n6\n53\n0\n1\n5\n0\n4\n48\n55\n4\n30\n56\n2\n49\n52\n5\n58\n1\n5\n57\n59\n5\n18\n1\n6\n19\n1\n18\n0\n0\n0\n8\n28\n1\n0\n1\n8\n37\n2\n0\n2\n8\n46\n3\n0\n3\n8\n54\n4\n0\n4\n8\n60\n5\n0\n5\n2\n19\n0\n0\n0\n2\n29\n0\n0\n0\n2\n38\n0\n0\n0\n2\n47\n0\n0\n0\n2\n55\n0\n0\n0\n4\n30\n7\n8\n0\n4\n48\n9\n10\n0\n4\n56\n13\n11\n0\n4\n57\n12\n14\n0\n3\n58\n0\n0\n0\n7\n59\n6\n15\n0\n7\n1\n17\n16\n0\n9\n61\n1\n18\n0\n";
+    }
+    if i == 32 {
+        return "74124\n1\n52\n1\n27\n0\n1\n84\n0\n1\n110\n0\n1\n133\n0\n1\n144\n0\n2\n4\n0\n2\n3\n0\n2\n2\n0\n2\n1\n0\n2\n0\n0\n4\n6\n6\n4\n11\n11\n4\n12\n6\n4\n7\n7\n4\n14\n14\n4\n15\n7\n4\n8\n8\n4\n17\n17\n4\n18\n8\n4\n9\n9\n4\n20\n20\n4\n21\n9\n4\n10\n10\n4\n23\n23\n4\n24\n10\n3\n13\n16\n3\n26\n19\n3\n27\n22\n4\n1\n1\n4\n29\n29\n4\n30\n1\n3\n31\n16\n3\n32\n19\n3\n33\n22\n4\n2\n2\n4\n35\n35\n4\n36\n2\n3\n31\n37\n3\n38\n19\n3\n39\n22\n4\n3\n3\n4\n41\n41\n4\n42\n3\n3\n38\n43\n3\n44\n22\n4\n4\n4\n4\n46\n46\n4\n47\n4\n3\n44\n48\n4\n5\n5\n4\n50\n50\n4\n51\n5\n61\n3\n0\n0\n1\n6\n0\n1\n7\n0\n1\n8\n0\n1\n9\n0\n1\n10\n0\n4\n2\n3\n4\n4\n5\n4\n8\n6\n4\n7\n9\n2\n28\n25\n5\n11\n1\n5\n10\n12\n6\n13\n0\n6\n14\n0\n6\n15\n0\n6\n16\n0\n6\n17\n0\n1\n1\n0\n4\n19\n3\n4\n20\n9\n2\n34\n25\n5\n22\n1\n5\n21\n23\n6\n24\n0\n6\n25\n0\n6\n26\n0\n6\n27\n0\n1\n2\n0\n4\n19\n29\n4\n30\n9\n2\n40\n25\n5\n32\n1\n5\n31\n33\n6\n34\n0\n6\n35\n0\n6\n36\n0\n1\n3\n0\n4\n38\n5\n4\n39\n6\n4\n30\n40\n2\n45\n25\n5\n42\n1\n5\n41\n43\n6\n44\n0\n6\n45\n0\n1\n4\n0\n4\n38\n47\n4\n48\n6\n4\n30\n49\n2\n49\n25\n5\n51\n1\n5\n50\n52\n6\n53\n0\n1\n5\n0\n4\n48\n55\n4\n30\n56\n2\n49\n52\n5\n58\n1\n5\n57\n59\n5\n18\n1\n61\n19\n1\n18\n0\n0\n0\n8\n28\n1\n0\n1\n8\n37\n2\n0\n2\n8\n46\n3\n0\n3\n8\n54\n4\n0\n4\n8\n60\n5\n0\n5\n2\n19\n0\n0\n0\n2\n29\n0\n0\n0\n2\n38\n0\n0\n0\n2\n47\n0\n0\n0\n2\n55\n0\n0\n0\n4\n30\n7\n8\n0\n4\n48\n9\n10\n0\n4\n56\n13\n11\n0\n4\n57\n12\n14\n0\n3\n58\n0\n0\n0\n7\n59\n6\n15\n0\n7\n1\n17\n16\n0\n9\n61\n1\n18\n0\n";
+    }
+    if i == 33 {
+        return "74123\n2\n52\n1\n27\n0\n1\n84\n0\n1\n110\n0\n1\n133\n0\n1\n144\n0\n2\n4\n0\n2\n3\n0\n2\n2\n0\n2\n1\n0\n2\n0\n0\n4\n6\n6\n4\n11\n11\n4\n12\n6\n4\n7\n7\n4\n14\n14\n4\n15\n7\n4\n8\n8\n4\n17\n17\n4\n18\n8\n4\n9\n9\n4\n20\n20\n4\n21\n9\n4\n10\n10\n4\n23\n23\n4\n24\n10\n3\n13\n16\n3\n26\n19\n3\n27\n22\n4\n1\n1\n4\n29\n29\n4\n30\n1\n3\n31\n16\n3\n32\n19\n3\n33\n22\n4\n2\n2\n4\n35\n35\n4\n36\n2\n3\n31\n37\n3\n38\n19\n3\n39\n22\n4\n3\n3\n4\n41\n41\n4\n42\n3\n3\n38\n43\n3\n44\n22\n4\n4\n4\n4\n46\n46\n4\n47\n4\n3\n44\n48\n4\n5\n5\n4\n50\n50\n4\n51\n5\n61\n3\n0\n0\n1\n6\n0\n1\n7\n0\n1\n8\n0\n1\n9\n0\n1\n10\n0\n4\n2\n3\n4\n4\n5\n4\n8\n6\n4\n7\n9\n2\n28\n25\n5\n11\n1\n5\n10\n12\n6\n13\n0\n6\n14\n0\n6\n15\n0\n6\n16\n0\n6\n17\n0\n1\n1\n0\n4\n19\n3\n4\n20\n9\n2\n34\n25\n5\n22\n1\n5\n21\n23\n6\n24\n0\n6\n25\n0\n6\n26\n0\n6\n27\n0\n1\n2\n0\n4\n19\n29\n4\n30\n9\n2\n40\n25\n5\n32\n1\n5\n31\n33\n6\n34\n0\n6\n35\n0\n6\n36\n0\n1\n3\n0\n4\n38\n5\n4\n39\n6\n4\n30\n40\n2\n45\n25\n5\n42\n1\n5\n41\n43\n6\n44\n0\n6\n45\n0\n1\n4\n0\n4\n38\n47\n4\n48\n6\n4\n30\n49\n2\n49\n25\n5\n51\n1\n5\n50\n52\n6\n53\n0\n1\n5\n0\n4\n48\n55\n4\n30\n56\n2\n49\n52\n5\n58\n1\n5\n57\n59\n5\n18\n1\n61\n19\n1\n18\n0\n0\n0\n8\n28\n1\n0\n1\n8\n37\n2\n0\n2\n8\n46\n3\n0\n3\n8\n54\n4\n0\n4\n8\n60\n5\n0\n5\n2\n19\n0\n0\n0\n2\n29\n0\n0\n0\n2\n38\n0\n0\n0\n2\n47\n0\n0\n0\n2\n55\n0\n0\n0\n4\n30\n7\n8\n0\n4\n48\n9\n10\n0\n4\n56\n13\n11\n0\n4\n57\n12\n14\n0\n3\n58\n0\n0\n0\n7\n59\n6\n15\n0\n7\n1\n17\n16\n0\n9\n61\n1\n18\n0\n";
+    }
+    if i == 34 {
+        return "074123\n1\n52\n1\n27\n0\n1\n84\n0\n1\n110\n0\n1\n133\n0\n1\n144\n0\n2\n4\n0\n2\n3\n0\n2\n2\n0\n2\n1\n0\n2\n0\n0\n4\n6\n6\n4\n11\n11\n4\n12\n6\n4\n7\n7\n4\n14\n14\n4\n15\n7\n4\n8\n8\n4\n17\n17\n4\n18\n8\n4\n9\n9\n4\n20\n20\n4\n21\n9\n4\n10\n10\n4\n23\n23\n4\n24\n10\n3\n13\n16\n3\n26\n19\n3\n27\n22\n4\n1\n1\n4\n29\n29\n4\n30\n1\n3\n31\n16\n3\n32\n19\n3\n33\n22\n4\n2\n2\n4\n35\n35\n4\n36\n2\n3\n31\n37\n3\n38\n19\n3\n39\n22\n4\n3\n3\n4\n41\n41\n4\n42\n3\n3\n38\n43\n3\n44\n22\n4\n4\n4\n4\n46\n46\n4\n47\n4\n3\n44\n48\n4\n5\n5\n4\n50\n50\n4\n51\n5\n61\n3\n0\n0\n1\n6\n0\n1\n7\n0\n1\n8\n0\n1\n9\n0\n1\n10\n0\n4\n2\n3\n4\n4\n5\n4\n8\n6\n4\n7\n9\n2\n28\n25\n5\n11\n1\n5\n10\n12\n6\n13\n0\n6\n14\n0\n6\n15\n0\n6\n16\n0\n6\n17\n0\n1\n1\n0\n4\n19\n3\n4\n20\n9\n2\n34\n25\n5\n22\n1\n5\n21\n23\n6\n24\n0\n6\n25\n0\n6\n26\n0\n6\n27\n0\n1\n2\n0\n4\n19\n29\n4\n30\n9\n2\n40\n25\n5\n32\n1\n5\n31\n33\n6\n34\n0\n6\n35\n0\n6\n36\n0\n1\n3\n0\n4\n38\n5\n4\n39\n6\n4\n30\n40\n2\n45\n25\n5\n42\n1\n5\n41\n43\n6\n44\n0\n6\n45\n0\n1\n4\n0\n4\n38\n47\n4\n48\n6\n4\n30\n49\n2\n49\n25\n5\n51\n1\n5\n50\n52\n6\n53\n0\n1\n5\n0\n4\n48\n55\n4\n30\n56\n2\n49\n52\n5\n58\n1\n5\n57\n59\n5\n18\n1\n61\n19\n1\n18\n0\n0\n0\n8\n28\n1\n0\n1\n8\n37\n2\n0\n2\n8\n46\n3\n0\n3\n8\n54\n4\n0\n4\n8\n60\n5\n0\n5\n2\n19\n0\n0\n0\n2\n29\n0\n0\n0\n2\n38\n0\n0\n0\n2\n47\n0\n0\n0\n2\n55\n0\n0\n0\n4\n30\n7\n8\n0\n4\n48\n9\n10\n0\n4\n56\n13\n11\n0\n4\n57\n12\n14\n0\n3\n58\n0\n0\n0\n7\n59\n6\n15\n0\n7\n1\n17\n16\n0\n9\n61\n1\n18\n0\n";
+    }
+    if i == 35 {
+        return "74123\n1\n52\n1\n27\n0\n1\n84\n0\n1\n110\n0\n1\n133\n0\n1\n144\n0\n2\n4\n0\n2\n3\n0\n2\n2\n0\n2\n1\n0\n2\n0\n0\n4\n6\n6\n4\n11\n11\n4\n12\n6\n4\n7\n7\n4\n14\n14\n4\n15\n7\n4\n8\n8\n4\n17\n17\n4\n18\n8\n4\n9\n9\n4\n20\n20\n4\n21\n9\n4\n10\n10\n4\n23\n23\n4\n24\n10\n3\n13\n16\n3\n26\n19\n3\n27\n22\n4\n1\n1\n4\n29\n29\n4\n30\n1\n3\n31\n16\n3\n32\n19\n3\n33\n22\n4\n2\n2\n4\n35\n35\n4\n36\n2\n3\n31\n37\n3\n38\n19\n3\n39\n22\n4\n3\n3\n4\n41\n41\n4\n42\n3\n3\n38\n43\n3\n44\n22\n4\n4\n4\n4\n46\n46\n4\n47\n4\n3\n44\n48\n4\n5\n5\n4\n50\n50\n4\n51\n5\n61\n3\n0\n0\n1\n6\n0\n1\n7\n0\n1\n8\n0\n1\n9\n0\n1\n10\n0\n4\n2\n3\n4\n4\n5\n4\n8\n6\n4\n7\n9\n2\n28\n25\n5\n11\n1\n5\n10\n12\n6\n13\n0\n6\n14\n0\n6\n15\n0\n6\n16\n0\n6\n17\n0\n1\n1\n0\n4\n19\n3\n4\n20\n9\n2\n34\n25\n5\n22\n1\n5\n21\n23\n6\n24\n0\n6\n25\n0\n6\n26\n0\n6\n27\n0\n1\n2\n0\n4\n19\n29\n4\n30\n9\n2\n40\n25\n5\n32\n1\n5\n31\n33\n6\n34\n0\n6\n35\n0\n6\n36\n0\n1\n3\n0\n4\n38\n5\n4\n39\n6\n4\n30\n40\n2\n45\n25\n5\n42\n1\n5\n41\n43\n6\n44\n0\n6\n45\n0\n1\n4\n0\n4\n38\n47\n4\n48\n6\n4\n30\n49\n2\n49\n25\n5\n51\n1\n5\n50\n52\n6\n53\n0\n1\n5\n0\n4\n48\n55\n4\n30\n56\n2\n49\n52\n5\n58\n1\n5\n57\n59\n5\n18\n1\n61\n19\n1\n18\n0\n0\n0\n8\n28\n1\n0\n1\n8\n37\n2\n0\n2\n8\n46\n3\n0\n3\n8\n54\n4\n0\n4\n8\n60\n5\n0\n5\n2\n19\n0\n0\n0\n2\n29\n0\n0\n0\n2\n38\n0\n0\n0\n2\n47\n0\n0\n0\n2\n55\n0\n0\n0\n4\n30\n7\n8\n0\n4\n48\n9\n10\n0\n4\n56\n13\n11\n0\n4\n57\n12\n14\n0\n3\n58\n0\n0\n0\n7\n59\n6\n15\n0\n7\n1\n17\n16\n0\n9\n61\n1\n18\n0\n\n";
+    }
+    if i == 36 {
+        return "74123\n1\n52\n1\n27\n0\n1\n84\n0\n1\n110\n0\n1\n133\n0\n1\n144\n0\n2\n4\n0\n2\n3\n0\n2\n2\n0\n2\n1\n0\n2\n0\n0\n4\n6\n6\n4\n11\n11\n4\n12\n6\n4\n7\n7\n4\n14\n14\n4\n15\n7\n4\n8\n8\n4\n17\n17\n4\n18\n8\n4\n9\n9\n4\n20\n20\n4\n21\n9\n4\n10\n10\n4\n23\n23\n4\n24\n10\n3\n13\n16\n3\n26\n19\n3\n27\n22\n4\n1\n1\n4\n29\n29\n4\n30\n1\n3\n31\n16\n3\n32\n19\n3\n33\n22\n4\n2\n2\n4\n35\n35\n4\n36\n2\n3\n31\n37\n3\n38\n19\n3\n39\n22\n4\n3\n3\n4\n41\n41\n4\n42\n3\n3\n38\n43\n3\n44\n22\n4\n4\n4\n4\n46\n46\n4\n47\n4\n3\n44\n48\n4\n5\n5\n4\n50\n50\n4\n51\n5\n61\n3\n0\n0\n1\n6\n0\n1\n7\n0\n1\n8\n0\n1\n9\n0\n1\n10\n0\n4\n2\n3\n4\n4\n5\n4\n8\n6\n4\n7\n9\n2\n28\n25\n5\n11\n1\n5\n10\n12\n6\n13\n0\n6\n14\n0\n6\n15\n0\n6\n16\n0\n6\n17\n0\n1\n1\n0\n4\n19\n3\n4\n20\n9\n2\n34\n25\n5\n22\n1\n5\n21\n23\n6\n24\n0\n6\n25\n0\n6\n26\n0\n6\n27\n0\n1\n2\n0\n4\n19\n29\n4\n30\n9\n2\n40\n25\n5\n32\n1\n5\n31\n33\n6\n34\n0\n6\n35\n0\n6\n36\n0\n1\n3\n0\n4\n38\n5\n4\n39\n6\n4\n30\n40\n2\n45\n25\n5\n42\n1\n5\n41\n43\n6\n44\n0\n6\n45\n0\n1\n4\n0\n4\n38\n47\n4\n48\n6\n4\n30\n49\n2\n49\n25\n5\n51\n1\n5\n50\n52\n6\n53\n0\n1\n5\n0\n4\n48\n55\n4\n30\n56\n2\n49\n52\n5\n58\n1\n5\n57\n59\n5\n18\n1\n61\n19\n1\n18\n0\n0\n0\n8\n28\n1\n0\n1\n8\n37\n2\n0\n2\n8\n46\n3\n0\n3\n8\n54\n4\n0\n4\n8\n60\n5\n0\n5\n2\n19\n0\n0\n0\n2\n29\n0\n0\n0\n2\n38\n0\n0\n0\n2\n47\n0\n0\n0\n2\n55\n0\n0\n0\n4\n30\n7\n8\n0\n4\n48\n9\n10\n0\n4\n56\n13\n11\n0\n4\n57\n12\n14\n0\n3\n58\n0\n0\n0\n7\n59\n6\n15\n0\n7\n1\n17\n16\n0\n9\n61\n1\n18\n0";
+    }
+    if i == 37 {
+        return "74123\n1000000\n52\n1\n27\n0\n1\n84\n0\n1\n110\n0\n1\n133\n0\n1\n144\n0\n2\n4\n0\n2\n3\n0\n2\n2\n0\n2\n1\n0\n2\n0\n0\n4\n6\n6\n4\n11\n11\n4\n12\n6\n4\n7\n7\n4\n14\n14\n4\n15\n7\n4\n8\n8\n4\n17\n17\n4\n18\n8\n4\n9\n9\n4\n20\n20\n4\n21\n9\n4\n10\n10\n4\n23\n23\n4\n24\n10\n3\n13\n16\n3\n26\n19\n3\n27\n22\n4\n1\n1\n4\n29\n29\n4\n30\n1\n3\n31\n16\n3\n32\n19\n3\n33\n22\n4\n2\n2\n4\n35\n35\n4\n36\n2\n3\n31\n37\n3\n38\n19\n3\n39\n22\n4\n3\n3\n4\n41\n41\n4\n42\n3\n3\n38\n43\n3\n44\n22\n4\n4\n4\n4\n46\n46\n4\n47\n4\n3\n44\n48\n4\n5\n5\n4\n50\n50\n4\n51\n5\n61\n3\n0\n0\n1\n6\n0\n1\n7\n0\n1\n8\n0\n1\n9\n0\n1\n10\n0\n4\n2\n3\n4\n4\n5\n4\n8\n6\n4\n7\n9\n2\n28\n25\n5\n11\n1\n5\n10\n12\n6\n13\n0\n6\n14\n0\n6\n15\n0\n6\n16\n0\n6\n17\n0\n1\n1\n0\n4\n19\n3\n4\n20\n9\n2\n34\n25\n5\n22\n1\n5\n21\n23\n6\n24\n0\n6\n25\n0\n6\n26\n0\n6\n27\n0\n1\n2\n0\n4\n19\n29\n4\n30\n9\n2\n40\n25\n5\n32\n1\n5\n31\n33\n6\n34\n0\n6\n35\n0\n6\n36\n0\n1\n3\n0\n4\n38\n5\n4\n39\n6\n4\n30\n40\n2\n45\n25\n5\n42\n1\n5\n41\n43\n6\n44\n0\n6\n45\n0\n1\n4\n0\n4\n38\n47\n4\n48\n6\n4\n30\n49\n2\n49\n25\n5\n51\n1\n5\n50\n52\n6\n53\n0\n1\n5\n0\n4\n48\n55\n4\n30\n56\n2\n49\n52\n5\n58\n1\n5\n57\n59\n5\n18\n1\n61\n19\n1\n18\n0\n0\n0\n8\n28\n1\n0\n1\n8\n37\n2\n0\n2\n8\n46\n3\n0\n3\n8\n54\n4\n0\n4\n8\n60\n5\n0\n5\n2\n19\n0\n0\n0\n2\n29\n0\n0\n0\n2\n38\n0\n0\n0\n2\n47\n0\n0\n0\n2\n55\n0\n0\n0\n4\n30\n7\n8\n0\n4\n48\n9\n10\n0\n4\n56\n13\n11\n0\n4\n57\n12\n14\n0\n3\n58\n0\n0\n0\n7\n59\n6\n15\n0\n7\n1\n17\n16\n0\n9\n61\n1\n18\n0\n";
+    }
+    if i == 38 {
+        return "74123\n1\n52\n4\n1\n1\n1\n84\n0\n1\n110\n0\n1\n133\n0\n1\n144\n0\n2\n4\n0\n2\n3\n0\n2\n2\n0\n2\n1\n0\n2\n0\n0\n4\n6\n6\n4\n11\n11\n4\n12\n6\n4\n7\n7\n4\n14\n14\n4\n15\n7\n4\n8\n8\n4\n17\n17\n4\n18\n8\n4\n9\n9\n4\n20\n20\n4\n21\n9\n4\n10\n10\n4\n23\n23\n4\n24\n10\n3\n13\n16\n3\n26\n19\n3\n27\n22\n4\n1\n1\n4\n29\n29\n4\n30\n1\n3\n31\n16\n3\n32\n19\n3\n33\n22\n4\n2\n2\n4\n35\n35\n4\n36\n2\n3\n31\n37\n3\n38\n19\n3\n39\n22\n4\n3\n3\n4\n41\n41\n4\n42\n3\n3\n38\n43\n3\n44\n22\n4\n4\n4\n4\n46\n46\n4\n47\n4\n3\n44\n48\n4\n5\n5\n4\n50\n50\n4\n51\n5\n61\n3\n0\n0\n1\n6\n0\n1\n7\n0\n1\n8\n0\n1\n9\n0\n1\n10\n0\n4\n2\n3\n4\n4\n5\n4\n8\n6\n4\n7\n9\n2\n28\n25\n5\n11\n1\n5\n10\n12\n6\n13\n0\n6\n14\n0\n6\n15\n0\n6\n16\n0\n6\n17\n0\n1\n1\n0\n4\n19\n3\n4\n20\n9\n2\n34\n25\n5\n22\n1\n5\n21\n23\n6\n24\n0\n6\n25\n0\n6\n26\n0\n6\n27\n0\n1\n2\n0\n4\n19\n29\n4\n30\n9\n2\n40\n25\n5\n32\n1\n5\n31\n33\n6\n34\n0\n6\n35\n0\n6\n36\n0\n1\n3\n0\n4\n38\n5\n4\n39\n6\n4\n30\n40\n2\n45\n25\n5\n42\n1\n5\n41\n43\n6\n44\n0\n6\n45\n0\n1\n4\n0\n4\n38\n47\n4\n48\n6\n4\n30\n49\n2\n49\n25\n5\n51\n1\n5\n50\n52\n6\n53\n0\n1\n5\n0\n4\n48\n55\n4\n30\n56\n2\n49\n52\n5\n58\n1\n5\n57\n59\n5\n18\n1\n61\n19\n1\n18\n0\n0\n0\n8\n28\n1\n0\n1\n8\n37\n2\n0\n2\n8\n46\n3\n0\n3\n8\n54\n4\n0\n4\n8\n60\n5\n0\n5\n2\n19\n0\n0\n0\n2\n29\n0\n0\n0\n2\n38\n0\n0\n0\n2\n47\n0\n0\n0\n2\n55\n0\n0\n0\n4\n30\n7\n8\n0\n4\n48\n9\n10\n0\n4\n56\n13\n11\n0\n4\n57\n12\n14\n0\n3\n58\n0\n0\n0\n7\n59\n6\n15\n0\n7\n1\n17\n16\n0\n9\n61\n1\n18\n0\n";
+    }
+    if i == 39 {
+        return "74123\n1\n52\n1\n27\n0\n1\n84\n0\n1\n110\n0\n1\n133\n0\n1\n144\n0\n2\n4\n0\n2\n3\n0\n2\n2\n0\n2\n1\n0\n2\n0\n0\n4\n6\n6\n4\n11\n11\n4\n12\n6\n4\n7\n7\n4\n14\n14\n4\n15\n7\n4\n8\n8\n4\n17\n17\n4\n18\n8\n4\n9\n9\n4\n20\n20\n4\n21\n9\n4\n10\n10\n4\n23\n23\n4\n24\n10\n3\n13\n16\n3\n26\n19\n3\n27\n22\n4\n1\n1\n4\n29\n29\n4\n30\n1\n3\n31\n16\n3\n32\n19\n3\n33\n22\n4\n2\n2\n4\n35\n35\n4\n36\n2\n3\n31\n37\n3\n38\n19\n3\n39\n22\n4\n3\n3\n4\n41\n41\n4\n42\n3\n3\n38\n43\n3\n44\n22\n4\n4\n4\n4\n46\n46\n4\n47\n4\n3\n44\n48\n4\n5\n5\n4\n50\n50\n4\n51\n5\n61\n3\n0\n0\n1\n6\n0\n1\n7\n0\n1\n8\n0\n1\n9\n0\n1\n10\n0\n4\n2\n3\n4\n4\n5\n4\n8\n6\n4\n7\n9\n2\n28\n25\n5\n11\n1\n5\n10\n12\n6\n13\n0\n6\n14\n0\n6\n15\n0\n6\n16\n0\n6\n17\n0\n1\n1\n0\n4\n19\n3\n4\n20\n9\n2\n34\n25\n5\n22\n1\n5\n21\n23\n6\n24\n0\n6\n25\n0\n6\n26\n0\n6\n27\n0\n1\n2\n0\n4\n19\n29\n4\n30\n9\n2\n40\n25\n5\n32\n1\n5\n31\n33\n6\n34\n0\n6\n35\n0\n6\n36\n0\n1\n3\n0\n4\n38\n5\n4\n39\n6\n4\n30\n40\n2\n45\n25\n5\n42\n1\n5\n41\n43\n6\n44\n0\n6\n45\n0\n1\n4\n0\n4\n38\n47\n4\n48\n6\n4\n30\n49\n2\n49\n25\n5\n51\n1\n5\n50\n52\n6\n53\n0\n1\n5\n0\n4\n48\n55\n4\n30\n56\n99\n49\n52\n5\n58\n1\n5\n57\n59\n5\n18\n1\n61\n19\n1\n18\n0\n0\n0\n8\n28\n1\n0\n1\n8\n37\n2\n0\n2\n8\n46\n3\n0\n3\n8\n54\n4\n0\n4\n8\n60\n5\n0\n5\n2\n19\n0\n0\n0\n2\n29\n0\n0\n0\n2\n38\n0\n0\n0\n2\n47\n0\n0\n0\n2\n55\n0\n0\n0\n4\n30\n7\n8\n0\n4\n48\n9\n10\n0\n4\n56\n13\n11\n0\n4\n57\n12\n14\n0\n3\n58\n0\n0\n0\n7\n59\n6\n15\n0\n7\n1\n17\n16\n0\n9\n61\n1\n18\n0\n";
+    }
+    if i == 40 {
+        return "74123\r\n1\n52\n1\n27\n0\n1\n84\n0\n1\n110\n0\n1\n133\n0\n1\n144\n0\n2\n4\n0\n2\n3\n0\n2\n2\n0\n2\n1\n0\n2\n0\n0\n4\n6\n6\n4\n11\n11\n4\n12\n6\n4\n7\n7\n4\n14\n14\n4\n15\n7\n4\n8\n8\n4\n17\n17\n4\n18\n8\n4\n9\n9\n4\n20\n20\n4\n21\n9\n4\n10\n10\n4\n23\n23\n4\n24\n10\n3\n13\n16\n3\n26\n19\n3\n27\n22\n4\n1\n1\n4\n29\n29\n4\n30\n1\n3\n31\n16\n3\n32\n19\n3\n33\n22\n4\n2\n2\n4\n35\n35\n4\n36\n2\n3\n31\n37\n3\n38\n19\n3\n39\n22\n4\n3\n3\n4\n41\n41\n4\n42\n3\n3\n38\n43\n3\n44\n22\n4\n4\n4\n4\n46\n46\n4\n47\n4\n3\n44\n48\n4\n5\n5\n4\n50\n50\n4\n51\n5\n61\n3\n0\n0\n1\n6\n0\n1\n7\n0\n1\n8\n0\n1\n9\n0\n1\n10\n0\n4\n2\n3\n4\n4\n5\n4\n8\n6\n4\n7\n9\n2\n28\n25\n5\n11\n1\n5\n10\n12\n6\n13\n0\n6\n14\n0\n6\n15\n0\n6\n16\n0\n6\n17\n0\n1\n1\n0\n4\n19\n3\n4\n20\n9\n2\n34\n25\n5\n22\n1\n5\n21\n23\n6\n24\n0\n6\n25\n0\n6\n26\n0\n6\n27\n0\n1\n2\n0\n4\n19\n29\n4\n30\n9\n2\n40\n25\n5\n32\n1\n5\n31\n33\n6\n34\n0\n6\n35\n0\n6\n36\n0\n1\n3\n0\n4\n38\n5\n4\n39\n6\n4\n30\n40\n2\n45\n25\n5\n42\n1\n5\n41\n43\n6\n44\n0\n6\n45\n0\n1\n4\n0\n4\n38\n47\n4\n48\n6\n4\n30\n49\n2\n49\n25\n5\n51\n1\n5\n50\n52\n6\n53\n0\n1\n5\n0\n4\n48\n55\n4\n30\n56\n2\n49\n52\n5\n58\n1\n5\n57\n59\n5\n18\n1\n61\n19\n1\n18\n0\n0\n0\n8\n28\n1\n0\n1\n8\n37\n2\n0\n2\n8\n46\n3\n0\n3\n8\n54\n4\n0\n4\n8\n60\n5\n0\n5\n2\n19\n0\n0\n0\n2\n29\n0\n0\n0\n2\n38\n0\n0\n0\n2\n47\n0\n0\n0\n2\n55\n0\n0\n0\n4\n30\n7\n8\n0\n4\n48\n9\n10\n0\n4\n56\n13\n11\n0\n4\n57\n12\n14\n0\n3\n58\n0\n0\n0\n7\n59\n6\n15\n0\n7\n1\n17\n16\n0\n9\n61\n1\n18\n0\n";
+    }
+    if i == 41 {
+        return "-74123\n1\n52\n1\n27\n0\n1\n84\n0\n1\n110\n0\n1\n133\n0\n1\n144\n0\n2\n4\n0\n2\n3\n0\n2\n2\n0\n2\n1\n0\n2\n0\n0\n4\n6\n6\n4\n11\n11\n4\n12\n6\n4\n7\n7\n4\n14\n14\n4\n15\n7\n4\n8\n8\n4\n17\n17\n4\n18\n8\n4\n9\n9\n4\n20\n20\n4\n21\n9\n4\n10\n10\n4\n23\n23\n4\n24\n10\n3\n13\n16\n3\n26\n19\n3\n27\n22\n4\n1\n1\n4\n29\n29\n4\n30\n1\n3\n31\n16\n3\n32\n19\n3\n33\n22\n4\n2\n2\n4\n35\n35\n4\n36\n2\n3\n31\n37\n3\n38\n19\n3\n39\n22\n4\n3\n3\n4\n41\n41\n4\n42\n3\n3\n38\n43\n3\n44\n22\n4\n4\n4\n4\n46\n46\n4\n47\n4\n3\n44\n48\n4\n5\n5\n4\n50\n50\n4\n51\n5\n61\n3\n0\n0\n1\n6\n0\n1\n7\n0\n1\n8\n0\n1\n9\n0\n1\n10\n0\n4\n2\n3\n4\n4\n5\n4\n8\n6\n4\n7\n9\n2\n28\n25\n5\n11\n1\n5\n10\n12\n6\n13\n0\n6\n14\n0\n6\n15\n0\n6\n16\n0\n6\n17\n0\n1\n1\n0\n4\n19\n3\n4\n20\n9\n2\n34\n25\n5\n22\n1\n5\n21\n23\n6\n24\n0\n6\n25\n0\n6\n26\n0\n6\n27\n0\n1\n2\n0\n4\n19\n29\n4\n30\n9\n2\n40\n25\n5\n32\n1\n5\n31\n33\n6\n34\n0\n6\n35\n0\n6\n36\n0\n1\n3\n0\n4\n38\n5\n4\n39\n6\n4\n30\n40\n2\n45\n25\n5\n42\n1\n5\n41\n43\n6\n44\n0\n6\n45\n0\n1\n4\n0\n4\n38\n47\n4\n48\n6\n4\n30\n49\n2\n49\n25\n5\n51\n1\n5\n50\n52\n6\n53\n0\n1\n5\n0\n4\n48\n55\n4\n30\n56\n2\n49\n52\n5\n58\n1\n5\n57\n59\n5\n18\n1\n61\n19\n1\n18\n0\n0\n0\n8\n28\n1\n0\n1\n8\n37\n2\n0\n2\n8\n46\n3\n0\n3\n8\n54\n4\n0\n4\n8\n60\n5\n0\n5\n2\n19\n0\n0\n0\n2\n29\n0\n0\n0\n2\n38\n0\n0\n0\n2\n47\n0\n0\n0\n2\n55\n0\n0\n0\n4\n30\n7\n8\n0\n4\n48\n9\n10\n0\n4\n56\n13\n11\n0\n4\n57\n12\n14\n0\n3\n58\n0\n0\n0\n7\n59\n6\n15\n0\n7\n1\n17\n16\n0\n9\n61\n1\n18\n0\n";
+    }
+    return "";
+}
+pub fn k5_fixture_kernel(i: i64) -> i64 {
+    if i == 0 {
+        return 1;
+    }
+    if i == 1 {
+        return 1;
+    }
+    if i == 2 {
+        return 1;
+    }
+    if i == 3 {
+        return 1;
+    }
+    if i == 4 {
+        return 1;
+    }
+    if i == 5 {
+        return 1;
+    }
+    if i == 6 {
+        return 1;
+    }
+    if i == 7 {
+        return 1;
+    }
+    if i == 8 {
+        return 1;
+    }
+    if i == 9 {
+        return 1;
+    }
+    if i == 10 {
+        return 0;
+    }
+    if i == 11 {
+        return 0;
+    }
+    if i == 12 {
+        return 0;
+    }
+    if i == 13 {
+        return 0;
+    }
+    if i == 14 {
+        return 0;
+    }
+    if i == 15 {
+        return 0;
+    }
+    if i == 16 {
+        return 0;
+    }
+    if i == 17 {
+        return 0;
+    }
+    if i == 18 {
+        return 0;
+    }
+    if i == 19 {
+        return 0;
+    }
+    if i == 20 {
+        return 0;
+    }
+    if i == 21 {
+        return 0;
+    }
+    if i == 22 {
+        return 0;
+    }
+    if i == 23 {
+        return 0;
+    }
+    if i == 24 {
+        return 0;
+    }
+    if i == 25 {
+        return 0;
+    }
+    if i == 26 {
+        return 0;
+    }
+    if i == 27 {
+        return 0;
+    }
+    if i == 28 {
+        return 0;
+    }
+    if i == 29 {
+        return 0;
+    }
+    if i == 30 {
+        return 0;
+    }
+    if i == 31 {
+        return 0;
+    }
+    if i == 32 {
+        return 0;
+    }
+    if i == 33 {
+        return 0;
+    }
+    if i == 34 {
+        return 0;
+    }
+    if i == 35 {
+        return 0;
+    }
+    if i == 36 {
+        return 0;
+    }
+    if i == 37 {
+        return 0;
+    }
+    if i == 38 {
+        return 0;
+    }
+    if i == 39 {
+        return 0;
+    }
+    if i == 40 {
+        return 0;
+    }
+    if i == 41 {
+        return 0;
+    }
+    return 0;
+}
+pub fn k5_fixture_bound(i: i64) -> i64 {
+    if i == 0 {
+        return 1;
+    }
+    if i == 1 {
+        return 1;
+    }
+    if i == 2 {
+        return 1;
+    }
+    if i == 3 {
+        return 0;
+    }
+    if i == 4 {
+        return 0;
+    }
+    if i == 5 {
+        return 0;
+    }
+    if i == 6 {
+        return 0;
+    }
+    if i == 7 {
+        return 0;
+    }
+    if i == 8 {
+        return 0;
+    }
+    if i == 9 {
+        return 0;
+    }
+    if i == 10 {
+        return 0;
+    }
+    if i == 11 {
+        return 0;
+    }
+    if i == 12 {
+        return 0;
+    }
+    if i == 13 {
+        return 0;
+    }
+    if i == 14 {
+        return 0;
+    }
+    if i == 15 {
+        return 0;
+    }
+    if i == 16 {
+        return 0;
+    }
+    if i == 17 {
+        return 0;
+    }
+    if i == 18 {
+        return 0;
+    }
+    if i == 19 {
+        return 0;
+    }
+    if i == 20 {
+        return 0;
+    }
+    if i == 21 {
+        return 0;
+    }
+    if i == 22 {
+        return 0;
+    }
+    if i == 23 {
+        return 0;
+    }
+    if i == 24 {
+        return 0;
+    }
+    if i == 25 {
+        return 0;
+    }
+    if i == 26 {
+        return 0;
+    }
+    if i == 27 {
+        return 0;
+    }
+    if i == 28 {
+        return 0;
+    }
+    if i == 29 {
+        return 0;
+    }
+    if i == 30 {
+        return 0;
+    }
+    if i == 31 {
+        return 0;
+    }
+    if i == 32 {
+        return 0;
+    }
+    if i == 33 {
+        return 0;
+    }
+    if i == 34 {
+        return 0;
+    }
+    if i == 35 {
+        return 0;
+    }
+    if i == 36 {
+        return 0;
+    }
+    if i == 37 {
+        return 0;
+    }
+    if i == 38 {
+        return 0;
+    }
+    if i == 39 {
+        return 0;
+    }
+    if i == 40 {
+        return 0;
+    }
+    if i == 41 {
+        return 0;
+    }
+    return 0;
+}
