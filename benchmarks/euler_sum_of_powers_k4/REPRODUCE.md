@@ -16,7 +16,7 @@ repo=$PWD
 bench=$repo/benchmarks/euler_sum_of_powers_k4
 compiler=$(readlink -f "$(command -v mindc)")
 test "$(sha256sum "$compiler" | cut -d ' ' -f1)" = "$(cat toolchain/compiler.sha256)"
-(cd "$bench" && sha256sum -c SHA256SUMS && sha256sum -c evidence/SHA256SUMS)
+(cd "$bench" && sha256sum -c SHA256SUMS && cd evidence && sha256sum -c SHA256SUMS)
 test "$(awk '/MemAvailable:/{print $2}' /proc/meminfo)" -ge 8388608
 scratch=$(mktemp -d)
 mkdir -p "$scratch/tmp" "$scratch/cache" "$scratch/receipts"
