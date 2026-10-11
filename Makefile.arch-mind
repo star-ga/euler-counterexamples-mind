@@ -1,0 +1,55 @@
+# Author: STARGA Inc. External architecture instrumentation, not proof authority.
+SHELL := /bin/bash
+.SHELLFLAGS := -eu -o pipefail -c
+.ONESHELL:
+ARCH_MIND_HOME ?=
+CPU ?= $(shell awk '/Cpus_allowed_list:/ {split($$2,a,/[-,]/); print a[1]}' /proc/self/status)
+LIMIT = timeout 60 taskset -c $(CPU) nice -n 19 prlimit --as=1073741824 --cpu=50 --
+.PHONY: arch-check
+
+arch-check:
+	@umask 077
+	test -n "$(ARCH_MIND_HOME)" || { echo 'Set ARCH_MIND_HOME to the approved Arch-Mind installation.' >&2; exit 2; }
+	test -x "$(ARCH_MIND_HOME)/bin/arch-mind"
+	root="$$(pwd -P)"
+	test "$$(git rev-parse --show-toplevel)" = "$$root"
+	(cd "$(ARCH_MIND_HOME)" && sha256sum --status -c "$$root/.arch-mind/toolchain.sha256") || { echo 'Arch-Mind tool hash mismatch.' >&2; exit 2; }
+	mkdir -p .arch-mind/state
+	state="$$(mktemp -d "$$root/.arch-mind/state/run.XXXXXXXX")"
+	mkdir "$$state/source"
+	git ls-files --others --exclude-standard -- '*.mind' ':!.arch-mind/**' > "$$state/untracked-mind.txt"
+	test ! -s "$$state/untracked-mind.txt" || { echo 'Untracked MIND source: add it to the index before checking.' >&2; exit 2; }
+	git ls-files -- '*.mind' ':!.arch-mind/**' | LC_ALL=C sort > "$$state/source-paths.txt"
+	test -s "$$state/source-paths.txt" || { echo 'No indexed MIND source: refusing vacuous scan.' >&2; exit 2; }
+	while IFS= read -r path; do
+	  test -f "$$path" && test ! -L "$$path" || { echo "Missing or symlinked MIND source: $$path" >&2; exit 2; }
+	  case "$$path" in /*|../*|*/../*|*$$'\t'*|*$$'\r'*) echo 'Unsupported source path' >&2; exit 2;; esac
+	  mkdir -p "$$state/source/$$(dirname "$$path")"
+	  cp -- "$$path" "$$state/source/$$path"
+	  sha256sum -- "$$path"
+	done < "$$state/source-paths.txt" > "$$state/sources.sha256"
+	cp .arch-mind/rules.mind "$$state/rules.mind"
+	(cd "$$state/source" && sha256sum --status -c "$$state/sources.sha256")
+	$(LIMIT) python3 "$(ARCH_MIND_HOME)/tools/mind_reflect.py" --repo "$$state/source" --out "$$state/ast.raw.json"
+	jq -S '.repo_root = "."' "$$state/ast.raw.json" > "$$state/ast.json"
+	jq -r '.modules[] | select(.path != "") | .path' "$$state/ast.json" | LC_ALL=C sort > "$$state/reflected-paths.txt"
+	cmp "$$state/source-paths.txt" "$$state/reflected-paths.txt"
+	while IFS= read -r path; do
+	  expected="$$(grep -Ec '^[[:blank:]]*(pub[[:blank:]]+)?fn[[:blank:]]' "$$state/source/$$path" || true)"
+	  actual="$$(jq --arg path "$$path" '[.modules[]|select(.path==$$path)|.id] as $$ids | [.symbols[]|select(.module_id==$$ids[0] and .tag=="function")]|length' "$$state/ast.json")"
+	  test "$$expected" -eq "$$actual" || { echo "Function reflection mismatch: $$path" >&2; exit 2; }
+	done < "$$state/source-paths.txt"
+	jq -e '(.symbols|length)>0 and (.decls|length)>0 and ([.decls[]|(.f32_uses+.f64_uses+.nondet_uses)]|add)==0' "$$state/ast.json" >/dev/null || { echo 'Empty declarations or forbidden floating-point/nondeterministic primitive.' >&2; exit 2; }
+	jq -e '[.modules[]|select(.path=="kernels/finite_nd/src/kernel.mind")|.id] as $$ids | ($$ids|length)==1 and ([.uses[]|select(.from_module==$$ids[0])]|length)==0' "$$state/ast.json" >/dev/null || { echo 'Missing kernel or forbidden kernel import.' >&2; exit 2; }
+	$(LIMIT) "$(ARCH_MIND_HOME)/bin/arch-mind" sidecar-scan --repo "$$state/source" --lang mind --out "$$state/summary.raw.json"
+	jq -S '._repo_root = "."' "$$state/summary.raw.json" > "$$state/summary.json"
+	jq -e '._languages=="mind" and ._aggregated_for_phase_a.module_count>0 and ._aggregated_for_phase_a.sum_symbols>0' "$$state/summary.json" >/dev/null
+	$(LIMIT) "$(ARCH_MIND_HOME)/bin/arch-mind" scan --fixture "$$state/summary.json" --out "$$state/scan.raw.json"
+	jq -S '._fixture = "summary.json"' "$$state/scan.raw.json" > "$$state/scan.json"
+	$(LIMIT) "$(ARCH_MIND_HOME)/bin/arch-mind" check-rules --repo "$$state/source" --fixture "$$state/summary.json" --rules "$$state/rules.mind" --mode enforce --no-bypass | tee "$$state/gate.stdout"
+	(cd "$(ARCH_MIND_HOME)" && sha256sum --status -c "$$root/.arch-mind/toolchain.sha256")
+	sha256sum --status -c "$$state/sources.sha256"
+	cmp .arch-mind/rules.mind "$$state/rules.mind"
+	printf 'MIND_SOURCE_FILES=%s\n' "$$(wc -l < "$$state/source-paths.txt")"
+	printf 'MIND_REFLECTED_DECLARATIONS=%s\n' "$$(jq '.decls|length' "$$state/ast.json")"
+	printf '%s\n' 'ARCH_MIND_REFERENCE_GATE=PASS' "Evidence: $$state"

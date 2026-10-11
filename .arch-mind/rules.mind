@@ -1,0 +1,6 @@
+// Author: STARGA Inc.
+// Architecture instrumentation only; see ARCHITECTURE_CHECKS.md.
+// The candidate exact-arithmetic checker must not gain floating-point or
+// nondeterministic primitives detectable by the pinned MIND reflector.
+[arch_rule(q16_determinism_purity, eq)]
+const EXACT_CHECKER_DETERMINISM: i32 = 10000
