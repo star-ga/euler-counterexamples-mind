@@ -28,10 +28,10 @@ new extension. Publication does not grant formal acceptance of the kernel.
 
 ## Optional architecture tooling
 
-The [Arch-Mind integration draft](https://github.com/star-ga/euler-counterexamples-mind/pull/1)
-documents optional architecture inspection for contributors with access to the
-separately maintained private tool. It is a separate, unmerged change; this
-extension does not require its code or access credentials. Arch-Mind reports
+The [Arch-Mind integration](ARCHITECTURE_CHECKS.md) provides optional
+architecture inspection for contributors with access to the separately
+maintained private tool. Proof reproduction does not require its code or
+access credentials. Arch-Mind reports
 are development diagnostics, not proof certificates or mathematical authority.
 All source and instructions needed for the proof checks are in this public
 repository, with the public compiler and backend dependencies documented above.

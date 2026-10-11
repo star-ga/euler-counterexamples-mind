@@ -111,3 +111,12 @@ are updated for changed documentation and new receipts. Historical source and
 execution identities remain explicit; no checker, certificate, mutation or
 original signed-release byte changes. These additions are also outside the
 earlier PQC signature scope.
+
+## Repository integration
+
+The owner subsequently authorized merging both public Euler pull requests on
+2026-10-11. The combined tree includes the optional Arch-Mind integration;
+the root extension entry now links its local documentation. The reviewed
+checker and certificate bytes, original signed release and proof status remain
+unchanged. Earlier publication-transition statements describe their original
+review stages; merging is not formal soundness acceptance or a new signature.
