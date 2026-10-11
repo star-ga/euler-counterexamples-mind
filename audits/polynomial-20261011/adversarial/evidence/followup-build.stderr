@@ -1,0 +1,30 @@
+/usr/bin/x86_64-linux-gnu-ld.bfd: /work/audit/target/obj/main.o: in function `clear':
+LLVMDialectModule:(.text+0x0): multiple definition of `clear'; /work/audit/target/obj/main.initial.o:LLVMDialectModule:(.text+0x0): first defined here
+/usr/bin/x86_64-linux-gnu-ld.bfd: /work/audit/target/obj/main.o: in function `term':
+LLVMDialectModule:(.text+0x20): multiple definition of `term'; /work/audit/target/obj/main.initial.o:LLVMDialectModule:(.text+0x20): first defined here
+/usr/bin/x86_64-linux-gnu-ld.bfd: /work/audit/target/obj/main.o: in function `form':
+LLVMDialectModule:(.text+0x40): multiple definition of `form'; /work/audit/target/obj/main.initial.o:LLVMDialectModule:(.text+0x40): first defined here
+/usr/bin/x86_64-linux-gnu-ld.bfd: /work/audit/target/obj/main.o: in function `line':
+LLVMDialectModule:(.text+0x70): multiple definition of `line'; /work/audit/target/obj/main.initial.o:LLVMDialectModule:(.text+0x70): first defined here
+/usr/bin/x86_64-linux-gnu-ld.bfd: /work/audit/target/obj/main.o: in function `field':
+LLVMDialectModule:(.text+0xb0): multiple definition of `field'; /work/audit/target/obj/main.initial.o:LLVMDialectModule:(.text+0xb0): first defined here
+/usr/bin/x86_64-linux-gnu-ld.bfd: /work/audit/target/obj/main.o: in function `encode':
+LLVMDialectModule:(.text+0x1b0): multiple definition of `encode'; /work/audit/target/obj/main.initial.o:LLVMDialectModule:(.text+0x1b0): first defined here
+/usr/bin/x86_64-linux-gnu-ld.bfd: /work/audit/target/obj/main.o: in function `closure':
+LLVMDialectModule:(.text+0x5f0): multiple definition of `closure'; /work/audit/target/obj/main.initial.o:LLVMDialectModule:(.text+0x5f0): first defined here
+/usr/bin/x86_64-linux-gnu-ld.bfd: /work/audit/target/obj/main.o: in function `maximum':
+LLVMDialectModule:(.text+0x710): multiple definition of `maximum'; /work/audit/target/obj/main.initial.o:LLVMDialectModule:(.text+0x710): first defined here
+/usr/bin/x86_64-linux-gnu-ld.bfd: /work/audit/target/obj/main.o: in function `expanded128':
+LLVMDialectModule:(.text+0x8a0): multiple definition of `expanded128'; /work/audit/target/obj/main.initial.o:LLVMDialectModule:(.text+0x8a0): first defined here
+/usr/bin/x86_64-linux-gnu-ld.bfd: /work/audit/target/obj/main.o: in function `fixture':
+LLVMDialectModule:(.text+0xb50): multiple definition of `fixture'; /work/audit/target/obj/main.initial.o:LLVMDialectModule:(.text+0xb50): first defined here
+/usr/bin/x86_64-linux-gnu-ld.bfd: /work/audit/target/obj/main.o: in function `expected':
+LLVMDialectModule:(.text+0x2670): multiple definition of `expected'; /work/audit/target/obj/main.initial.o:LLVMDialectModule:(.text+0x1e80): first defined here
+/usr/bin/x86_64-linux-gnu-ld.bfd: /work/audit/target/obj/main.o: in function `copy_bytes':
+LLVMDialectModule:(.text+0x26e0): multiple definition of `copy_bytes'; /work/audit/target/obj/main.initial.o:LLVMDialectModule:(.text+0x1ed0): first defined here
+/usr/bin/x86_64-linux-gnu-ld.bfd: /work/audit/target/obj/main.o: in function `observe':
+LLVMDialectModule:(.text+0x27a0): multiple definition of `observe'; /work/audit/target/obj/main.initial.o:LLVMDialectModule:(.text+0x1f90): first defined here
+/usr/bin/x86_64-linux-gnu-ld.bfd: /work/audit/target/obj/main.o: in function `main':
+LLVMDialectModule:(.text+0x2ab0): multiple definition of `main'; /work/audit/target/obj/main.initial.o:LLVMDialectModule:(.text+0x22a0): first defined here
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+error[build]: linking failed with exit code: Some(1)

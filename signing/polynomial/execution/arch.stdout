@@ -1,0 +1,6 @@
+rules: 1  scan_metrics: 9
+OK: every rule passed.
+MIND_SOURCE_FILES=35
+MIND_REFLECTED_DECLARATIONS=268
+ARCH_MIND_REFERENCE_GATE=PASS
+Evidence: /PUBLIC_REPO/.arch-mind/state/run.TpxuAG4E

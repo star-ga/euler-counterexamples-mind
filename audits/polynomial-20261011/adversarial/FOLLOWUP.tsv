@@ -1,0 +1,8 @@
+id	expect	case	reason
+41	1	zero_product_before_degree_addition	x^32*(0*x^32)=0 has an empty intermediate; no monomial pair exceeds degree
+42	0	zero_product_after_degree_overflow	0*(x^32*x)=0 is true but an independently declared x^33 must reject admission
+43	1	full_capacity_duplicate_merge	P128+P128=2*P128 keeps exactly128 distinct keys
+44	0	degree33_second_digit_collision	x1^33=x2 false at x1=0,x2=1
+45	0	degree33_third_digit_collision	x2^33=x3 false at x2=0,x3=1
+46	1	all_four_degrees32	product of four independent degree32 monomials is supported
+401..412	0	each_limb_forgery	x=(1+1000^j)*x false at x=1 for j=0..11; tests every coefficient limb comparison

@@ -1,0 +1,46 @@
+id	expect	case	mathematical_or_contract_reason
+1	1	three_variable_distribution	x*(y+z)=x*y+x*z over all integers
+2	0	forged_variable_equality	x+y=x+x fails at x=0,y=1
+3	1	maximum_coefficient	(10^36-1)*x equals itself and is representable
+4	0	symbolic_add_overflow	(10^36-1)*x+x cannot wrap to zero; false at x=1
+5	0	symbolic_multiply_overflow	2*(10^36-1)*x cannot wrap to zero; false at x=1
+6	0	unused_symbolic_overflow	all terms must be admitted even when goal is x=x
+7	0	ground_add_overflow	10^36 is outside coefficient bound; cannot equal zero
+8	1	shared_add_children	x+x=2*x; child sharing must not mutate input cache
+9	1	shared_product_children	(x+1)*(x+1)=x*x+2*x+1
+10	1	degree32_low_digit	x0^32=x0^32 within limit
+11	0	degree33_low_digit_collision	x0^33=x1 false at x0=0,x1=1; radix carry forbidden
+12	1	degree32_high_digit	x3^32=x3^32 within four-variable limit
+13	0	degree33_high_digit_overflow	x3^33=0 false at x3=1; cannot drop radix overflow
+14	0	unused_variable4	all normalized variables must have indices0..3
+15	0	insufficient_binder	one binder cannot close variable1
+16	1	zero_product	0*x=0 identically; empty normal form
+17	1	coefficient_carry	999999*x+x=(1000*1000)*x
+18	0	evaluation_sampling_trap	x=x*x fails at x=2 despite agreement at0,1
+19	0	coefficient_mismatch	999999*x=999998*x fails at x=1
+20	1	nested_instantiation	instantiate outer x at7 in forall x forall y x+y=y+x
+21	0	wrong_nested_binder	claim forall y 7+y=y+y, false at y=0
+22	0	open_instantiation_witness	FORALL_ELIM requires a closed witness
+23	0	polynomially_equal_wrong_instance	true target y+y=y+y is not the declared structural instance
+24	0	closed_scope_reuse	line created under discharged assumption is unavailable
+25	1	active_scope_control	line consumed before closing scope; final Bottom implies Bottom
+26	0	unclosed_assumption	final proof has an active assumption
+27	0	reopened_scope_reuse	fresh assumption occurrence must not reactivate an old line
+28	1	monomials128	128 distinct supported monomials
+29	0	monomials129	129 monomials exceeds admission bound
+30	0	forged_second_poly_rule	first true POLY_ID must not bypass comparison of later false result
+31	0	goal_mismatch	last theorem must structurally equal declared goal
+32	0	proof_premise_forward_reference	AND_INTRO cannot refer to its own future line
+33	0	term_forward_reference	term children must be strictly earlier
+34	0	formula_forward_reference	formula children must be strictly earlier
+35	0	reserved_term_field	numeral b field must be zero
+36	0	reserved_formula_field	Forall b field must be zero
+37	0	reserved_proof_field	POLY_ID aux must be zero
+38	0	unsupported_version	NDv2 entry must refuse version1
+39	0	unknown_rule	unsupported proof rule11 must refuse
+40	0	ground_open_equality	open x=x cannot be concluded by GROUND_EQ
+101..111	0	malformed_encoding	leading zero, CR, space, plus, NUL, high byte, empty line, overlarge field, missingLF, trailingLF, trailingdigit
+201..203	1	cache_dirty_and_recovery	arbitrary initialized workspace and reject/recovery must give same true outcome
+204..205	0	cache_stale_forgery	fresh false certificate cannot inherit prior successful normal form
+301..306	0	API_numeric_guards	owned-memory overlaps, misalignment, insufficient cap and signed range overflow reject before access
+307..308	1	adjacent_owned_regions	exact half-open adjacency in either order is legal

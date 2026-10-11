@@ -120,3 +120,17 @@ the root extension entry now links its local documentation. The reviewed
 checker and certificate bytes, original signed release and proof status remain
 unchanged. Earlier publication-transition statements describe their original
 review stages; merging is not formal soundness acceptance or a new signature.
+
+## Independent audit and additive signing
+
+The subsequent audit targets merged public commit
+`cacb9492a0c356dd094d08972910fda9232b4472`; its complete report is in
+`audits/polynomial-20261011/REPORT.md` at the repository root. It rebuilds the
+documented public compiler from source, replays all 54 certificates and 326
+existing harness calls, and adds independent source reasoning and MIND tests.
+No polynomial checker, certificate, historical mutation or original signed
+K4/K5 payload changes. Documentation now links this audit and the separate
+`signing/polynomial/` artifact. The package checksum manifest and mapped current
+documentation hashes are regenerated. Historical statements that the extension
+was unsigned describe those earlier stages; only the new manifest supplies
+polynomial signature coverage. Formal status and direct-native blockers remain.

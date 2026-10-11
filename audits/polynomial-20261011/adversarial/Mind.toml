@@ -1,0 +1,6 @@
+[package]
+name = "independent-polynomial-boundaries"
+version = "0.1.0"
+[build]
+target = "cpu"
+entry = "src/main.mind"
