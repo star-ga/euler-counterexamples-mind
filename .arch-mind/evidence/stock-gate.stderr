@@ -1,0 +1,2 @@
+Function reflection mismatch: benchmarks/euler_sum_of_powers_k5/src/binding.mind
+make: *** [Makefile.arch-mind:11: arch-check] Error 2

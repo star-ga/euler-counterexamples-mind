@@ -1,0 +1,14 @@
+# Author: STARGA Inc. Local scan state and signing material are never published.
+/*
+!/.gitignore
+!/rules.mind
+!/toolchain.sha256
+!/evidence/
+
+# Defense in depth inside any allowed directory.
+**/keys.json
+**/*private*
+**/*secret*
+**/*.key
+**/*.pem
+**/.env*

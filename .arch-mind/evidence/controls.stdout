@@ -1,0 +1,68 @@
+
+CASE=B01
+rules: 1  scan_metrics: 9
+OK: every rule passed.
+MIND_SOURCE_FILES=19
+MIND_REFLECTED_DECLARATIONS=109
+ARCH_MIND_REFERENCE_GATE=PASS
+MAKE_EXIT=0
+
+CASE=B02
+rules: 1  scan_metrics: 9
+OK: every rule passed.
+MIND_SOURCE_FILES=19
+MIND_REFLECTED_DECLARATIONS=109
+ARCH_MIND_REFERENCE_GATE=PASS
+MAKE_EXIT=0
+
+CASE=N01
+Empty declarations or forbidden floating-point/nondeterministic primitive.
+make: *** [Makefile.arch-mind:11: arch-check] Error 2
+MAKE_EXIT=2
+
+CASE=N02
+Empty declarations or forbidden floating-point/nondeterministic primitive.
+make: *** [Makefile.arch-mind:11: arch-check] Error 2
+MAKE_EXIT=2
+
+CASE=N03
+Empty declarations or forbidden floating-point/nondeterministic primitive.
+make: *** [Makefile.arch-mind:11: arch-check] Error 2
+MAKE_EXIT=2
+
+CASE=N04
+Missing kernel or forbidden kernel import.
+make: *** [Makefile.arch-mind:11: arch-check] Error 2
+MAKE_EXIT=2
+
+CASE=N05
+Missing or symlinked MIND source: kernels/finite_nd/src/kernel.mind
+make: *** [Makefile.arch-mind:11: arch-check] Error 2
+MAKE_EXIT=2
+
+CASE=N06
+Untracked MIND source: add it to the index before checking.
+make: *** [Makefile.arch-mind:11: arch-check] Error 2
+MAKE_EXIT=2
+
+CASE=N07
+Untracked MIND source: add it to the index before checking.
+make: *** [Makefile.arch-mind:11: arch-check] Error 2
+MAKE_EXIT=2
+
+CASE=N08
+rules: 1  scan_metrics: 9
+VIOLATIONS: 1 of 1 rules failed
+  FAIL EXACT_CHECKER_DETERMINISM    q16_determinism_purity       eq     0  (actual: raw=10000, q16=655360000)
+make: *** [Makefile.arch-mind:11: arch-check] Error 1
+MAKE_EXIT=2
+
+CASE=N09
+Arch-Mind tool hash mismatch.
+make: *** [Makefile.arch-mind:11: arch-check] Error 2
+MAKE_EXIT=2
+
+CASE=N10
+Empty declarations or forbidden floating-point/nondeterministic primitive.
+make: *** [Makefile.arch-mind:11: arch-check] Error 2
+MAKE_EXIT=2
