@@ -1,0 +1,33 @@
+--- /work/scratch/main/src/kernel.mind	2026-10-11 03:09:24.433804097 -0700
++++ kernels/polynomial_nd/src/kernel.mind	2026-10-11 03:16:25.638797960 -0700
+@@ -3,8 +3,9 @@
+ // Integers in the semantics are unbounded. The ground evaluator implements a
+ // nonnegative fragment and refuses values outside 12 base-1000 limbs.
+ // Caller-owned input and workspace; no certificate-supplied address is used.
+-// Workspace: header128, terms10240, formulas20480, values24576, proofs8192,
++// Core workspace: header128, terms10240, formulas20480, values24576, proofs8192,
+ // assumption stack240, multiplication temporary192. Total64048 <=65536.
++// NDv2 additionally requires the polynomial cache below; full extent4194304.
+ fn nd_term(w: i64, i: i64) -> i64 { return w + 128 + (i - 1) * 40; }
+ fn nd_formula(w: i64, i: i64) -> i64 { return w + 10368 + (i - 1) * 40; }
+ fn nd_value(w: i64, i: i64) -> i64 { return w + 30848 + (i - 1) * 96; }
+@@ -13,7 +14,8 @@
+ 
+ // Header fields: input0, length8, cursor16, error24, comparison budget32,
+ // term count40, formula count48, active assumptions56, stack depth64,
+-// next monotonic assumption ID72. All counters are bounded before use.
++// next monotonic assumption ID72, version80, polynomial budget96, cache-valid104.
++// All counters are bounded before use.
+ fn nd_number(w: i64) -> i64 {
+     if __mind_load_i64(w + 24) != 0 { return 0 - 1; }
+     let p: i64 = __mind_load_i64(w);
+@@ -527,7 +529,8 @@
+ }
+ 
+ // API preconditions: caller owns readable [p,p+n) and writable aligned
+-// [work,work+65536), and neither region aliases executable code or external
++// [work,work+required), where required is65536 for v1 or4194304 for v2.
++// Neither region aliases executable code or external
+ // mutable state. Numeric pointer checks cannot establish allocation ownership.
+ // Returns 1 only for a closed derivation of the caller-declared goal.
+ fn nd_check_version(p: i64, n: i64, work: i64, cap: i64, version: i64) -> i64 {

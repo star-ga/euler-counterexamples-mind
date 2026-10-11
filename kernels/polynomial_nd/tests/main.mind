@@ -1,0 +1,85 @@
+// Author: STARGA Inc. All acceptance decisions and fixture construction are MIND.
+import kernel;
+import fixtures;
+import legacy_fixtures;
+fn test_emit(s: String) -> i64 { return __mind_write(1, s.addr, s.len, 0 - 1); }
+fn test_copy(source: i64, target: i64, n: i64) -> i64 {
+    let mut i: i64 = 0;
+    while i < n { __mind_store_i8(target + i, __mind_load_i8(source + i)); i = i + 1; }
+    return 1;
+}
+fn test_bytes(a: i64, b: i64, n: i64) -> i64 {
+    let mut i: i64 = 0;
+    while i < n { if __mind_load_i8(a + i) != __mind_load_i8(b + i) { return 0; } i = i + 1; }
+    return 1;
+}
+fn main() -> i64 {
+    let raw: i64 = __mind_alloc(4194320); let work: i64 = raw + 8;
+    let input: i64 = __mind_alloc(65537); let backup: i64 = __mind_alloc(65537);
+    let state: i64 = __mind_alloc(40000);
+    if raw == 0 || input == 0 || backup == 0 || state == 0 { return 2; }
+    __mind_store_i64(raw, 734192); __mind_store_i64(work + 4194304, 928314);
+    if poly_fixture_count() != 54 || fixture_count() != 57 { return 1; }
+    let mut i: i64 = 0; let mut positives: i64 = 0; let mut negatives: i64 = 0;
+    while i < poly_fixture_count() {
+        let n: i64 = poly_fixture_build(i, state, input); test_copy(input, backup, n);
+        let observed: i64 = finite_nd_poly_check(input, n, work, 4194304);
+        test_emit("CASE="); test_emit(poly_fixture_name(i)); test_emit("\nOBSERVED="); print(observed);
+        if observed != poly_fixture_expected(i) { test_emit("CASE=FAIL\n"); return 1; }
+        if test_bytes(input, backup, n) == 0 { test_emit("INPUT_MUTATION=FAIL\n"); return 1; }
+        if __mind_load_i64(raw) != 734192 || __mind_load_i64(work + 4194304) != 928314 {
+            test_emit("WORKSPACE_GUARD=FAIL\n"); return 1;
+        }
+        if poly_fixture_expected(i) == 1 { positives = positives + 1; }
+        else { negatives = negatives + 1; }
+        if i < 16 {
+            if finite_nd_check(input, n, work, 65536) != 0 { test_emit("LEGACY_ACCEPTED_V2=FAIL\n"); return 1; }
+            negatives = negatives + 1;
+        }
+        if i == 26 {
+            if finite_nd_check(input, n, work, 65536) != 0 { test_emit("LEGACY_RULE10=FAIL\n"); return 1; }
+            negatives = negatives + 1;
+        }
+        i = i + 1;
+    }
+    // Entire unchanged legacy fixture corpus through its original strict API.
+    i = 0;
+    while i < fixture_count() {
+        let old: String = fixture_certificate(i);
+        let observed: i64 = finite_nd_check(old.addr, old.len, work, 65536);
+        test_emit("LEGACY_CASE="); test_emit(fixture_name(i)); test_emit("\nOBSERVED="); print(observed);
+        if observed != fixture_expected(i) { test_emit("LEGACY_CORPUS=FAIL\n"); return 1; }
+        if observed == 1 { positives = positives + 1; } else { negatives = negatives + 1; }
+        i = i + 1;
+    }
+    let n: i64 = poly_fixture_build(0, state, input);
+    if finite_nd_poly_check(input, n, work, 4194303) != 0 { return 1; }
+    if finite_nd_poly_check(input, 65537, work, 4194304) != 0 { return 1; }
+    if finite_nd_poly_check(0, n, work, 4194304) != 0 { return 1; }
+    if finite_nd_poly_check(input, n, work + 1, 4194304) != 0 { return 1; }
+    if finite_nd_poly_check(work, n, work, 4194304) != 0 { return 1; }
+    if finite_nd_poly_check(input, 0 - 1, work, 4194304) != 0 { return 1; }
+    negatives = negatives + 6;
+    i = 0;
+    while i < n {
+        if finite_nd_poly_check(input, i, work, 4194304) != 0 {
+            test_emit("PREFIX=FAIL\n"); print(i); return 1;
+        }
+        negatives = negatives + 1; i = i + 1;
+    }
+    i = 0;
+    while i < n {
+        let original: i64 = __mind_load_i8(input + i); __mind_store_i8(input + i, 88);
+        let observed: i64 = finite_nd_poly_check(input, n, work, 4194304);
+        __mind_store_i8(input + i, original);
+        if observed != 0 { test_emit("BYTE_SUBSTITUTION=FAIL\n"); print(i); return 1; }
+        negatives = negatives + 1; i = i + 1;
+    }
+    if finite_nd_poly_check(input, n, work, 4194304) != 1 { test_emit("RESTORATION=FAIL\n"); return 1; }
+    if positives != 24 || negatives != 110 + n * 2 { test_emit("EXECUTED_COUNT=FAIL\n"); return 1; }
+    test_emit("P01_BYTES="); print(n);
+    test_emit("EXPECTED_ACCEPTS="); print(positives);
+    test_emit("EXPECTED_REJECTS="); print(negatives);
+    test_emit("RESTORED_BINOMIAL=PASS\nPOLYNOMIAL_ND_TESTS=PASS\nFORMAL_ACCEPTANCE=BLOCKED\n");
+    __mind_free(raw); __mind_free(input); __mind_free(backup); __mind_free(state); return 0;
+}

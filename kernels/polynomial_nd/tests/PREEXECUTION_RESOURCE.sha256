@@ -1,0 +1,4 @@
+# Historical observed-artifact digests; paths may be sanitized.
+# Verify current export bytes with the package SHA256SUMS; see PUBLICATION.md.
+8cde615dda8fc799e292d3b65a321dd05c27e855b5c06631a29bcfa59b490a7b  kernels/polynomial_nd/tests/resource.mind
+43e46b9a02becac3768b0ec6bb5c7835c2e533e4d14da66c11586e85db05d238  kernels/polynomial_nd/tests/FIXTURE_CLARIFICATIONS.md

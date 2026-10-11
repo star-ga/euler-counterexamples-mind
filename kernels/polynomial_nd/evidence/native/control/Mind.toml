@@ -1,0 +1,6 @@
+[package]
+name = "native-control"
+version = "0.1.0"
+authors = ["STARGA Inc."]
+[build]
+entry = "src/main.mind"

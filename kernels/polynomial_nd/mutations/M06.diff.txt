@@ -1,0 +1,11 @@
+--- a/src/kernel.mind
++++ b/src/kernel.mind
+@@ -168,7 +168,7 @@
+     let mut key: i64 = 0; let mut i: i64 = 0;
+     while i < 4 {
+         let degree: i64 = a % 33 + b % 33;
+-        if degree > 32 { return 0 - 1; }
++        // MUTANT: allow packed-key exponent carry.
+         key = key + degree * place;
+         a = a / 33; b = b / 33; place = place * 33; i = i + 1;
+     }

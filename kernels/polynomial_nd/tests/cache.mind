@@ -1,0 +1,29 @@
+// Author: STARGA Inc. Source-informed cache tests, separate from frozen original cases.
+import kernel;
+import fixtures;
+fn emit(s: String) -> i64 { return __mind_write(1, s.addr, s.len, 0 - 1); }
+fn main() -> i64 {
+    let input: i64 = __mind_alloc(65537); let state: i64 = __mind_alloc(40000);
+    let work: i64 = __mind_alloc(4194304);
+    if input == 0 || state == 0 || work == 0 { return 2; }
+    let n: i64 = poly_fixture_build(0, state, input);
+    let one_result: i64 = finite_nd_poly_check(input, n, work, 4194304);
+    let one_budget: i64 = __mind_load_i64(work + 96);
+    emit("ONE_RULE_RESULT="); print(one_result); emit("ONE_RULE_BUDGET="); print(one_budget);
+    if n != 93 || __mind_load_i8(input + n - 13) != 49 { return 1; }
+    __mind_store_i8(input + n - 13, 50);
+    let mut i: i64 = 0;
+    while i < 11 {
+        __mind_store_i8(input + n + i, __mind_load_i8(input + n - 11 + i)); i = i + 1;
+    }
+    let two_result: i64 = finite_nd_poly_check(input, n + 11, work, 4194304);
+    let two_budget: i64 = __mind_load_i64(work + 96);
+    emit("TWO_RULE_RESULT="); print(two_result); emit("TWO_RULE_BUDGET="); print(two_budget);
+    if one_result != 1 || two_result != 1 || two_budget != one_budget - 3 { return 1; }
+    let bad: String = "74123\n2\n3\n2\n0\n0\n1\n1\n0\n3\n1\n2\n4\n2\n1\n1\n6\n1\n0\n2\n1\n3\n6\n3\n0\n4\n2\n10\n2\n0\n0\n0\n10\n4\n0\n0\n0\n";
+    let bad_result: i64 = finite_nd_poly_check(bad.addr, bad.len, work, 4194304);
+    emit("FALSE_SECOND_RULE_RESULT="); print(bad_result);
+    if bad_result != 0 { return 1; }
+    emit("CACHE_TESTS=PASS\nFORMAL_ACCEPTANCE=BLOCKED\n");
+    __mind_free(input); __mind_free(state); __mind_free(work); return 0;
+}

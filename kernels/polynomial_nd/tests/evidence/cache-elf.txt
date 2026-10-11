@@ -1,0 +1,1 @@
+/work/scratch/cache/cache: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=aa08999ed06e2e6a588fa8b6f394eb68cf14e989, for GNU/Linux 3.2.0, not stripped

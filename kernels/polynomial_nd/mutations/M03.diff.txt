@@ -1,0 +1,29 @@
+--- a/src/kernel.mind
++++ b/src/kernel.mind
+@@ -265,7 +265,7 @@
+     if binders < 1 { return 0; }
+     let body: i64 = nd_formula(w, id);
+     if __mind_load_i64(body) != 2 { return 0; }
+-    if __mind_load_i64(body + 24) > binders { return 0; }
++    // MUTANT: POLY_ID free-variable guard bypassed.
+     if poly_normalize(w) != 1 { return 0; }
+     return poly_equal(w, __mind_load_i64(body + 8), __mind_load_i64(body + 16));
+ }
+@@ -437,7 +437,7 @@
+         if __mind_load_i64(w + 24) != 0 { return 0; }
+         if result < 1 || result > __mind_load_i64(w + 48) { return 0; }
+         let f: i64 = nd_formula(w, result);
+-        if __mind_load_i64(f + 24) != 0 { return 0; }
++        if rule != 10 && __mind_load_i64(f + 24) != 0 { return 0; }
+         let tag: i64 = __mind_load_i64(f); let a: i64 = __mind_load_i64(f + 8);
+         let b: i64 = __mind_load_i64(f + 16);
+         let mut deps: i64 = 0; let mut own_bit: i64 = 0;
+@@ -556,7 +556,7 @@
+     if nd_read_formulas(work, formulas) != 1 { return 0; }
+     let goal: i64 = nd_number(work);
+     if goal < 1 || goal > formulas { return 0; }
+-    if __mind_load_i64(nd_formula(work, goal) + 24) != 0 { return 0; }
++    // MUTANT: goal closedness bypassed.
+     let proof: i64 = nd_number(work);
+     if proof < 1 || proof > 256 { return 0; }
+     if nd_read_proof(work, proof) != 1 { return 0; }

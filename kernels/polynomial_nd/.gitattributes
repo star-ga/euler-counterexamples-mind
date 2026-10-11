@@ -1,0 +1,7 @@
+# Preserve exact malformed certificate bytes, tool output and unified-diff context.
+certificates/N24_trailing_lf.nd.txt whitespace=-blank-at-eof
+evidence/llvm20/elf.txt whitespace=-blank-at-eol
+evidence/llvm23/elf.txt whitespace=-blank-at-eol
+mutations/M08.diff.txt whitespace=-blank-at-eol,-blank-at-eof
+mutations/M10.diff.txt whitespace=-blank-at-eol,-blank-at-eof
+tests/evidence/final-source-comment.diff.txt whitespace=-blank-at-eol

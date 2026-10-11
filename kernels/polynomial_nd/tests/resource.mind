@@ -1,0 +1,20 @@
+// Author: STARGA Inc. Supporting resource diagnostics; never theorem authority.
+import kernel;
+import fixtures;
+fn emit(s: String) -> i64 { return __mind_write(1, s.addr, s.len, 0 - 1); }
+fn main() -> i64 {
+    let state: i64 = __mind_alloc(40000); let input: i64 = __mind_alloc(65537);
+    let work: i64 = __mind_alloc(4194304);
+    if state == 0 || input == 0 || work == 0 { return 2; }
+    let positive_len: i64 = poly_fixture_build(15, state, input);
+    let positive: i64 = finite_nd_poly_check(input, positive_len, work, 4194304);
+    let positive_remaining: i64 = __mind_load_i64(work + 96);
+    emit("P16_RESULT="); print(positive); emit("P16_WORK_REMAINING="); print(positive_remaining);
+    let negative_len: i64 = poly_fixture_build(37, state, input);
+    let negative: i64 = finite_nd_poly_check(input, negative_len, work, 4194304);
+    let negative_remaining: i64 = __mind_load_i64(work + 96);
+    emit("N22_RESULT="); print(negative); emit("N22_WORK_REMAINING="); print(negative_remaining);
+    if positive != 1 || positive_remaining <= 0 || negative != 0 || negative_remaining != 0 { return 1; }
+    emit("RESOURCE_ISOLATION=PASS\nFORMAL_ACCEPTANCE=BLOCKED\n");
+    __mind_free(state); __mind_free(input); __mind_free(work); return 0;
+}

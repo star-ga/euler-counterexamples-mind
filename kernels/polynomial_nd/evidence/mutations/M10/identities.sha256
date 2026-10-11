@@ -1,0 +1,4 @@
+# Historical observed-artifact digests; paths may be sanitized.
+# Verify current export bytes with the package SHA256SUMS; see PUBLICATION.md.
+693845f11777a140fd620fd6c649eff5e980708f5ea6fdf7a2eebcd7825c64fd  src/kernel.mind
+c148023efc2323e738e6a2792077bbe35579780759cf0cec58fb195ec232b0b8  check

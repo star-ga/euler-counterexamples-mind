@@ -1,0 +1,5 @@
+# Historical observed-artifact digests; paths may be sanitized.
+# Verify current export bytes with the package SHA256SUMS; see PUBLICATION.md.
+eb4fe19d7a3e8f61a71875fa0cd5508c707090de64c3dc54e858418f72475736  /work/scratch/cache/cache
+6b7c0afefd279c1b127ad074a8893dd3a11a6ca30e22a3118cb29631c0621542  /work/scratch/cache/src/kernel.mind
+fb76854863cfda0c8c2661a7a2663ee8b3febc821cb1045ec7feecea0666ee31  /work/scratch/cache/src/main.mind

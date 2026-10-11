@@ -1,0 +1,2 @@
+[WARN] /work/scratch/mutations/M04/main.mind: not natively compiled — embedded as runtime-JIT fallback (error[type-check][E2003]: unsupported call to `finite_nd_poly_check`)
+error[build][E5005]: public CPU executable requires every source module to compile natively; refusing to link a runtime-JIT fallback object

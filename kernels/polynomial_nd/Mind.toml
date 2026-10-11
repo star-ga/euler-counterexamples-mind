@@ -1,0 +1,8 @@
+[package]
+name = "mind-math-polynomial-nd"
+version = "0.2.0"
+authors = ["STARGA Inc."]
+description = "Candidate NDv2 checker with exact symbolic polynomial identities over integers"
+[build]
+target = "cpu"
+entry = "src/main.mind"

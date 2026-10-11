@@ -1,0 +1,351 @@
+// Author: STARGA Inc. Certificate construction is pure MIND, independent of the checker.
+// State: counts at 0/8/16, goal 24, version 32, magic 40; disjoint AST tables.
+pub fn poly_fixture_count() -> i64 { return 54; }
+pub fn poly_fixture_expected(i: i64) -> i64 { if i >= 0 && i < 16 { return 1; } return 0; }
+pub fn poly_fixture_name(i: i64) -> String {
+    if i == 0 { return "P01_binomial"; }
+    if i == 1 { return "P02_scaled_k4"; }
+    if i == 2 { return "P03_add_commute"; }
+    if i == 3 { return "P04_multiply_commute"; }
+    if i == 4 { return "P05_distribute"; }
+    if i == 5 { return "P06_four_variables"; }
+    if i == 6 { return "P07_zero"; }
+    if i == 7 { return "P08_vacuous"; }
+    if i == 8 { return "P09_collect"; }
+    if i == 9 { return "P10_exponent32"; }
+    if i == 10 { return "P11_coefficient_carry"; }
+    if i == 11 { return "P12_binomial_instantiate"; }
+    if i == 12 { return "P13_nested_instantiate"; }
+    if i == 13 { return "P14_two_instantiations"; }
+    if i == 14 { return "P15_active_scope"; }
+    if i == 15 { return "P16_monomials128"; }
+    if i == 16 { return "N01_forged_coefficient"; }
+    if i == 17 { return "N02_wrong_constant"; }
+    if i == 18 { return "N03_variable_mismatch"; }
+    if i == 19 { return "N04_free_index"; }
+    if i == 20 { return "N05_open_poly"; }
+    if i == 21 { return "N06_open_ground"; }
+    if i == 22 { return "N07_five_binders"; }
+    if i == 23 { return "N08_nonzero_p1"; }
+    if i == 24 { return "N09_nonzero_p2"; }
+    if i == 25 { return "N10_nonzero_aux"; }
+    if i == 26 { return "N11_version1_rule10"; }
+    if i == 27 { return "N12_goal_mismatch"; }
+    if i == 28 { return "N13_positivity_shape"; }
+    if i == 29 { return "N14_implication_shape"; }
+    if i == 30 { return "N15_conjunction_shape"; }
+    if i == 31 { return "N16_no_binder"; }
+    if i == 32 { return "N17_coefficient_overflow"; }
+    if i == 33 { return "N18_unused_overflow"; }
+    if i == 34 { return "N19_exponent33"; }
+    if i == 35 { return "N20_unused_variable4"; }
+    if i == 36 { return "N21_monomials129"; }
+    if i == 37 { return "N22_work_exhaustion"; }
+    if i == 38 { return "N23_trailing_number"; }
+    if i == 39 { return "N24_trailing_lf"; }
+    if i == 40 { return "N25_missing_lf"; }
+    if i == 41 { return "N26_magic"; }
+    if i == 42 { return "N27_version3"; }
+    if i == 43 { return "N28_closed_scope"; }
+    if i == 44 { return "N29_open_assumption"; }
+    if i == 45 { return "N30_binder_capture"; }
+    if i == 46 { return "N31_open_witness"; }
+    if i == 47 { return "N32_wrong_witness"; }
+    if i == 48 { return "N33_changed_k4"; }
+    if i == 49 { return "N34_unknown_rule"; }
+    if i == 50 { return "N35_term_reserved"; }
+    if i == 51 { return "N36_forall_reserved"; }
+    if i == 52 { return "N37_exponent_key_collision"; }
+    if i == 53 { return "N38_symbolic_coefficient_wrap"; }
+    return "INVALID_FIXTURE";
+}
+fn pf_clear(s: i64) -> i64 {
+    let mut i: i64 = 0;
+    while i < 40000 { __mind_store_i8(s + i, 0); i = i + 1; }
+    __mind_store_i64(s + 32, 2); __mind_store_i64(s + 40, 74123); return 1;
+}
+fn pf_term(s: i64, tag: i64, a: i64, b: i64) -> i64 {
+    let count: i64 = __mind_load_i64(s);
+    let p: i64 = s + 128 + count * 24;
+    __mind_store_i64(p, tag); __mind_store_i64(p + 8, a); __mind_store_i64(p + 16, b);
+    __mind_store_i64(s, count + 1); return count + 1;
+}
+fn pf_formula(s: i64, tag: i64, a: i64, b: i64) -> i64 {
+    let count: i64 = __mind_load_i64(s + 8);
+    let p: i64 = s + 8192 + count * 24;
+    __mind_store_i64(p, tag); __mind_store_i64(p + 8, a); __mind_store_i64(p + 16, b);
+    __mind_store_i64(s + 8, count + 1); return count + 1;
+}
+fn pf_proof(s: i64, rule: i64, result: i64, p1: i64, p2: i64, aux: i64) -> i64 {
+    let count: i64 = __mind_load_i64(s + 16);
+    let p: i64 = s + 24576 + count * 40;
+    __mind_store_i64(p, rule); __mind_store_i64(p + 8, result);
+    __mind_store_i64(p + 16, p1); __mind_store_i64(p + 24, p2); __mind_store_i64(p + 32, aux);
+    __mind_store_i64(s + 16, count + 1); __mind_store_i64(s + 24, result); return count + 1;
+}
+fn pf_number(p: i64, n: i64, value: i64) -> i64 {
+    let mut place: i64 = 1; let mut out: i64 = n;
+    while value / place >= 10 { place = place * 10; }
+    while place > 0 {
+        __mind_store_i8(p + out, 48 + (value / place) % 10); out = out + 1; place = place / 10;
+    }
+    __mind_store_i8(p + out, 10); return out + 1;
+}
+fn pf_encode(s: i64, p: i64) -> i64 {
+    let mut n: i64 = pf_number(p, 0, __mind_load_i64(s + 40));
+    n = pf_number(p, n, __mind_load_i64(s + 32));
+    n = pf_number(p, n, __mind_load_i64(s));
+    let mut j: i64 = 0;
+    while j < __mind_load_i64(s) * 3 {
+        n = pf_number(p, n, __mind_load_i64(s + 128 + j * 8)); j = j + 1;
+    }
+    n = pf_number(p, n, __mind_load_i64(s + 8)); j = 0;
+    while j < __mind_load_i64(s + 8) * 3 {
+        n = pf_number(p, n, __mind_load_i64(s + 8192 + j * 8)); j = j + 1;
+    }
+    n = pf_number(p, n, __mind_load_i64(s + 24));
+    n = pf_number(p, n, __mind_load_i64(s + 16)); j = 0;
+    while j < __mind_load_i64(s + 16) * 5 {
+        n = pf_number(p, n, __mind_load_i64(s + 24576 + j * 8)); j = j + 1;
+    }
+    return n;
+}
+fn pf_identity(s: i64, left: i64, right: i64, binders: i64) -> i64 {
+    let mut f: i64 = pf_formula(s, 2, left, right); let mut k: i64 = 0;
+    while k < binders { f = pf_formula(s, 6, f, 0); k = k + 1; }
+    pf_proof(s, 10, f, 0, 0, 0); return f;
+}
+fn pf_binomial(s: i64, variant: i64) -> i64 {
+    let x: i64 = pf_term(s, 2, 0, 0); let one: i64 = pf_term(s, 1, 1, 0);
+    let mut coefficient: i64 = 2; if variant == 1 { coefficient = 3; }
+    let two: i64 = pf_term(s, 1, coefficient, 0);
+    let plus: i64 = pf_term(s, 3, x, one); let left: i64 = pf_term(s, 4, plus, plus);
+    let square: i64 = pf_term(s, 4, x, x); let twice: i64 = pf_term(s, 4, two, x);
+    let mut constant: i64 = one; if variant == 2 { constant = pf_term(s, 1, 2, 0); }
+    let tail: i64 = pf_term(s, 3, twice, constant); let right: i64 = pf_term(s, 3, square, tail);
+    let f: i64 = pf_identity(s, left, right, 1);
+    if variant == 3 {
+        let three: i64 = pf_term(s, 1, 3, 0);
+        let a: i64 = pf_term(s, 3, three, one); let b: i64 = pf_term(s, 4, a, a);
+        let c: i64 = pf_term(s, 4, three, three); let d: i64 = pf_term(s, 4, two, three);
+        let e: i64 = pf_term(s, 3, d, one); let g: i64 = pf_term(s, 3, c, e);
+        let result: i64 = pf_formula(s, 2, b, g); pf_proof(s, 8, result, 1, 0, three);
+    }
+    return f;
+}
+fn pf_k4(s: i64, variant: i64) -> i64 {
+    let x: i64 = pf_term(s, 2, 0, 0); let mut first: i64 = 95800;
+    if variant != 0 { first = 95801; }
+    let a: i64 = pf_term(s, 1, first, 0); let b: i64 = pf_term(s, 1, 217519, 0);
+    let c: i64 = pf_term(s, 1, 414560, 0); let d: i64 = pf_term(s, 1, 422481, 0);
+    let ax: i64 = pf_term(s, 4, a, x); let bx: i64 = pf_term(s, 4, b, x);
+    let cx: i64 = pf_term(s, 4, c, x); let dx: i64 = pf_term(s, 4, d, x);
+    let a2: i64 = pf_term(s, 4, ax, ax); let a4: i64 = pf_term(s, 4, a2, a2);
+    let b2: i64 = pf_term(s, 4, bx, bx); let b4: i64 = pf_term(s, 4, b2, b2);
+    let c2: i64 = pf_term(s, 4, cx, cx); let c4: i64 = pf_term(s, 4, c2, c2);
+    let d2: i64 = pf_term(s, 4, dx, dx); let d4: i64 = pf_term(s, 4, d2, d2);
+    let ab: i64 = pf_term(s, 3, a4, b4); let abc: i64 = pf_term(s, 3, ab, c4);
+    return pf_identity(s, abc, d4, 1);
+}
+fn pf_commute(s: i64, tag: i64) -> i64 {
+    let x: i64 = pf_term(s, 2, 1, 0); let y: i64 = pf_term(s, 2, 0, 0);
+    let left: i64 = pf_term(s, tag, x, y); let right: i64 = pf_term(s, tag, y, x);
+    return pf_identity(s, left, right, 2);
+}
+fn pf_distribute(s: i64) -> i64 {
+    let x: i64 = pf_term(s, 2, 2, 0); let y: i64 = pf_term(s, 2, 1, 0);
+    let z: i64 = pf_term(s, 2, 0, 0); let sum: i64 = pf_term(s, 3, y, z);
+    let left: i64 = pf_term(s, 4, x, sum); let xy: i64 = pf_term(s, 4, x, y);
+    let xz: i64 = pf_term(s, 4, x, z); let right: i64 = pf_term(s, 3, xy, xz);
+    return pf_identity(s, left, right, 3);
+}
+fn pf_four(s: i64) -> i64 {
+    let x: i64 = pf_term(s, 2, 3, 0); let y: i64 = pf_term(s, 2, 2, 0);
+    let z: i64 = pf_term(s, 2, 1, 0); let w: i64 = pf_term(s, 2, 0, 0);
+    let xy: i64 = pf_term(s, 4, x, y); let zw: i64 = pf_term(s, 4, z, w);
+    let left: i64 = pf_term(s, 4, xy, zw); let wz: i64 = pf_term(s, 4, w, z);
+    let yx: i64 = pf_term(s, 4, y, x); let right: i64 = pf_term(s, 4, wz, yx);
+    return pf_identity(s, left, right, 4);
+}
+fn pf_vacuous(s: i64) -> i64 {
+    let one: i64 = pf_term(s, 1, 1, 0); let two: i64 = pf_term(s, 1, 2, 0);
+    let sum: i64 = pf_term(s, 3, one, one); return pf_identity(s, sum, two, 1);
+}
+fn pf_power(s: i64, exponent33: i64) -> i64 {
+    let x: i64 = pf_term(s, 2, 0, 0); let mut power: i64 = x; let mut j: i64 = 0;
+    while j < 5 { power = pf_term(s, 4, power, power); j = j + 1; }
+    if exponent33 != 0 { power = pf_term(s, 4, power, x); }
+    return pf_identity(s, power, power, 1);
+}
+fn pf_carry(s: i64) -> i64 {
+    let x: i64 = pf_term(s, 2, 0, 0); let c: i64 = pf_term(s, 1, 999999, 0);
+    let one: i64 = pf_term(s, 1, 1, 0); let cx: i64 = pf_term(s, 4, c, x);
+    let plus: i64 = pf_term(s, 3, cx, one); let left: i64 = pf_term(s, 4, plus, plus);
+    let cc: i64 = pf_term(s, 4, c, c); let xx: i64 = pf_term(s, 4, x, x);
+    let lead: i64 = pf_term(s, 4, cc, xx); let twice: i64 = pf_term(s, 3, c, c);
+    let middle: i64 = pf_term(s, 4, twice, x); let tail: i64 = pf_term(s, 3, middle, one);
+    let right: i64 = pf_term(s, 3, lead, tail); return pf_identity(s, left, right, 1);
+}
+fn pf_instantiate(s: i64, variant: i64) -> i64 {
+    pf_commute(s, 3);
+    let two: i64 = pf_term(s, 1, 2, 0); let three: i64 = pf_term(s, 1, 3, 0);
+    let mut witness: i64 = two; if variant == 4 { witness = three; }
+    let mut left: i64 = pf_term(s, 3, witness, 2); let mut right: i64 = pf_term(s, 3, 2, witness);
+    if variant == 2 { let swap: i64 = left; left = right; right = swap; }
+    let eq: i64 = pf_formula(s, 2, left, right); let all: i64 = pf_formula(s, 6, eq, 0);
+    let mut aux: i64 = two; if variant == 3 { aux = 2; }
+    pf_proof(s, 8, all, 1, 0, aux);
+    if variant == 1 {
+        let a: i64 = pf_term(s, 3, two, three); let b: i64 = pf_term(s, 3, three, two);
+        let result: i64 = pf_formula(s, 2, a, b); pf_proof(s, 8, result, 2, 0, three);
+    }
+    return all;
+}
+fn pf_scope(s: i64, variant: i64) -> i64 {
+    let x: i64 = pf_term(s, 2, 0, 0); let three: i64 = pf_term(s, 1, 3, 0);
+    let eq: i64 = pf_formula(s, 2, x, x); let all: i64 = pf_formula(s, 6, eq, 0);
+    let bot: i64 = pf_formula(s, 3, 0, 0);
+    if variant == 0 {
+        let neg: i64 = pf_formula(s, 5, all, bot); let goal: i64 = pf_formula(s, 5, neg, bot);
+        pf_proof(s, 1, neg, 0, 0, 0); pf_proof(s, 10, all, 0, 0, 0);
+        pf_proof(s, 7, bot, 1, 2, 0); pf_proof(s, 9, goal, 1, 3, 0); return goal;
+    }
+    pf_proof(s, 1, bot, 0, 0, 0); pf_proof(s, 10, all, 0, 0, 0);
+    if variant == 2 { return all; }
+    let negbot: i64 = pf_formula(s, 5, bot, bot); pf_proof(s, 9, negbot, 1, 1, 0);
+    let result: i64 = pf_formula(s, 2, three, three); pf_proof(s, 8, result, 2, 0, three);
+    return result;
+}
+fn pf_geometric(s: i64, x: i64, one: i64, degree: i64) -> i64 {
+    let mut sum: i64 = one; let mut power: i64 = one; let mut j: i64 = 0;
+    while j < degree {
+        power = pf_term(s, 4, power, x); sum = pf_term(s, 3, sum, power); j = j + 1;
+    }
+    return sum;
+}
+fn pf_many(s: i64, variant: i64) -> i64 {
+    let x: i64 = pf_term(s, 2, 1, 0); let y: i64 = pf_term(s, 2, 0, 0);
+    let one: i64 = pf_term(s, 1, 1, 0);
+    let a: i64 = pf_geometric(s, x, one, 7); let b: i64 = pf_geometric(s, y, one, 15);
+    let product: i64 = pf_term(s, 4, a, b); let mut result: i64 = product;
+    if variant == 1 {
+        let mut x8: i64 = x; let mut j: i64 = 0;
+        while j < 3 { x8 = pf_term(s, 4, x8, x8); j = j + 1; }
+        result = pf_term(s, 3, product, x8);
+    }
+    if variant == 2 {
+        // Repeated independent additions keep each coefficient at 2, depth at 18,
+        // and support at exactly 128. They cannot overflow or exceed AST limits.
+        let mut j: i64 = 0;
+        while j < 200 { result = pf_term(s, 3, product, product); j = j + 1; }
+    }
+    return pf_identity(s, result, result, 2);
+}
+fn pf_overflow(s: i64, unused: i64) -> i64 {
+    let x: i64 = pf_term(s, 2, 0, 0); let c: i64 = pf_term(s, 1, 999999, 0);
+    let mut power: i64 = pf_term(s, 4, c, x); let mut j: i64 = 0;
+    while j < 3 { power = pf_term(s, 4, power, power); j = j + 1; }
+    if unused != 0 { return pf_vacuous(s); }
+    return pf_identity(s, power, power, 1);
+}
+pub fn poly_fixture_build(i: i64, s: i64, p: i64) -> i64 {
+    pf_clear(s);
+    if i == 0 { pf_binomial(s, 0); }
+    if i == 1 { pf_k4(s, 0); }
+    if i == 2 { pf_commute(s, 3); }
+    if i == 3 { pf_commute(s, 4); }
+    if i == 4 { pf_distribute(s); }
+    if i == 5 { pf_four(s); }
+    if i == 6 {
+        let x: i64 = pf_term(s, 2, 0, 0); let zero: i64 = pf_term(s, 1, 0, 0);
+        let product: i64 = pf_term(s, 4, x, zero); pf_identity(s, product, zero, 1);
+    }
+    if i == 7 { pf_vacuous(s); }
+    if i == 8 {
+        let x: i64 = pf_term(s, 2, 0, 0); let two: i64 = pf_term(s, 1, 2, 0);
+        let sum: i64 = pf_term(s, 3, x, x); let product: i64 = pf_term(s, 4, two, x);
+        pf_identity(s, sum, product, 1);
+    }
+    if i == 9 { pf_power(s, 0); }
+    if i == 10 { pf_carry(s); }
+    if i == 11 { pf_binomial(s, 3); }
+    if i == 12 { pf_instantiate(s, 0); }
+    if i == 13 { pf_instantiate(s, 1); }
+    if i == 14 { pf_scope(s, 0); }
+    if i == 15 { pf_many(s, 0); }
+    if i == 16 { pf_binomial(s, 1); }
+    if i == 17 { pf_binomial(s, 2); }
+    if i == 18 {
+        let x: i64 = pf_term(s, 2, 1, 0); let y: i64 = pf_term(s, 2, 0, 0);
+        pf_identity(s, x, y, 2);
+    }
+    if i == 19 { let x: i64 = pf_term(s, 2, 1, 0); pf_identity(s, x, x, 1); }
+    if i == 20 || i == 21 {
+        let x: i64 = pf_term(s, 2, 0, 0); let one: i64 = pf_term(s, 1, 1, 0);
+        let plus: i64 = pf_term(s, 3, x, one); let eq: i64 = pf_formula(s, 2, x, plus);
+        let mut rule: i64 = 10; if i == 21 { rule = 3; } pf_proof(s, rule, eq, 0, 0, 0);
+    }
+    if i == 22 { let one: i64 = pf_term(s, 1, 1, 0); pf_identity(s, one, one, 5); }
+    if i >= 23 && i <= 27 {
+        pf_binomial(s, 0);
+        if i == 23 { __mind_store_i64(s + 24576 + 16, 1); }
+        if i == 24 { __mind_store_i64(s + 24576 + 24, 1); }
+        if i == 25 { __mind_store_i64(s + 24576 + 32, 1); }
+        if i == 26 { __mind_store_i64(s + 32, 1); }
+        if i == 27 {
+            let eq: i64 = pf_formula(s, 2, 1, 1); let goal: i64 = pf_formula(s, 6, eq, 0);
+            __mind_store_i64(s + 24, goal);
+        }
+    }
+    if i >= 28 && i <= 30 {
+        let x: i64 = pf_term(s, 2, 0, 0); let eq: i64 = pf_formula(s, 2, x, x);
+        let mut body: i64 = eq;
+        if i == 28 { body = pf_formula(s, 1, x, 0); }
+        if i == 29 { body = pf_formula(s, 5, eq, eq); }
+        if i == 30 { body = pf_formula(s, 4, eq, eq); }
+        let all: i64 = pf_formula(s, 6, body, 0); pf_proof(s, 10, all, 0, 0, 0);
+    }
+    if i == 31 { let one: i64 = pf_term(s, 1, 1, 0); pf_identity(s, one, one, 0); }
+    if i == 32 { pf_overflow(s, 0); }
+    if i == 33 { pf_overflow(s, 1); }
+    if i == 34 { pf_power(s, 1); }
+    if i == 35 { pf_term(s, 2, 4, 0); pf_vacuous(s); }
+    if i == 36 { pf_many(s, 1); }
+    if i == 37 { pf_many(s, 2); }
+    if i >= 38 && i <= 42 {
+        pf_binomial(s, 0);
+        if i == 41 { __mind_store_i64(s + 40, 74124); }
+        if i == 42 { __mind_store_i64(s + 32, 3); }
+    }
+    if i == 43 { pf_scope(s, 1); }
+    if i == 44 { pf_scope(s, 2); }
+    if i == 45 { pf_instantiate(s, 2); }
+    if i == 46 { pf_instantiate(s, 3); }
+    if i == 47 { pf_instantiate(s, 4); }
+    if i == 48 { pf_k4(s, 1); }
+    if i >= 49 && i <= 51 {
+        pf_binomial(s, 0);
+        if i == 49 { __mind_store_i64(s + 24576, 11); }
+        if i == 50 { __mind_store_i64(s + 128 + 16, 1); }
+        if i == 51 { __mind_store_i64(s + 8192 + 24 + 16, 1); }
+    }
+    if i == 52 {
+        // Base-33 packed exponents must never reinterpret x^33 as a distinct variable.
+        let x: i64 = pf_term(s, 2, 0, 0); let y: i64 = pf_term(s, 2, 1, 0);
+        let mut power: i64 = x; let mut j: i64 = 0;
+        while j < 5 { power = pf_term(s, 4, power, power); j = j + 1; }
+        power = pf_term(s, 4, power, x); pf_identity(s, power, y, 2);
+    }
+    if i == 53 {
+        // Every accumulating product is symbolic: legacy ground overflow cannot mask this test.
+        let x: i64 = pf_term(s, 2, 0, 0); let thousand: i64 = pf_term(s, 1, 1000, 0);
+        let zero: i64 = pf_term(s, 1, 0, 0); let mut product: i64 = x; let mut j: i64 = 0;
+        while j < 12 { product = pf_term(s, 4, product, thousand); j = j + 1; }
+        pf_identity(s, product, zero, 1);
+    }
+    let mut n: i64 = pf_encode(s, p);
+    if i == 38 { n = pf_number(p, n, 0); }
+    if i == 39 { __mind_store_i8(p + n, 10); n = n + 1; }
+    if i == 40 { n = n - 1; }
+    return n;
+}

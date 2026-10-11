@@ -1,0 +1,3 @@
+# Historical observed-artifact digests; paths may be sanitized.
+# Verify current export bytes with the package SHA256SUMS; see PUBLICATION.md.
+7e5ad4f66fc4de9de4065b4d872a69a397e945acecb27cb0bea3e2550bc1fdcc  kernels/polynomial_nd/tests/dump.mind

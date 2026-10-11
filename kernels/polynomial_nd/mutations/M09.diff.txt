@@ -1,0 +1,11 @@
+--- a/src/kernel.mind
++++ b/src/kernel.mind
+@@ -406,7 +406,7 @@
+         return nd_term_match(w, b, __mind_load_i64(t + 16), substitute, replacement, binders, recursion + 1);
+     }
+     if tag == 6 {
+-        return nd_formula_match(w, a, __mind_load_i64(t + 8), substitute, replacement, binders + 1, recursion + 1);
++        return nd_formula_match(w, a, __mind_load_i64(t + 8), substitute, replacement, binders, recursion + 1); // MUTANT: wrong binder
+     }
+     if nd_formula_match(w, a, __mind_load_i64(t + 8), substitute, replacement, binders, recursion + 1) != 1 { return 0; }
+     return nd_formula_match(w, b, __mind_load_i64(t + 16), substitute, replacement, binders, recursion + 1);

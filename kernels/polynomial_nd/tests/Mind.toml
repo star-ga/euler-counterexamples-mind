@@ -1,0 +1,8 @@
+[package]
+name = "mind-math-polynomial-nd-tests"
+version = "0.1.0"
+authors = ["STARGA Inc."]
+description = "Pure-MIND adversarial controls for polynomial certificate checking"
+[build]
+target = "cpu"
+entry = "src/main.mind"

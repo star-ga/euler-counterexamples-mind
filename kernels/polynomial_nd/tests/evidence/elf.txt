@@ -1,0 +1,2 @@
+/work/scratch/main/check: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=36461a9c0d22749555b90d67ebaacdccc22d18b8, for GNU/Linux 3.2.0, not stripped
+/work/scratch/dump/dump:   ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=e013765bdf29f3655b1ee164221a3c0ff7941715, for GNU/Linux 3.2.0, not stripped

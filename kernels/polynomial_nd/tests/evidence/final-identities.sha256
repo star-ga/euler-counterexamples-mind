@@ -1,0 +1,15 @@
+# Historical observed-artifact digests; paths may be sanitized.
+# Verify current export bytes with the package SHA256SUMS; see PUBLICATION.md.
+7eed71f7cb06715744471edf80da5b6b1f3cdadb2ba345e3605814d2951fa3e2  kernels/polynomial_nd/src/kernel.mind
+7eed71f7cb06715744471edf80da5b6b1f3cdadb2ba345e3605814d2951fa3e2  /work/scratch/main/src/kernel.mind
+7eed71f7cb06715744471edf80da5b6b1f3cdadb2ba345e3605814d2951fa3e2  /work/scratch/resource/src/kernel.mind
+7eed71f7cb06715744471edf80da5b6b1f3cdadb2ba345e3605814d2951fa3e2  /work/scratch/cache/src/kernel.mind
+fb76854863cfda0c8c2661a7a2663ee8b3febc821cb1045ec7feecea0666ee31  kernels/polynomial_nd/tests/cache.mind
+7e5ad4f66fc4de9de4065b4d872a69a397e945acecb27cb0bea3e2550bc1fdcc  kernels/polynomial_nd/tests/dump.mind
+988350aa25d392f0e5b2170eb779fb78c076f12e66807a8337cd7e283d08c5ae  kernels/polynomial_nd/tests/fixtures.mind
+3df6c3d115200095770ac5391670600fcd9f13623e019eef25ed7bc3aa347d2c  kernels/polynomial_nd/tests/main.mind
+8cde615dda8fc799e292d3b65a321dd05c27e855b5c06631a29bcfa59b490a7b  kernels/polynomial_nd/tests/resource.mind
+a1444e4412efcf6eef4d2f0635ee530cacdc58414531b7c7b5bec6eff15d7ffa  /work/toolchain/mindc
+33ede8b8c6480d6587294f3c2b3382d41e133e6bb42eccd326b90b0f2f8c5f81  /work/scratch/main/check
+486cb056754b6a1b962faf33c0ed3ace34279d18a0c47478e6b72b377e0c6469  /work/scratch/resource/resource
+eb4fe19d7a3e8f61a71875fa0cd5508c707090de64c3dc54e858418f72475736  /work/scratch/cache/cache

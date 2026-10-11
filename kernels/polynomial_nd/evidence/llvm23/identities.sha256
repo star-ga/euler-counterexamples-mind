@@ -1,0 +1,7 @@
+# Historical observed-artifact digests; paths may be sanitized.
+# Verify current export bytes with the package SHA256SUMS; see PUBLICATION.md.
+7eed71f7cb06715744471edf80da5b6b1f3cdadb2ba345e3605814d2951fa3e2  src/kernel.mind
+c92542160bde0d3908d0a364b17d55091c965937a7b0d2392af3e77507618160  check
+12758a64a51d0b623b0091f5fcdec93cdd5dcadcf93dde30998bbecb48885b69  /opt/llvm-23/bin/mlir-opt
+738f59331cd57730da43b12c602f80b87e0c16fca2d925cb57c8a59ae5acb17f  /opt/llvm-23/bin/mlir-translate
+913453afb492abab17025139852413ba7fd7a52b4fb75fcce58ff3fe399d0a9e  /opt/llvm-23/bin/clang-23

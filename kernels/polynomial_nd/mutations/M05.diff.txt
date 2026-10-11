@@ -1,0 +1,20 @@
+--- a/src/kernel.mind
++++ b/src/kernel.mind
+@@ -60,7 +60,7 @@
+         __mind_store_i64(out + i * 8, v % 1000);
+         carry = v / 1000; i = i + 1;
+     }
+-    if carry != 0 { return 0; } return 1;
++    return 1; // MUTANT: discard carry.
+ }
+ fn nd_multiply(w: i64, x: i64, y: i64, out: i64) -> i64 {
+     let temp: i64 = w + 63856; nd_zero(temp, 24);
+@@ -86,7 +86,7 @@
+     }
+     i = 12;
+     while i < 24 {
+-        if __mind_load_i64(temp + i * 8) != 0 { return 0; }
++        // MUTANT: discard upper product limbs.
+         i = i + 1;
+     }
+     i = 0;

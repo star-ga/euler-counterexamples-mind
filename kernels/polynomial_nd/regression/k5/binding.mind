@@ -1,0 +1,240 @@
+// Author: STARGA Inc.
+// Exact benchmark statement binding; inference authority stays in kernel.mind.
+// The validated workspace layout is pinned to kernel ca181abc...e13128.
+import kernel;
+
+fn k5_term(w: i64, i: i64) -> i64 {
+    if i < 1 || i > __mind_load_i64(w + 40) {
+        return 0;
+    }
+    return w + 128 + (i - 1) * 40;
+}
+fn k5_formula(w: i64, i: i64) -> i64 {
+    if i < 1 || i > __mind_load_i64(w + 48) {
+        return 0;
+    }
+    return w + 10368 + (i - 1) * 40;
+}
+fn k5_ttag(w: i64, i: i64, tag: i64) -> i64 {
+    let p: i64 = k5_term(w, i);
+    if p == 0 {
+        return 0;
+    }
+    if __mind_load_i64(p) != tag {
+        return 0;
+    }
+    return 1;
+}
+fn k5_ftag(w: i64, i: i64, tag: i64) -> i64 {
+    let p: i64 = k5_formula(w, i);
+    if p == 0 {
+        return 0;
+    }
+    if __mind_load_i64(p) != tag {
+        return 0;
+    }
+    return 1;
+}
+fn k5_tleft(w: i64, i: i64) -> i64 {
+    let p: i64 = k5_term(w, i);
+    if p == 0 {
+        return 0;
+    }
+    return __mind_load_i64(p + 8);
+}
+fn k5_tright(w: i64, i: i64) -> i64 {
+    let p: i64 = k5_term(w, i);
+    if p == 0 {
+        return 0;
+    }
+    return __mind_load_i64(p + 16);
+}
+fn k5_fleft(w: i64, i: i64) -> i64 {
+    let p: i64 = k5_formula(w, i);
+    if p == 0 {
+        return 0;
+    }
+    return __mind_load_i64(p + 8);
+}
+fn k5_fright(w: i64, i: i64) -> i64 {
+    let p: i64 = k5_formula(w, i);
+    if p == 0 {
+        return 0;
+    }
+    return __mind_load_i64(p + 16);
+}
+fn k5_variable(w: i64, term: i64, index: i64) -> i64 {
+    if k5_ttag(w, term, 2) != 1 {
+        return 0;
+    }
+    if k5_tleft(w, term) != index || k5_tright(w, term) != 0 {
+        return 0;
+    }
+    return 1;
+}
+fn k5_square(w: i64, term: i64, index: i64) -> i64 {
+    if k5_ttag(w, term, 4) != 1 {
+        return 0;
+    }
+    if k5_variable(w, k5_tleft(w, term), index) != 1 {
+        return 0;
+    }
+    return k5_variable(w, k5_tright(w, term), index);
+}
+fn k5_fifth(w: i64, term: i64, index: i64) -> i64 {
+    if k5_ttag(w, term, 4) != 1 {
+        return 0;
+    }
+    if k5_variable(w, k5_tright(w, term), index) != 1 {
+        return 0;
+    }
+    let fourth: i64 = k5_tleft(w, term);
+    if k5_ttag(w, fourth, 4) != 1 {
+        return 0;
+    }
+    if k5_square(w, k5_tleft(w, fourth), index) != 1 {
+        return 0;
+    }
+    return k5_square(w, k5_tright(w, fourth), index);
+}
+fn k5_positive(w: i64, formula: i64, index: i64) -> i64 {
+    if k5_ftag(w, formula, 1) != 1 {
+        return 0;
+    }
+    return k5_variable(w, k5_fleft(w, formula), index);
+}
+fn k5_positives(w: i64, formula: i64) -> i64 {
+    if k5_ftag(w, formula, 4) != 1 {
+        return 0;
+    }
+    let ab: i64 = k5_fleft(w, formula);
+    let cde: i64 = k5_fright(w, formula);
+    if k5_ftag(w, ab, 4) != 1 || k5_ftag(w, cde, 4) != 1 {
+        return 0;
+    }
+    let cd: i64 = k5_fleft(w, cde);
+    if k5_ftag(w, cd, 4) != 1 {
+        return 0;
+    }
+    if k5_positive(w, k5_fleft(w, ab), 4) != 1 {
+        return 0;
+    }
+    if k5_positive(w, k5_fright(w, ab), 3) != 1 {
+        return 0;
+    }
+    if k5_positive(w, k5_fleft(w, cd), 2) != 1 {
+        return 0;
+    }
+    if k5_positive(w, k5_fright(w, cd), 1) != 1 {
+        return 0;
+    }
+    return k5_positive(w, k5_fright(w, cde), 0);
+}
+fn k5_equation(w: i64, formula: i64) -> i64 {
+    if k5_ftag(w, formula, 2) != 1 {
+        return 0;
+    }
+    let abcd: i64 = k5_fleft(w, formula);
+    if k5_ttag(w, abcd, 3) != 1 {
+        return 0;
+    }
+    let abc: i64 = k5_tleft(w, abcd);
+    if k5_ttag(w, abc, 3) != 1 {
+        return 0;
+    }
+    let ab: i64 = k5_tleft(w, abc);
+    if k5_ttag(w, ab, 3) != 1 {
+        return 0;
+    }
+    if k5_fifth(w, k5_tleft(w, ab), 4) != 1 {
+        return 0;
+    }
+    if k5_fifth(w, k5_tright(w, ab), 3) != 1 {
+        return 0;
+    }
+    if k5_fifth(w, k5_tright(w, abc), 2) != 1 {
+        return 0;
+    }
+    if k5_fifth(w, k5_tright(w, abcd), 1) != 1 {
+        return 0;
+    }
+    return k5_fifth(w, k5_fright(w, formula), 0);
+}
+// Only called after finite_nd_check accepted canonical, completely framed input.
+// Skip magic/version/counts and all table records to obtain the declared goal.
+fn k5_declared_goal(p: i64, n: i64, w: i64) -> i64 {
+    let skip: i64 = 4 + 3 * __mind_load_i64(w + 40) + 3 * __mind_load_i64(w + 48);
+    let mut pos: i64 = 0;
+    let mut lines: i64 = 0;
+    while pos < n && lines < skip {
+        if __mind_load_i8(p + pos) == 10 {
+            lines = lines + 1;
+        }
+        pos = pos + 1;
+    }
+    if lines != skip {
+        return 0;
+    }
+    let mut value: i64 = 0;
+    while pos < n {
+        let ch: i64 = __mind_load_i8(p + pos);
+        if ch == 10 {
+            return value;
+        }
+        if ch < 48 || ch > 57 || value > 99999 {
+            return 0;
+        }
+        value = value * 10 + ch - 48;
+        pos = pos + 1;
+    }
+    return 0;
+}
+fn k5_goal_matches(p: i64, n: i64, w: i64) -> i64 {
+    let goal: i64 = k5_declared_goal(p, n, w);
+    if k5_ftag(w, goal, 5) != 1 {
+        return 0;
+    }
+    if k5_ftag(w, k5_fright(w, goal), 3) != 1 {
+        return 0;
+    }
+    let mut body: i64 = k5_fleft(w, goal);
+    let mut binders: i64 = 0;
+    while binders < 5 {
+        if k5_ftag(w, body, 6) != 1 {
+            return 0;
+        }
+        body = k5_fleft(w, body);
+        binders = binders + 1;
+    }
+    if k5_ftag(w, body, 5) != 1 {
+        return 0;
+    }
+    if k5_positives(w, k5_fleft(w, body)) != 1 {
+        return 0;
+    }
+    let negative_equation: i64 = k5_fright(w, body);
+    if k5_ftag(w, negative_equation, 5) != 1 {
+        return 0;
+    }
+    if k5_ftag(w, k5_fright(w, negative_equation), 3) != 1 {
+        return 0;
+    }
+    return k5_equation(w, k5_fleft(w, negative_equation));
+}
+pub fn k5_check(p: i64, n: i64, work: i64, cap: i64) -> i64 {
+    if finite_nd_check(p, n, work, cap) != 1 {
+        return 0;
+    }
+    return k5_goal_matches(p, n, work);
+}
+pub fn k5_emit(s: String) -> i64 {
+    let mut pos: i64 = 0;
+    while pos < s.len {
+        let written: i64 = __mind_write(1, s.addr + pos, s.len - pos, 0 - 1);
+        if written <= 0 {
+            return 0;
+        }
+        pos = pos + written;
+    }
+    return 1;
+}

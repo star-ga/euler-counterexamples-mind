@@ -1,0 +1,11 @@
+--- a/src/kernel.mind
++++ b/src/kernel.mind
+@@ -442,7 +442,7 @@
+         let b: i64 = __mind_load_i64(f + 16);
+         let mut deps: i64 = 0; let mut own_bit: i64 = 0;
+         if (rule >= 1 && rule <= 3) || rule == 10 {
+-            if p1 != 0 || p2 != 0 || aux != 0 { return 0; }
++            if rule != 10 && (p1 != 0 || p2 != 0 || aux != 0) { return 0; }
+             if rule == 10 {
+                 if poly_rule(w, result) != 1 { return 0; }
+             } else { if rule == 1 {

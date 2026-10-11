@@ -1,0 +1,9 @@
+{
+  "harnesses": 3,
+  "stages": 6,
+  "checker_calls": 326,
+  "accepts": 28,
+  "rejects": 298,
+  "passed": true,
+  "compiler_sha256": "c6a4cdce63a76af95025de2664ade696df9f3dbd1b9a84f4a77e6379e6811ea5"
+}

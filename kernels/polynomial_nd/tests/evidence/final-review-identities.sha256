@@ -1,0 +1,7 @@
+# Historical observed-artifact digests; paths may be sanitized.
+# Verify current export bytes with the package SHA256SUMS; see PUBLICATION.md.
+10ff828a78cbf1879c1f41aa770ce3b374e4e877de38d19cb3cb221061b20104  kernels/polynomial_nd/tests/REVIEW.md
+7eed71f7cb06715744471edf80da5b6b1f3cdadb2ba345e3605814d2951fa3e2  kernels/polynomial_nd/src/kernel.mind
+d14308c81524bf98913f7e45f9984ef9325963a1da1b5f53113396beb33cb9e0  kernels/polynomial_nd/SOUNDNESS.md
+5dfc8f755ab1efead2dcc274fec39d88e213a7c74fa97b58c6ab730190439866  kernels/polynomial_nd/SYNTAX.md
+69ccf5425f9f5d65483e1df6e9b68c67e21b81d23721a012a753fb6351fcc7d7  kernels/polynomial_nd/FOUNDATIONS.md
