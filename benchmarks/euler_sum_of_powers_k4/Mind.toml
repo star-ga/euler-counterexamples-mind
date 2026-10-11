@@ -1,0 +1,8 @@
+[package]
+name = "mind-math-euler-k4"
+version = "0.1.0"
+authors = ["STARGA Inc."]
+description = "Exact arithmetic and separate refutation-trace candidate"
+[build]
+target = "cpu"
+entry = "src/main.mind"

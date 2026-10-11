@@ -1,0 +1,11 @@
+# Preserve mathematical inputs, including deliberately malformed byte fixtures.
+*.mind -text
+*.nd.txt -text
+*.diff.txt -text
+*.stdout -text
+*.stderr -text
+*.exit -text
+benchmarks/euler_sum_of_powers_k4/arithmetic.txt -text
+benchmarks/euler_sum_of_powers_k4/refutation.txt -text
+benchmarks/euler_sum_of_powers_k4/zero-arithmetic.txt -text
+benchmarks/euler_sum_of_powers_k4/zero-refutation.txt -text

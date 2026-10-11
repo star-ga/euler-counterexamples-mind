@@ -1,0 +1,310 @@
+sha256sum -c publication/SOURCE_SHA256SUMS
+kernels/finite_nd/certificates/N49_closed_creation_context.nd.txt: OK
+kernels/finite_nd/tests/mutations/M02_witness_binding.diff.txt: OK
+kernels/finite_nd/certificates/N25_ground_multiplication_overflow.nd.txt: OK
+kernels/finite_nd/certificates/N14_goal_mismatch.nd.txt: OK
+kernels/finite_nd/certificates/N07_reused_scope_depth.nd.txt: OK
+kernels/finite_nd/certificates/N04_witness_mismatch.nd.txt: OK
+kernels/finite_nd/certificates/N11_wrong_conjunction_side.nd.txt: OK
+benchmarks/euler_sum_of_powers_k4/src/checker.mind: OK
+kernels/finite_nd/tests/mutations/M06_positivity.diff.txt: OK
+kernels/finite_nd/certificates/N10_self_premise.nd.txt: OK
+kernels/finite_nd/tests/mutations/M01_substitution.diff.txt: OK
+benchmarks/euler_sum_of_powers_k4/src/main.mind: OK
+kernels/finite_nd/certificates/P03_unrelated_addition.nd.txt: OK
+kernels/finite_nd/certificates/N31_euler_removed_positivity.nd.txt: OK
+kernels/finite_nd/certificates/N12_modus_ponens_nonimplication.nd.txt: OK
+benchmarks/euler_sum_of_powers_k4/Mind.toml: OK
+kernels/finite_nd/certificates/N38_missing_final_lf.nd.txt: OK
+kernels/finite_nd/certificates/P06_nested_binders.nd.txt: OK
+kernels/finite_nd/certificates/N34_leading_zero.nd.txt: OK
+kernels/finite_nd/tests/fixtures.mind: OK
+toolchain/compiler.sha256: OK
+kernels/finite_nd/certificates/N17_formula_forward_self_reference.nd.txt: OK
+kernels/finite_nd/certificates/N37_empty_line.nd.txt: OK
+kernels/finite_nd/tests/mutations/M04_creation_scope.diff.txt: OK
+benchmarks/euler_sum_of_powers_k4/evidence/initial-probe.mind: OK
+kernels/finite_nd/tests/main.mind: OK
+kernels/finite_nd/tests/mutations/M03_ground_equality.diff.txt: OK
+kernels/finite_nd/certificates/N06_wrong_discharge_formula.nd.txt: OK
+kernels/finite_nd/certificates/N23_unknown_formula_tag.nd.txt: OK
+kernels/finite_nd/certificates/N02_zero_positive.nd.txt: OK
+kernels/finite_nd/certificates/N05_popped_scope_false_goal.nd.txt: OK
+kernels/finite_nd/evidence/independent-review/probe/src/main.mind: OK
+kernels/finite_nd/certificates/N29_euler_changed_witness.nd.txt: OK
+kernels/finite_nd/Mind.toml: OK
+kernels/finite_nd/certificates/N45_proof_count_limit.nd.txt: OK
+kernels/finite_nd/certificates/N32_wrong_magic.nd.txt: OK
+kernels/finite_nd/certificates/N27_formula_depth_limit.nd.txt: OK
+kernels/finite_nd/certificates/N39_trailing_lf.nd.txt: OK
+kernels/finite_nd/certificates/N33_wrong_version.nd.txt: OK
+kernels/finite_nd/certificates/N30_euler_first_witness_binding.nd.txt: OK
+kernels/finite_nd/certificates/N43_zero_terms.nd.txt: OK
+kernels/finite_nd/certificates/N03_invalid_instantiation.nd.txt: OK
+kernels/finite_nd/certificates/N21_unknown_rule.nd.txt: OK
+kernels/finite_nd/certificates/N35_negative_decimal.nd.txt: OK
+kernels/finite_nd/certificates/N48_nonzero_reserved_field.nd.txt: OK
+benchmarks/euler_sum_of_powers_k4/zero-refutation.txt: OK
+benchmarks/euler_sum_of_powers_k4/refutation.txt: OK
+kernels/finite_nd/certificates/P07_conjunction_projection.nd.txt: OK
+kernels/finite_nd/certificates/N08_unused_open_assumption.nd.txt: OK
+kernels/finite_nd/tests/mutations/M05_discharge.diff.txt: OK
+benchmarks/euler_sum_of_powers_k4/supplemental/main.mind: OK
+kernels/finite_nd/certificates/N36_crlf.nd.txt: OK
+kernels/finite_nd/certificates/P08_zero_equality.nd.txt: OK
+benchmarks/euler_sum_of_powers_k4/evidence/original-main.mind: OK
+kernels/finite_nd/certificates/N22_unknown_term_tag.nd.txt: OK
+kernels/finite_nd/certificates/N15_signed_literal.nd.txt: OK
+kernels/finite_nd/src/main.mind: OK
+benchmarks/euler_sum_of_powers_k4/mutations/positivity.diff.txt: OK
+kernels/finite_nd/certificates/N13_modus_ponens_wrong_argument.nd.txt: OK
+kernels/finite_nd/certificates/N20_unexpected_auxiliary.nd.txt: OK
+kernels/finite_nd/certificates/N41_wide_number.nd.txt: OK
+kernels/finite_nd/certificates/N28_assumption_id_limit.nd.txt: OK
+kernels/finite_nd/certificates/N09_future_premise.nd.txt: OK
+kernels/finite_nd/certificates/N44_formula_count_limit.nd.txt: OK
+kernels/finite_nd/certificates/P05_not_bottom.nd.txt: OK
+kernels/finite_nd/tests/Mind.toml: OK
+kernels/finite_nd/src/kernel.mind: OK
+kernels/finite_nd/certificates/N46_ground_rule_wrong_shape.nd.txt: OK
+benchmarks/euler_sum_of_powers_k4/mutations/recomputation.diff.txt: OK
+kernels/finite_nd/tests/mutations/M08_assumption_id_reuse.diff.txt: OK
+benchmarks/euler_sum_of_powers_k4/zero-arithmetic.txt: OK
+benchmarks/euler_sum_of_powers_k4/mutations/eof.diff.txt: OK
+kernels/finite_nd/certificates/P04_noncontradiction.nd.txt: OK
+kernels/finite_nd/certificates/N18_free_variable_result.nd.txt: OK
+benchmarks/euler_sum_of_powers_k4/arithmetic.txt: OK
+kernels/finite_nd/tests/mutations/M07_eof.diff.txt: OK
+benchmarks/euler_sum_of_powers_k4/mutations/binding.diff.txt: OK
+kernels/finite_nd/certificates/N24_out_of_order_discharge.nd.txt: OK
+kernels/finite_nd/certificates/P01_euler_c4_refutation.nd.txt: OK
+kernels/finite_nd/certificates/N26_term_depth_limit.nd.txt: OK
+kernels/finite_nd/certificates/N16_term_forward_self_reference.nd.txt: OK
+kernels/finite_nd/certificates/N47_nested_binder_wrong_witness.nd.txt: OK
+kernels/finite_nd/certificates/N40_trailing_number.nd.txt: OK
+kernels/finite_nd/evidence/independent-review/probe/Mind.toml: OK
+kernels/finite_nd/certificates/P02_positive_numeral.nd.txt: OK
+kernels/finite_nd/certificates/N19_open_instantiation_term.nd.txt: OK
+kernels/finite_nd/certificates/N42_term_count_limit.nd.txt: OK
+kernels/finite_nd/certificates/N01_forged_ground_equality.nd.txt: OK
+cp kernels/finite_nd/Mind.toml "/BUILD_REPOSITORY/.build/kernel/"
+cp kernels/finite_nd/src/*.mind "/BUILD_REPOSITORY/.build/kernel/src/"
+cd "/BUILD_REPOSITORY/.build/kernel" && timeout 60 taskset -c 0 nice -n 19 prlimit --as=1073741824 --cpu=50 -- "/BUILD_TMP/euler-public-compiler-profile-20261011/compiler-target/release/mindc" build src/main.mind --backend mlir --target cpu --emit binary --optimize debug --no-cache --out "/BUILD_REPOSITORY/.build/kernel-check"
+   Finished cpu [binary] /BUILD_REPOSITORY/.build/kernel-check
+   Artifact: 50464 bytes
+sha256sum "/BUILD_REPOSITORY/.build/kernel-check"
+51d9b0daa89c9bbfaca7629f47e96866c457c9fddbf7a0748f05d44e733231dc  /BUILD_REPOSITORY/.build/kernel-check
+timeout 15 taskset -c 0 nice -n 19 prlimit --as=268435456 --cpu=10 -- "/BUILD_REPOSITORY/.build/kernel-check" < kernels/finite_nd/certificates/P01_euler_c4_refutation.nd.txt
+KERNEL_CHECK=PASS
+cp kernels/finite_nd/tests/Mind.toml "/BUILD_REPOSITORY/.build/suite/"
+cp kernels/finite_nd/tests/main.mind kernels/finite_nd/tests/fixtures.mind kernels/finite_nd/src/kernel.mind "/BUILD_REPOSITORY/.build/suite/src/"
+cd "/BUILD_REPOSITORY/.build/suite" && timeout 60 taskset -c 0 nice -n 19 prlimit --as=1073741824 --cpu=50 -- "/BUILD_TMP/euler-public-compiler-profile-20261011/compiler-target/release/mindc" build src/main.mind --backend mlir --target cpu --emit binary --optimize debug --no-cache --out "/BUILD_REPOSITORY/.build/suite-check"
+   Finished cpu [binary] /BUILD_REPOSITORY/.build/suite-check
+   Artifact: 62968 bytes
+timeout 15 taskset -c 0 nice -n 19 prlimit --as=268435456 --cpu=10 -- "/BUILD_REPOSITORY/.build/suite-check"
+CASE=P01_euler_c4_refutation
+OBSERVED=1
+CASE=P02_positive_numeral
+OBSERVED=1
+CASE=P03_unrelated_addition
+OBSERVED=1
+CASE=P04_noncontradiction
+OBSERVED=1
+CASE=P05_not_bottom
+OBSERVED=1
+CASE=P06_nested_binders
+OBSERVED=1
+CASE=P07_conjunction_projection
+OBSERVED=1
+CASE=P08_zero_equality
+OBSERVED=1
+CASE=N01_forged_ground_equality
+OBSERVED=0
+CASE=N02_zero_positive
+OBSERVED=0
+CASE=N03_invalid_instantiation
+OBSERVED=0
+CASE=N04_witness_mismatch
+OBSERVED=0
+CASE=N05_popped_scope_false_goal
+OBSERVED=0
+CASE=N06_wrong_discharge_formula
+OBSERVED=0
+CASE=N07_reused_scope_depth
+OBSERVED=0
+CASE=N08_unused_open_assumption
+OBSERVED=0
+CASE=N09_future_premise
+OBSERVED=0
+CASE=N10_self_premise
+OBSERVED=0
+CASE=N11_wrong_conjunction_side
+OBSERVED=0
+CASE=N12_modus_ponens_nonimplication
+OBSERVED=0
+CASE=N13_modus_ponens_wrong_argument
+OBSERVED=0
+CASE=N14_goal_mismatch
+OBSERVED=0
+CASE=N15_signed_literal
+OBSERVED=0
+CASE=N16_term_forward_self_reference
+OBSERVED=0
+CASE=N17_formula_forward_self_reference
+OBSERVED=0
+CASE=N18_free_variable_result
+OBSERVED=0
+CASE=N19_open_instantiation_term
+OBSERVED=0
+CASE=N20_unexpected_auxiliary
+OBSERVED=0
+CASE=N21_unknown_rule
+OBSERVED=0
+CASE=N22_unknown_term_tag
+OBSERVED=0
+CASE=N23_unknown_formula_tag
+OBSERVED=0
+CASE=N24_out_of_order_discharge
+OBSERVED=0
+CASE=N25_ground_multiplication_overflow
+OBSERVED=0
+CASE=N26_term_depth_limit
+OBSERVED=0
+CASE=N27_formula_depth_limit
+OBSERVED=0
+CASE=N28_assumption_id_limit
+OBSERVED=0
+CASE=N29_euler_changed_witness
+OBSERVED=0
+CASE=N30_euler_first_witness_binding
+OBSERVED=0
+CASE=N31_euler_removed_positivity
+OBSERVED=0
+CASE=N32_wrong_magic
+OBSERVED=0
+CASE=N33_wrong_version
+OBSERVED=0
+CASE=N34_leading_zero
+OBSERVED=0
+CASE=N35_negative_decimal
+OBSERVED=0
+CASE=N36_crlf
+OBSERVED=0
+CASE=N37_empty_line
+OBSERVED=0
+CASE=N38_missing_final_lf
+OBSERVED=0
+CASE=N39_trailing_lf
+OBSERVED=0
+CASE=N40_trailing_number
+OBSERVED=0
+CASE=N41_wide_number
+OBSERVED=0
+CASE=N42_term_count_limit
+OBSERVED=0
+CASE=N43_zero_terms
+OBSERVED=0
+CASE=N44_formula_count_limit
+OBSERVED=0
+CASE=N45_proof_count_limit
+OBSERVED=0
+CASE=N46_ground_rule_wrong_shape
+OBSERVED=0
+CASE=N47_nested_binder_wrong_witness
+OBSERVED=0
+CASE=N48_nonzero_reserved_field
+OBSERVED=0
+CASE=N49_closed_creation_context
+OBSERVED=0
+EXPECTED_ACCEPTS=8
+EXPECTED_REJECTS=1585
+RESTORED_EULER=PASS
+FINITE_ND_TESTS=PASS
+FORMAL_ACCEPTANCE=BLOCKED
+cp kernels/finite_nd/evidence/independent-review/probe/Mind.toml "/BUILD_REPOSITORY/.build/review/"
+cp kernels/finite_nd/evidence/independent-review/probe/src/main.mind kernels/finite_nd/src/kernel.mind "/BUILD_REPOSITORY/.build/review/src/"
+cd "/BUILD_REPOSITORY/.build/review" && timeout 60 taskset -c 0 nice -n 19 prlimit --as=1073741824 --cpu=50 -- "/BUILD_TMP/euler-public-compiler-profile-20261011/compiler-target/release/mindc" build src/main.mind --backend mlir --target cpu --emit binary --optimize debug --no-cache --out "/BUILD_REPOSITORY/.build/review-check"
+   Finished cpu [binary] /BUILD_REPOSITORY/.build/review-check
+   Artifact: 58648 bytes
+timeout 15 taskset -c 0 nice -n 19 prlimit --as=268435456 --cpu=10 -- "/BUILD_REPOSITORY/.build/review-check"
+1
+1
+2
+0
+3
+1
+4
+1
+5
+1
+6
+0
+7
+1
+8
+1
+9
+1
+10
+0
+11
+0
+12
+1
+13
+0
+14
+1
+15
+0
+16
+0
+17
+1
+18
+0
+19
+0
+20
+0
+21
+0
+22
+0
+23
+1
+24
+0
+25
+0
+26
+0
+27
+0
+28
+0
+29
+0
+30
+0
+31
+0
+32
+0
+33
+0
+0
+cp benchmarks/euler_sum_of_powers_k4/Mind.toml "/BUILD_REPOSITORY/.build/regression/"
+cp benchmarks/euler_sum_of_powers_k4/src/*.mind "/BUILD_REPOSITORY/.build/regression/src/"
+cd "/BUILD_REPOSITORY/.build/regression" && timeout 60 taskset -c 0 nice -n 19 prlimit --as=1073741824 --cpu=50 -- "/BUILD_TMP/euler-public-compiler-profile-20261011/compiler-target/release/mindc" build src/main.mind --backend mlir --target cpu --emit binary --optimize debug --no-cache --out "/BUILD_REPOSITORY/.build/regression-check"
+   Finished cpu [binary] /BUILD_REPOSITORY/.build/regression-check
+   Artifact: 50096 bytes
+timeout 15 taskset -c 0 nice -n 19 prlimit --as=268435456 --cpu=10 -- "/BUILD_REPOSITORY/.build/regression-check" < benchmarks/euler_sum_of_powers_k4/arithmetic.txt 3< benchmarks/euler_sum_of_powers_k4/refutation.txt 4< benchmarks/euler_sum_of_powers_k4/zero-arithmetic.txt 5< benchmarks/euler_sum_of_powers_k4/zero-refutation.txt
+BENCHMARK=EULER_SUM_OF_POWERS_K4_COUNTEREXAMPLE
+MIND_MATH_PROOF_AUTHORITY=NOT_YET_ESTABLISHED
+NATIVE_PROOF_ACCEPTANCE=BLOCKED
+ARITHMETIC_CERTIFICATE=PASS
+REFUTATION_TEMPLATE=PASS
+NEGATIVE_CASES_EXECUTED=1240
+FINITE_TESTS=PASS
+FORMAL_SOUNDNESS_VALIDATION=OUTSTANDING

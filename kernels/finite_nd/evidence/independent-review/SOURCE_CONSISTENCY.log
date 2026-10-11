@@ -1,0 +1,9 @@
+{
+  "scope": "External source-consistency diagnostic only; not theorem acceptance",
+  "correction": "Anchored table-row regex to line start to exclude proof-table formula references; previous F count diagnostic was reviewer regex error, not source issue.",
+  "static_fixtures_checked": 57,
+  "term_table_records_checked": 31,
+  "formula_table_records_checked": 46,
+  "failures": [],
+  "fixture_module_sha256": "3f5bc4cc4cd4e8d3ab742520110b8c5e25fcf0f5f9caedf6b75771877904e69b"
+}

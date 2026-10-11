@@ -1,0 +1,13 @@
+EULER_K4_REFUTATION_V1
+C4 := forall a,b,c,d : Z, (a>0 and b>0 and c>0 and d>0) -> not(a^4+b^4+c^4=d^4)
+witness
+0
+1
+0
+1
+1: positive_integer_tuple(witness) by checked_literals
+2: equality_at(witness) by checked_arithmetic
+3: assume C4
+4: not(equality_at(witness)) by forall_elim_and_modus_ponens 3 1
+5: false by not_elim 4 2
+6: not(C4) by not_intro discharge 3 through 5

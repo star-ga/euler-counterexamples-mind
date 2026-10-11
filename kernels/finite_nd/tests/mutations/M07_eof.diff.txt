@@ -1,0 +1,11 @@
+--- a/kernel.mind
++++ b/kernel.mind
+@@ -394,7 +394,7 @@
+     if nd_read_proof(work, proof) != 1 { return 0; }
+     if __mind_load_i64(work + 24) != 0 { return 0; }
+     // Exact end-of-input is a security boundary, not whitespace normalization.
+-    if __mind_load_i64(work + 16) != n { return 0; }
++    // MUTANT: exact end-of-input comparison deliberately removed.
+     if __mind_load_i64(work + 56) != 0 || __mind_load_i64(work + 64) != 0 { return 0; }
+     let last: i64 = nd_line(work, proof);
+     if __mind_load_i64(last + 8) != 0 { return 0; }

@@ -1,0 +1,15 @@
+--- checker.mind
++++ checker.mind
+@@ -82,10 +82,10 @@
+     let term: i64 = scratch + 32; let total: i64 = scratch + 128; zero(total);
+     k = 0;
+     while k < 4 {
+-        if fourth(__mind_load_i64(w + 8 * k), term) == 0 { return 0; }
++        // MUTANT: trust claimed powers instead of recomputing fourth powers.
+         let mut i: i64 = 0;
+         while i < 12 {
+-            if number(scratch, 999) != __mind_load_i64(term + 8 * i) { return 0; }
++            let claimed: i64 = number(scratch, 999); if claimed < 0 { return 0; } __mind_store_i64(term + 8 * i, claimed);
+             i = i + 1;
+         }
+         if k < 3 { if add_to(total, term) == 0 { return 0; } }

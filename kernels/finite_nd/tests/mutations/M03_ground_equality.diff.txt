@@ -1,0 +1,11 @@
+--- a/kernel.mind
++++ b/kernel.mind
+@@ -301,7 +301,7 @@
+                 } else {
+                     if tag != 2 { return 0; }
+                     // GROUND_EQ recomputes both declared terms in the AST.
+-                    if nd_values_equal(nd_value(w, a), nd_value(w, b)) != 1 { return 0; }
++                    // MUTANT: arithmetic equality comparison deliberately removed.
+                 }
+             }
+         } else {

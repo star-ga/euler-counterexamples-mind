@@ -1,0 +1,9 @@
+Mind.toml: OK
+src/checker.mind: OK
+src/main.mind: OK
+arithmetic.txt: OK
+refutation.txt: OK
+zero-arithmetic.txt: OK
+zero-refutation.txt: OK
+README.md: OK
+TEST_CONTRACT.md: OK

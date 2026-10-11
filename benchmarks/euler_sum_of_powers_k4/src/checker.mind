@@ -1,0 +1,115 @@
+// Author: STARGA Inc.
+// Experimental certificate checker; NOT an accepted native proof kernel.
+// Parser state: buffer, length, cursor, failure. All allocations are caller-owned.
+fn at(p: i64, i: i64) -> i64 { return __mind_load_i8(p + i); }
+fn init(s: i64, p: i64, n: i64) -> i64 {
+    __mind_store_i64(s, p); __mind_store_i64(s + 8, n);
+    __mind_store_i64(s + 16, 0); __mind_store_i64(s + 24, 0); return 0;
+}
+fn literal(s: i64, text: String) -> i64 {
+    let p: i64 = __mind_load_i64(s);
+    let n: i64 = __mind_load_i64(s + 8);
+    let pos: i64 = __mind_load_i64(s + 16);
+    if __mind_load_i64(s + 24) != 0 { return 0; }
+    if text.len > n - pos { __mind_store_i64(s + 24, 1); return 0; }
+    let mut i: i64 = 0;
+    while i < text.len {
+        if at(p, pos + i) != at(text.addr, i) { __mind_store_i64(s + 24, 1); return 0; }
+        i = i + 1;
+    }
+    __mind_store_i64(s + 16, pos + text.len); return 1;
+}
+// Canonical unsigned decimal, one number per LF-terminated line; bounded before multiply.
+fn number(s: i64, maximum: i64) -> i64 {
+    if __mind_load_i64(s + 24) != 0 { return 0 - 1; }
+    let p: i64 = __mind_load_i64(s); let n: i64 = __mind_load_i64(s + 8);
+    let start: i64 = __mind_load_i64(s + 16); let mut pos: i64 = start;
+    let mut value: i64 = 0;
+    while pos < n && at(p, pos) != 10 {
+        let digit: i64 = at(p, pos) - 48;
+        if digit < 0 || digit > 9 || (pos > start && at(p, start) == 48) {
+            __mind_store_i64(s + 24, 1); return 0 - 1;
+        }
+        if value > maximum / 10 || (value == maximum / 10 && digit > maximum % 10) {
+            __mind_store_i64(s + 24, 1); return 0 - 1;
+        }
+        value = value * 10 + digit; pos = pos + 1;
+    }
+    if pos == start || pos == n { __mind_store_i64(s + 24, 1); return 0 - 1; }
+    __mind_store_i64(s + 16, pos + 1); return value;
+}
+fn finished(s: i64) -> i64 {
+    if __mind_load_i64(s + 24) != 0 { return 0; }
+    if __mind_load_i64(s + 16) != __mind_load_i64(s + 8) { return 0; } return 1;
+}
+fn zero(p: i64) -> i64 {
+    let mut i: i64 = 0; while i < 12 { __mind_store_i64(p + 8 * i, 0); i = i + 1; } return 0;
+}
+// 12 little-endian base-1000 limbs. No wraparound is accepted.
+fn fourth(x: i64, p: i64) -> i64 {
+    if x < 0 || x > 999999 { return 0; }
+    zero(p); __mind_store_i64(p, 1);
+    let mut k: i64 = 0;
+    while k < 4 {
+        let mut carry: i64 = 0; let mut i: i64 = 0;
+        while i < 12 {
+            let t: i64 = __mind_load_i64(p + 8 * i) * x + carry;
+            __mind_store_i64(p + 8 * i, t % 1000); carry = t / 1000; i = i + 1;
+        }
+        if carry != 0 { return 0; } k = k + 1;
+    }
+    return 1;
+}
+fn add_to(total: i64, term: i64) -> i64 {
+    let mut carry: i64 = 0; let mut i: i64 = 0;
+    while i < 12 {
+        let t: i64 = __mind_load_i64(total + 8 * i) + __mind_load_i64(term + 8 * i) + carry;
+        __mind_store_i64(total + 8 * i, t % 1000); carry = t / 1000; i = i + 1;
+    }
+    if carry != 0 { return 0; } return 1;
+}
+// w is four i64 witness slots, scratch is 32-byte parser + two 96-byte integers.
+// Arithmetic accepts zero; positivity belongs to the separate logical layer.
+fn arithmetic(p: i64, n: i64, w: i64, scratch: i64) -> i64 {
+    if n <= 0 || n > 4096 { return 0; }
+    init(scratch, p, n);
+    if literal(scratch, "EULER_K4_ARITH_V1\n") == 0 { return 0; }
+    let mut k: i64 = 0;
+    while k < 4 {
+        let x: i64 = number(scratch, 999999); if x < 0 { return 0; }
+        __mind_store_i64(w + 8 * k, x); k = k + 1;
+    }
+    let term: i64 = scratch + 32; let total: i64 = scratch + 128; zero(total);
+    k = 0;
+    while k < 4 {
+        if fourth(__mind_load_i64(w + 8 * k), term) == 0 { return 0; }
+        let mut i: i64 = 0;
+        while i < 12 {
+            if number(scratch, 999) != __mind_load_i64(term + 8 * i) { return 0; }
+            i = i + 1;
+        }
+        if k < 3 { if add_to(total, term) == 0 { return 0; } }
+        k = k + 1;
+    }
+    let mut i: i64 = 0;
+    while i < 12 {
+        let sum: i64 = __mind_load_i64(total + 8 * i);
+        if sum != __mind_load_i64(term + 8 * i) || number(scratch, 999) != sum { return 0; }
+        i = i + 1;
+    }
+    return finished(scratch);
+}
+// Restricted derivation-template recognizer. Always recomputes the arithmetic premise;
+// no caller-provided PASS Boolean, hash, theorem id or cached result is trusted.
+fn refutation(ap: i64, an: i64, rp: i64, rn: i64, w: i64, scratch: i64) -> i64 {
+    if arithmetic(ap, an, w, scratch) == 0 || rn <= 0 || rn > 4096 { return 0; }
+    init(scratch, rp, rn);
+    if literal(scratch, "EULER_K4_REFUTATION_V1\nC4 := forall a,b,c,d : Z, (a>0 and b>0 and c>0 and d>0) -> not(a^4+b^4+c^4=d^4)\nwitness\n") == 0 { return 0; }
+    let mut k: i64 = 0;
+    while k < 4 {
+        let x: i64 = number(scratch, 999999);
+        if x <= 0 || x != __mind_load_i64(w + 8 * k) { return 0; } k = k + 1;
+    }
+    if literal(scratch, "1: positive_integer_tuple(witness) by checked_literals\n2: equality_at(witness) by checked_arithmetic\n3: assume C4\n4: not(equality_at(witness)) by forall_elim_and_modus_ponens 3 1\n5: false by not_elim 4 2\n6: not(C4) by not_intro discharge 3 through 5\n") == 0 { return 0; }
+    return finished(scratch);
+}

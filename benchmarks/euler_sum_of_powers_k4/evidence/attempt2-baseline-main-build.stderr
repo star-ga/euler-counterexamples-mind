@@ -1,0 +1,2 @@
+[WARN] /BUILD_TMP/mindmath-euler-k4-20261011/baseline-src/src/main.mind: not natively compiled — embedded as runtime-JIT fallback (error[type-check][E2003]: unsupported call to `arithmetic`)
+error[build][E5005]: public CPU executable requires every source module to compile natively; refusing to link a runtime-JIT fallback object

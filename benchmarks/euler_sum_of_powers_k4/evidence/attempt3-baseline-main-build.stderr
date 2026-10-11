@@ -1,0 +1,8 @@
+/usr/bin/x86_64-linux-gnu-ld.bfd: /BUILD_TMP/mindmath-euler-k4-20261011/baseline-src/target/obj/mutation_probe.o: in function `emit':
+LLVMDialectModule:(.text+0x0): multiple definition of `emit'; /BUILD_TMP/mindmath-euler-k4-20261011/baseline-src/target/obj/main.o:LLVMDialectModule:(.text+0x0): first defined here
+/usr/bin/x86_64-linux-gnu-ld.bfd: /BUILD_TMP/mindmath-euler-k4-20261011/baseline-src/target/obj/mutation_probe.o: in function `read_certificate':
+LLVMDialectModule:(.text+0x20): multiple definition of `read_certificate'; /BUILD_TMP/mindmath-euler-k4-20261011/baseline-src/target/obj/main.o:LLVMDialectModule:(.text+0x20): first defined here
+/usr/bin/x86_64-linux-gnu-ld.bfd: /BUILD_TMP/mindmath-euler-k4-20261011/baseline-src/target/obj/mutation_probe.o: in function `main':
+LLVMDialectModule:(.text+0x270): multiple definition of `main'; /BUILD_TMP/mindmath-euler-k4-20261011/baseline-src/target/obj/main.o:LLVMDialectModule:(.text+0xb0): first defined here
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+error[build]: linking failed with exit code: Some(1)

@@ -1,0 +1,111 @@
+// Author: STARGA Inc. Pure-MIND finite tests; execution is not formal acceptance.
+import checker;
+fn emit(s: String) -> i64 { return __mind_write(1, s.addr, s.len, 0 - 1); }
+fn read_certificate(fd: i64, p: i64) -> i64 {
+    let mut n: i64 = 0;
+    while n < 4096 {
+        let k: i64 = __mind_read(fd, p + n, 4096 - n, 0 - 1);
+        if k < 0 { return 0 - 1; } if k == 0 { return n; } n = n + k;
+    }
+    let extra: i64 = __mind_read(fd, p + 4096, 1, 0 - 1);
+    if extra != 0 { return 0 - 1; } return n;
+}
+fn main() -> i64 {
+    emit("BENCHMARK=EULER_SUM_OF_POWERS_K4_COUNTEREXAMPLE\n");
+    emit("MIND_MATH_PROOF_AUTHORITY=NOT_YET_ESTABLISHED\nNATIVE_PROOF_ACCEPTANCE=BLOCKED\n");
+    let ap: i64 = __mind_alloc(4097); let rp: i64 = __mind_alloc(4097);
+    let zp: i64 = __mind_alloc(4097); let zrp: i64 = __mind_alloc(4097);
+    let w: i64 = __mind_alloc(32); let scratch: i64 = __mind_alloc(224);
+    if ap == 0 || rp == 0 || zp == 0 || zrp == 0 || w == 0 || scratch == 0 { return 2; }
+    let an: i64 = read_certificate(0, ap); let rn: i64 = read_certificate(3, rp);
+    let zn: i64 = read_certificate(4, zp); let zrn: i64 = read_certificate(5, zrp);
+    if an <= 0 || rn <= 0 || zn <= 0 || zrn <= 0 { emit("INPUT=FAIL\n"); return 2; }
+    if arithmetic(ap, an, w, scratch) != 1 { emit("ARITHMETIC_CERTIFICATE=FAIL\n"); return 1; }
+    if __mind_load_i64(w) != 95800 || __mind_load_i64(w + 8) != 217519 || __mind_load_i64(w + 16) != 414560 || __mind_load_i64(w + 24) != 422481 { return 1; }
+    emit("ARITHMETIC_CERTIFICATE=PASS\n");
+    if refutation(ap, an, rp, rn, w, scratch) != 1 { emit("REFUTATION_TEMPLATE=FAIL\n"); return 1; }
+    emit("REFUTATION_TEMPLATE=PASS\n");
+    // A true identity outside the positive-integer domain must not refute C4.
+    if arithmetic(zp, zn, w, scratch) != 1 { return 1; }
+    if __mind_load_i64(w) != 0 || __mind_load_i64(w + 8) != 1 || __mind_load_i64(w + 16) != 0 || __mind_load_i64(w + 24) != 1 { return 1; }
+    if refutation(zp, zn, zrp, zrn, w, scratch) != 0 { return 1; }
+    // Valid arithmetic with a certificate for a different tuple must fail binding.
+    if refutation(ap, an, zrp, zrn, w, scratch) != 0 { return 1; }
+    let mut count: i64 = 2; let mut i: i64 = 0;
+    // Every single-byte X substitution: arithmetic input, statement and rule trace.
+    while i < an {
+        let old: i64 = at(ap, i); __mind_store_i8(ap + i, 88);
+        let accepted: i64 = refutation(ap, an, rp, rn, w, scratch);
+        __mind_store_i8(ap + i, old); if accepted != 0 { return 1; }
+        count = count + 1; i = i + 1;
+    }
+    i = 0;
+    while i < rn {
+        let old: i64 = at(rp, i); __mind_store_i8(rp + i, 88);
+        let accepted: i64 = refutation(ap, an, rp, rn, w, scratch);
+        __mind_store_i8(rp + i, old); if accepted != 0 { return 1; }
+        count = count + 1; i = i + 1;
+    }
+    // Syntactically valid changed witness and changed exponent.
+    __mind_store_i8(ap + 22, 49);
+    let changed: i64 = refutation(ap, an, rp, rn, w, scratch);
+    __mind_store_i8(ap + 22, 48); if changed != 0 { return 1; } count = count + 1;
+    i = 0; let mut exponent_controls: i64 = 0;
+    while i + 1 < rn {
+        if at(rp, i) == 94 && at(rp, i + 1) == 52 {
+            __mind_store_i8(rp + i + 1, 53);
+            let accepted: i64 = refutation(ap, an, rp, rn, w, scratch);
+            __mind_store_i8(rp + i + 1, 52); if accepted != 0 { return 1; }
+            count = count + 1; exponent_controls = exponent_controls + 1;
+        }
+        i = i + 1;
+    }
+    if exponent_controls != 4 { return 1; }
+    // Positive but different witness: binding must fail without relying on positivity.
+    let marker: String = "witness\n95800\n";
+    i = 0; let mut binding_controls: i64 = 0;
+    while i + marker.len <= rn {
+        let mut j: i64 = 0;
+        while j < marker.len && at(rp, i + j) == at(marker.addr, j) { j = j + 1; }
+        if j == marker.len {
+            __mind_store_i8(rp + i + marker.len - 2, 49);
+            let accepted: i64 = refutation(ap, an, rp, rn, w, scratch);
+            __mind_store_i8(rp + i + marker.len - 2, 48);
+            if accepted != 0 { return 1; } count = count + 1;
+            binding_controls = binding_controls + 1;
+        }
+        i = i + 1;
+    }
+    if binding_controls != 1 { return 1; }
+    // Parser resource/canonicality controls, independent of certificate arithmetic.
+    let oversized: String = "1000000\n"; init(scratch, oversized.addr, oversized.len);
+    if number(scratch, 999999) != 0 - 1 { return 1; } count = count + 1;
+    let wide_limb: String = "1000\n"; init(scratch, wide_limb.addr, wide_limb.len);
+    if number(scratch, 999) != 0 - 1 { return 1; } count = count + 1;
+    let leading_zero: String = "01\n"; init(scratch, leading_zero.addr, leading_zero.len);
+    if number(scratch, 999) != 0 - 1 { return 1; } count = count + 1;
+    let negative: String = "-1\n"; init(scratch, negative.addr, negative.len);
+    if number(scratch, 999) != 0 - 1 { return 1; } count = count + 1;
+    // Every proper prefix and a trailing-byte extension are rejected.
+    i = 0;
+    while i < an {
+        if refutation(ap, i, rp, rn, w, scratch) != 0 { return 1; }
+        count = count + 1; i = i + 1;
+    }
+    i = 0;
+    while i < rn {
+        if refutation(ap, an, rp, i, w, scratch) != 0 { return 1; }
+        count = count + 1; i = i + 1;
+    }
+    __mind_store_i8(ap + an, 10); __mind_store_i8(rp + rn, 10);
+    if refutation(ap, an + 1, rp, rn, w, scratch) != 0 { return 1; }
+    if refutation(ap, an, rp, rn + 1, w, scratch) != 0 { return 1; }
+    count = count + 2;
+    // Recheck originals after all mutations to detect faulty restoration.
+    if refutation(ap, an, rp, rn, w, scratch) != 1 { return 1; }
+    if count != 1240 { emit("CASE_COUNT=FAIL\n"); return 1; }
+    emit("NEGATIVE_CASES_EXECUTED="); print(count);
+    emit("FINITE_TESTS=PASS\nFORMAL_SOUNDNESS_VALIDATION=OUTSTANDING\n");
+    __mind_free(ap); __mind_free(rp); __mind_free(zp); __mind_free(zrp);
+    __mind_free(w); __mind_free(scratch); return 0;
+}

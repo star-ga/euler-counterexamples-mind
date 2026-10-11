@@ -1,0 +1,11 @@
+--- a/kernel.mind
++++ b/kernel.mind
+@@ -297,7 +297,7 @@
+                 if rule == 2 {
+                     if tag != 1 { return 0; }
+                     // GROUND_POS recomputes the declared term, never trusts a receipt.
+-                    if nd_positive(nd_value(w, a)) != 1 { return 0; }
++                    // MUTANT: strict positivity comparison deliberately removed.
+                 } else {
+                     if tag != 2 { return 0; }
+                     // GROUND_EQ recomputes both declared terms in the AST.

@@ -1,0 +1,8 @@
+target/
+.build/
+.mind-build.lock
+*.o
+*.so
+*.key
+*.pem
+.env

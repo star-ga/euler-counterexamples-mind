@@ -1,0 +1,49 @@
+// Author: STARGA Inc.
+// Independent static fixture probe; acceptance decisions execute only in Pure MIND.
+import kernel;
+fn probe(s: String, expected: i64, id: i64, work: i64) -> i64 {
+    let actual: i64 = finite_nd_check(s.addr, s.len, work, 65536);
+    print(id); print(actual);
+    if actual != expected { return 1; } return 0;
+}
+fn main() -> i64 {
+    let work: i64 = __mind_alloc(65536);
+    if work == 0 { return 2; }
+    let mut failures: i64 = 0;
+    failures = failures + probe("74123\n1\n1\n1\n1\n0\n1\n1\n1\n0\n1\n1\n2\n1\n0\n0\n0\n", 1, 1, work);
+    failures = failures + probe("74123\n1\n1\n1\n0\n0\n1\n1\n1\n0\n1\n1\n2\n1\n0\n0\n0\n", 0, 2, work);
+    failures = failures + probe("74123\n1\n1\n1\n999999\n0\n1\n1\n1\n0\n1\n1\n2\n1\n0\n0\n0\n", 1, 3, work);
+    failures = failures + probe("74123\n1\n4\n1\n2\n0\n1\n3\n0\n3\n1\n2\n1\n5\n0\n1\n2\n3\n4\n1\n1\n3\n1\n0\n0\n0\n", 1, 4, work);
+    failures = failures + probe("74123\n1\n4\n1\n2\n0\n1\n3\n0\n4\n1\n2\n1\n6\n0\n1\n2\n3\n4\n1\n1\n3\n1\n0\n0\n0\n", 1, 5, work);
+    failures = failures + probe("74123\n1\n4\n1\n2\n0\n1\n3\n0\n4\n1\n2\n1\n5\n0\n1\n2\n3\n4\n1\n1\n3\n1\n0\n0\n0\n", 0, 6, work);
+    failures = failures + probe("74123\n1\n4\n1\n999\n0\n1\n1\n0\n3\n1\n2\n1\n1000\n0\n1\n2\n3\n4\n1\n1\n3\n1\n0\n0\n0\n", 1, 7, work);
+    failures = failures + probe("74123\n1\n8\n1\n999999\n0\n4\n1\n1\n1\n999998\n0\n1\n1000\n0\n1\n1\n0\n4\n3\n4\n4\n6\n4\n3\n7\n5\n1\n2\n2\n8\n1\n1\n3\n1\n0\n0\n0\n", 1, 8, work);
+    failures = failures + probe("74123\n1\n25\n1\n1000\n0\n1\n999\n0\n1\n1\n0\n4\n2\n1\n3\n4\n2\n4\n5\n1\n3\n6\n2\n4\n7\n1\n3\n8\n2\n4\n9\n1\n3\n10\n2\n4\n11\n1\n3\n12\n2\n4\n13\n1\n3\n14\n2\n4\n15\n1\n3\n16\n2\n4\n17\n1\n3\n18\n2\n4\n19\n1\n3\n20\n2\n4\n21\n1\n3\n22\n2\n4\n23\n1\n3\n24\n2\n1\n1\n25\n0\n1\n1\n2\n1\n0\n0\n0\n", 1, 9, work);
+    failures = failures + probe("74123\n1\n26\n1\n1000\n0\n1\n999\n0\n1\n1\n0\n4\n2\n1\n3\n4\n2\n4\n5\n1\n3\n6\n2\n4\n7\n1\n3\n8\n2\n4\n9\n1\n3\n10\n2\n4\n11\n1\n3\n12\n2\n4\n13\n1\n3\n14\n2\n4\n15\n1\n3\n16\n2\n4\n17\n1\n3\n18\n2\n4\n19\n1\n3\n20\n2\n4\n21\n1\n3\n22\n2\n4\n23\n1\n3\n24\n2\n3\n25\n3\n1\n1\n26\n0\n1\n1\n2\n1\n0\n0\n0\n", 0, 10, work);
+    failures = failures + probe("74123\n1\n13\n1\n1000\n0\n1\n0\n0\n4\n1\n1\n4\n3\n1\n4\n4\n1\n4\n5\n1\n4\n6\n1\n4\n7\n1\n4\n8\n1\n4\n9\n1\n4\n10\n1\n4\n11\n1\n4\n12\n1\n1\n2\n13\n2\n1\n1\n3\n1\n0\n0\n0\n", 0, 11, work);
+    failures = failures + probe("74123\n1\n1\n1\n1\n0\n5\n1\n1\n0\n3\n0\n0\n5\n1\n2\n4\n1\n3\n5\n4\n2\n5\n5\n1\n4\n0\n0\n0\n5\n1\n1\n0\n0\n6\n3\n1\n0\n0\n7\n2\n3\n2\n0\n9\n5\n1\n4\n0\n", 1, 12, work);
+    failures = failures + probe("74123\n1\n1\n1\n1\n0\n23\n1\n1\n0\n4\n1\n1\n4\n2\n2\n4\n3\n3\n4\n4\n4\n4\n5\n5\n4\n6\n6\n4\n7\n7\n4\n8\n8\n4\n9\n9\n4\n10\n10\n4\n11\n11\n4\n12\n12\n4\n13\n13\n4\n14\n14\n4\n15\n15\n4\n16\n16\n4\n17\n17\n4\n18\n18\n3\n0\n0\n5\n19\n20\n4\n19\n21\n5\n22\n20\n23\n5\n1\n22\n0\n0\n0\n5\n19\n1\n0\n0\n6\n21\n1\n0\n0\n7\n20\n3\n2\n0\n9\n23\n1\n4\n0\n", 0, 13, work);
+    failures = failures + probe("74123\n1\n3\n2\n0\n0\n1\n1\n0\n1\n0\n0\n7\n1\n1\n0\n1\n2\n0\n3\n0\n0\n5\n1\n3\n6\n4\n0\n5\n2\n3\n5\n5\n3\n7\n5\n1\n5\n0\n0\n0\n8\n6\n1\n0\n2\n2\n2\n0\n0\n0\n7\n3\n2\n3\n0\n9\n7\n1\n4\n0\n", 1, 14, work);
+    failures = failures + probe("74123\n1\n3\n2\n0\n0\n1\n1\n0\n1\n0\n0\n7\n1\n1\n0\n1\n2\n0\n3\n0\n0\n5\n1\n3\n6\n4\n0\n5\n2\n3\n5\n5\n3\n7\n5\n1\n5\n0\n0\n0\n8\n6\n1\n0\n3\n2\n2\n0\n0\n0\n7\n3\n2\n3\n0\n9\n7\n1\n4\n0\n", 0, 15, work);
+    failures = failures + probe("74123\n1\n3\n2\n0\n0\n1\n1\n0\n1\n0\n0\n7\n1\n1\n0\n1\n2\n0\n3\n0\n0\n5\n1\n3\n6\n4\n0\n5\n2\n3\n5\n5\n3\n7\n5\n1\n5\n0\n0\n0\n8\n6\n1\n0\n1\n2\n2\n0\n0\n0\n7\n3\n2\n3\n0\n9\n7\n1\n4\n0\n", 0, 16, work);
+    failures = failures + probe("74123\n1\n4\n2\n0\n0\n2\n1\n0\n1\n1\n0\n1\n2\n0\n15\n1\n2\n0\n1\n1\n0\n1\n3\n0\n1\n4\n0\n3\n0\n0\n4\n1\n2\n5\n6\n5\n6\n7\n0\n6\n8\n0\n4\n3\n2\n5\n10\n5\n6\n11\n0\n4\n3\n4\n5\n13\n5\n5\n9\n5\n15\n8\n1\n9\n0\n0\n0\n8\n12\n1\n0\n3\n8\n14\n2\n0\n4\n2\n3\n0\n0\n0\n2\n4\n0\n0\n0\n4\n13\n4\n5\n0\n7\n5\n3\n6\n0\n9\n15\n1\n7\n0\n", 1, 17, work);
+    failures = failures + probe("74123\n1\n4\n2\n0\n0\n2\n1\n0\n1\n1\n0\n1\n2\n0\n15\n1\n2\n0\n1\n1\n0\n1\n3\n0\n1\n4\n0\n3\n0\n0\n4\n1\n2\n5\n6\n5\n6\n7\n0\n6\n8\n0\n4\n2\n3\n5\n10\n5\n6\n11\n0\n4\n3\n4\n5\n13\n5\n5\n9\n5\n15\n8\n1\n9\n0\n0\n0\n8\n12\n1\n0\n3\n8\n14\n2\n0\n4\n2\n3\n0\n0\n0\n2\n4\n0\n0\n0\n4\n13\n4\n5\n0\n7\n5\n3\n6\n0\n9\n15\n1\n7\n0\n", 0, 18, work);
+    failures = failures + probe("74123\n1\n1\n1\n1\n0\n4\n1\n1\n0\n3\n0\n0\n5\n1\n2\n5\n3\n2\n3\n6\n1\n3\n0\n0\n0\n2\n1\n0\n0\n0\n7\n2\n1\n2\n0\n9\n4\n1\n3\n0\n1\n1\n0\n0\n0\n9\n3\n5\n3\n0\n", 0, 19, work);
+    failures = failures + probe("74123\n1\n1\n1\n1\n0\n1\n1\n1\n0\n1\n1\n1\n1\n0\n0\n0\n", 0, 20, work);
+    failures = failures + probe("74123\n1\n1\n1\n1\n0\n3\n1\n1\n0\n3\n0\n0\n5\n1\n2\n3\n4\n1\n3\n0\n0\n0\n2\n1\n0\n0\n0\n7\n2\n1\n2\n0\n9\n3\n1\n3\n0\n", 0, 21, work);
+    failures = failures + probe("74123\n1\n1\n1\n1\n0\n3\n1\n1\n0\n3\n0\n0\n5\n1\n2\n3\n3\n1\n1\n0\n0\n0\n2\n1\n0\n0\n0\n9\n3\n1\n2\n0\n", 0, 22, work);
+    failures = failures + probe("74123\n1\n1\n1\n1\n0\n2\n1\n1\n0\n1\n1\n0\n2\n1\n2\n1\n0\n0\n0\n", 1, 23, work);
+    failures = failures + probe("74123\n1\n2\n1\n1\n0\n1\n2\n0\n2\n1\n1\n0\n1\n2\n0\n2\n1\n2\n1\n0\n0\n0\n", 0, 24, work);
+    failures = failures + probe("74123\n1\n3\n1\n1\n0\n1\n2\n0\n3\n1\n1\n5\n1\n2\n0\n1\n3\n0\n3\n0\n0\n5\n1\n3\n5\n4\n3\n5\n4\n1\n4\n0\n0\n0\n2\n2\n0\n0\n0\n7\n3\n1\n2\n0\n9\n5\n1\n3\n0\n", 0, 25, work);
+    failures = failures + probe("74123\n1\n1\n1\n1\n0\n1\n1\n1\n0\n1\n1\n2\n1\n0\n0\n0\n\n", 0, 26, work);
+    failures = failures + probe("74123\n1\n1\n1\n1\n0\n1\n1\n1\n0\n1\n1\n2\n1\n0\n0\n0", 0, 27, work);
+    failures = failures + probe("074123\n1\n1\n1\n1\n0\n1\n1\n1\n0\n1\n1\n2\n1\n0\n0\n0\n", 0, 28, work);
+    failures = failures + probe("9999999\n1\n1\n1\n1\n0\n1\n1\n1\n0\n1\n1\n2\n1\n0\n0\n0\n", 0, 29, work);
+    failures = failures + probe("74123\n1\n2\n3\n2\n2\n1\n1\n0\n1\n1\n1\n0\n1\n1\n2\n1\n0\n0\n0\n", 0, 30, work);
+    failures = failures + probe("74123\n1\n1\n1\n1\n0\n1\n4\n1\n1\n1\n1\n1\n1\n0\n0\n0\n", 0, 31, work);
+    failures = failures + probe("74123\n1\n1\n1\n1\n0\n1\n1\n1\n1\n1\n1\n2\n1\n0\n0\n0\n", 0, 32, work);
+    failures = failures + probe("74123\n1\n33\n1\n0\n0\n3\n1\n1\n3\n2\n1\n3\n3\n1\n3\n4\n1\n3\n5\n1\n3\n6\n1\n3\n7\n1\n3\n8\n1\n3\n9\n1\n3\n10\n1\n3\n11\n1\n3\n12\n1\n3\n13\n1\n3\n14\n1\n3\n15\n1\n3\n16\n1\n3\n17\n1\n3\n18\n1\n3\n19\n1\n3\n20\n1\n3\n21\n1\n3\n22\n1\n3\n23\n1\n3\n24\n1\n3\n25\n1\n3\n26\n1\n3\n27\n1\n3\n28\n1\n3\n29\n1\n3\n30\n1\n3\n31\n1\n3\n32\n1\n1\n2\n33\n1\n1\n1\n3\n1\n0\n0\n0\n", 0, 33, work);
+    __mind_free(work);
+    print(failures);
+    if failures != 0 { return 1; } return 0;
+}

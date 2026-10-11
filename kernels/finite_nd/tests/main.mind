@@ -1,0 +1,58 @@
+// Author: STARGA Inc. Pure-MIND acceptance decisions over fixed reviewed fixtures.
+// Stage this file, fixtures.mind and the exact src/kernel.mind in one build tree.
+import kernel;
+import fixtures;
+fn test_emit(s: String) -> i64 { return __mind_write(1, s.addr, s.len, 0 - 1); }
+fn test_copy(source: i64, target: i64, n: i64) -> i64 {
+    let mut i: i64 = 0;
+    while i < n { __mind_store_i8(target + i, __mind_load_i8(source + i)); i = i + 1; }
+    return 1;
+}
+fn main() -> i64 {
+    let work: i64 = __mind_alloc(65544); let input: i64 = __mind_alloc(65537);
+    if work == 0 || input == 0 { return 2; }
+    if fixture_count() != 57 { test_emit("FIXTURE_COUNT=FAIL\n"); return 1; }
+    let mut i: i64 = 0; let mut positives: i64 = 0; let mut negatives: i64 = 0;
+    while i < fixture_count() {
+        let fixture: String = fixture_certificate(i);
+        let observed: i64 = finite_nd_check(fixture.addr, fixture.len, work, 65536);
+        test_emit("CASE="); test_emit(fixture_name(i)); test_emit("\nOBSERVED="); print(observed);
+        if observed != fixture_expected(i) { test_emit("CASE=FAIL\n"); return 1; }
+        if fixture_expected(i) == 1 { positives = positives + 1; }
+        else { negatives = negatives + 1; }
+        i = i + 1;
+    }
+    let euler: String = fixture_certificate(0);
+    if euler.len != 765 { test_emit("EULER_FIXTURE_SIZE=FAIL\n"); return 1; }
+    test_copy(euler.addr, input, euler.len);
+    // Predeclared API controls: valid backing allocations, bad scalar contracts.
+    if finite_nd_check(input, euler.len, work, 65535) != 0 { return 1; }
+    if finite_nd_check(input, 65537, work, 65536) != 0 { return 1; }
+    if finite_nd_check(0, euler.len, work, 65536) != 0 { return 1; }
+    if finite_nd_check(input, euler.len, work + 1, 65536) != 0 { return 1; }
+    if finite_nd_check(work, euler.len, work, 65536) != 0 { return 1; }
+    if finite_nd_check(input, 0 - 1, work, 65536) != 0 { return 1; }
+    negatives = negatives + 6;
+    // All 765 proper prefixes of the Euler certificate must reject normally.
+    i = 0;
+    while i < euler.len {
+        if finite_nd_check(input, i, work, 65536) != 0 { test_emit("PREFIX=FAIL\n"); print(i); return 1; }
+        negatives = negatives + 1; i = i + 1;
+    }
+    // All 765 single-byte substitutions by nondecimal X must reject normally.
+    i = 0;
+    while i < euler.len {
+        let original: i64 = __mind_load_i8(input + i);
+        __mind_store_i8(input + i, 88);
+        let observed: i64 = finite_nd_check(input, euler.len, work, 65536);
+        __mind_store_i8(input + i, original);
+        if observed != 0 { test_emit("BYTE_SUBSTITUTION=FAIL\n"); print(i); return 1; }
+        negatives = negatives + 1; i = i + 1;
+    }
+    if finite_nd_check(input, euler.len, work, 65536) != 1 { test_emit("RESTORATION=FAIL\n"); return 1; }
+    if positives != 8 || negatives != 1585 { test_emit("EXECUTED_COUNT=FAIL\n"); return 1; }
+    test_emit("EXPECTED_ACCEPTS="); print(positives);
+    test_emit("EXPECTED_REJECTS="); print(negatives);
+    test_emit("RESTORED_EULER=PASS\nFINITE_ND_TESTS=PASS\nFORMAL_ACCEPTANCE=BLOCKED\n");
+    __mind_free(work); __mind_free(input); return 0;
+}

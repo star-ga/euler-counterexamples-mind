@@ -1,0 +1,8 @@
+[package]
+name = "mind-math-finite-nd"
+version = "0.1.0"
+authors = ["STARGA Inc."]
+description = "Candidate bounded natural-deduction checker with exact ground arithmetic"
+[build]
+target = "cpu"
+entry = "src/main.mind"

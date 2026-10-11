@@ -1,0 +1,11 @@
+--- a/kernel.mind
++++ b/kernel.mind
+@@ -263,7 +263,7 @@
+     let context: i64 = __mind_load_i64(line + 16);
+     // Both dependencies and creation scope must still be active.
+     if (deps & active) != deps { return 0; }
+-    if (context & active) != context { return 0; }
++    // MUTANT: creation context accessibility deliberately removed.
+     return 1;
+ }
+ 

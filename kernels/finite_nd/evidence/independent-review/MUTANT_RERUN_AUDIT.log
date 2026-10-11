@@ -1,0 +1,7 @@
+{
+  "scope": "Independent raw-receipt comparison, not theorem authority",
+  "runs": 26,
+  "byte_equal_fields": 78,
+  "errors": [],
+  "peak_rss_kib": 8344
+}

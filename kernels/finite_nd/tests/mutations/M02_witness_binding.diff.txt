@@ -1,0 +1,11 @@
+--- a/kernel.mind
++++ b/kernel.mind
+@@ -215,7 +215,7 @@
+     if tag == 2 && substitute == 1 {
+         if a == binders {
+             // Replacement is closed, so it requires no lifting under binders.
+-            return nd_term_match(w, replacement, target, 0, 0, 0, recursion + 1);
++            return 1; // MUTANT: replacement is not compared to the target.
+         }
+         if __mind_load_i64(t) != 2 { return 0; }
+         if a > binders {

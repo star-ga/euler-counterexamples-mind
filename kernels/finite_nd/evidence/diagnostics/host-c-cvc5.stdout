@@ -1,0 +1,2 @@
+unsupported
+(error "cannot push when not solving incrementally (use --incremental)")

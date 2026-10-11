@@ -1,0 +1,11 @@
+MemAvailable:   46848176 kB
+SwapFree:       37904932 kB
+7.31 9.57 6.83 5/3699 3968604
+oom_kill 1
+low 0
+high 0
+max 0
+oom 0
+oom_kill 0
+oom_group_kill 0
+sock_throttled 12

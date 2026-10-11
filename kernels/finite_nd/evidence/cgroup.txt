@@ -1,0 +1,1 @@
+0::/user.slice/user-1000.slice/user@1000.service/app.slice/app-org.gnome.Terminal.slice/vte-spawn-a1d61693-05eb-4f00-bed1-031bb4adc35f.scope

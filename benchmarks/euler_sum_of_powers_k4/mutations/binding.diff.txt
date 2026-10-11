@@ -1,0 +1,11 @@
+--- checker.mind
++++ checker.mind
+@@ -108,7 +108,7 @@
+     let mut k: i64 = 0;
+     while k < 4 {
+         let x: i64 = number(scratch, 999999);
+-        if x <= 0 || x != __mind_load_i64(w + 8 * k) { return 0; } k = k + 1;
++        if x <= 0 { return 0; } k = k + 1;
+     }
+     if literal(scratch, "1: positive_integer_tuple(witness) by checked_literals\n2: equality_at(witness) by checked_arithmetic\n3: assume C4\n4: not(equality_at(witness)) by forall_elim_and_modus_ponens 3 1\n5: false by not_elim 4 2\n6: not(C4) by not_intro discharge 3 through 5\n") == 0 { return 0; }
+     return finished(scratch);

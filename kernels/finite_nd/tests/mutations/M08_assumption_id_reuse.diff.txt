@@ -1,0 +1,11 @@
+--- a/kernel.mind
++++ b/kernel.mind
+@@ -285,7 +285,7 @@
+         if rule >= 1 && rule <= 3 {
+             if p1 != 0 || p2 != 0 || aux != 0 { return 0; }
+             if rule == 1 {
+-                let id: i64 = __mind_load_i64(w + 72);
++                let id: i64 = __mind_load_i64(w + 64); // MUTANT: reuse depth as occurrence identity.
+                 let depth: i64 = __mind_load_i64(w + 64);
+                 if id >= 30 || depth >= 30 { return 0; }
+                 own_bit = 1 << id; deps = own_bit;

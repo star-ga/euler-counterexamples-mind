@@ -1,0 +1,73 @@
+artifact:         /BUILD_TMP/euler-kernel-unsigned-mic-20261011/kernel.mic3
+bytes:            12789
+instrs:           60
+ssa_next_id:      20
+exports:          0
+attested:         YES
+trace_hash:       e9cdd5895c61f5393b39a6a7853de1ed7d631a9199c6c861aee863b282563373
+determinism:      deterministic
+fp_mode:          strict
+--- canonical IR ---
+module {
+  // fn nd_term
+  %0 = const.i64 0
+  output %0
+  // fn nd_formula
+  %1 = const.i64 0
+  output %1
+  // fn nd_value
+  %2 = const.i64 0
+  output %2
+  // fn nd_line
+  %3 = const.i64 0
+  output %3
+  // fn nd_max
+  %4 = const.i64 0
+  output %4
+  // fn nd_number
+  %5 = const.i64 0
+  output %5
+  // fn nd_zero
+  %6 = const.i64 0
+  output %6
+  // fn nd_add
+  %7 = const.i64 0
+  output %7
+  // fn nd_multiply
+  %8 = const.i64 0
+  output %8
+  // fn nd_values_equal
+  %9 = const.i64 0
+  output %9
+  // fn nd_positive
+  %10 = const.i64 0
+  output %10
+  // fn nd_read_terms
+  %11 = const.i64 0
+  output %11
+  // fn nd_read_formulas
+  %12 = const.i64 0
+  output %12
+  // fn nd_step
+  %13 = const.i64 0
+  output %13
+  // fn nd_term_match
+  %14 = const.i64 0
+  output %14
+  // fn nd_formula_match
+  %15 = const.i64 0
+  output %15
+  // fn nd_same
+  %16 = const.i64 0
+  output %16
+  // fn nd_premise
+  %17 = const.i64 0
+  output %17
+  // fn nd_read_proof
+  %18 = const.i64 0
+  output %18
+  // fn finite_nd_check
+  %19 = const.i64 0
+  output %19
+}  // next_id = 20
+

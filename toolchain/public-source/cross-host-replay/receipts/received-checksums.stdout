@@ -1,0 +1,14 @@
+./cli-check: OK
+./independent-check: OK
+./regression-check: OK
+./suite-check: OK
+inputs/P01_euler_c4_refutation.nd.txt: OK
+inputs/arithmetic.txt: OK
+inputs/refutation.txt: OK
+inputs/zero-arithmetic.txt: OK
+inputs/zero-refutation.txt: OK
+expected/cli.stdout: OK
+expected/independent.stdout: OK
+expected/regression.stdout: OK
+expected/suite.stdout: OK
+run.sh: OK

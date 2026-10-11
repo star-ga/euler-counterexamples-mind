@@ -1,0 +1,11 @@
+--- a/kernel.mind
++++ b/kernel.mind
+@@ -348,7 +348,7 @@
+                         if __mind_load_i64(nd_formula(w, formula2)) != 3 { return 0; }
+                         if tag != 5 || __mind_load_i64(nd_formula(w, b)) != 3 { return 0; }
+                         // Discharged formula must be exactly this assumption occurrence.
+-                        if nd_same(w, a, formula1) != 1 { return 0; }
++                        // MUTANT: discharged antecedent comparison deliberately removed.
+                         deps = __mind_load_i64(line2 + 8);
+                         deps = deps - (deps & bit);
+                         __mind_store_i64(w + 56, __mind_load_i64(w + 56) - bit);

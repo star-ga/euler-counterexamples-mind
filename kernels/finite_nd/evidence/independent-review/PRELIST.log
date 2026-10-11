@@ -1,0 +1,271 @@
+{
+  "author": "STARGA Inc.",
+  "scope": "Independent preregistered source-review probes; no execution yet",
+  "decision_runtime": "Pure MIND",
+  "cases": [
+    {
+      "name": "ground-positive-one",
+      "expected": 1,
+      "reason": "Strict positivity positive control",
+      "id": 1,
+      "path": "fixtures/01-ground-positive-one.cert",
+      "sha256": "0b93852a5b6c8a430a59043c28a91a948e1346c277d3d67f8d7e0e3b6faad84b"
+    },
+    {
+      "name": "zero-not-positive",
+      "expected": 0,
+      "reason": "Arithmetic rule must not accept 0>0",
+      "id": 2,
+      "path": "fixtures/02-zero-not-positive.cert",
+      "sha256": "5ab5e1efc1ce7eb5bc2bb1e517bc76f361d4e59feb652105ee1c5c6fb6dfb5e2"
+    },
+    {
+      "name": "maximum-numeral-positive",
+      "expected": 1,
+      "reason": "Largest wire numeral is representable",
+      "id": 3,
+      "path": "fixtures/03-maximum-numeral-positive.cert",
+      "sha256": "82781a7dc6bbb0175aaf8326079b7de44ebb3e20ae57fccf41dd1409e7254e95"
+    },
+    {
+      "name": "addition-small",
+      "expected": 1,
+      "reason": "Ground equality recomputes declared terms",
+      "id": 4,
+      "path": "fixtures/04-addition-small.cert",
+      "sha256": "280b4a50d61778d793069657aa2736b8b526cbac4bba3c93c6fcddd945b9f47e"
+    },
+    {
+      "name": "multiplication-small",
+      "expected": 1,
+      "reason": "Ground equality recomputes declared terms",
+      "id": 5,
+      "path": "fixtures/05-multiplication-small.cert",
+      "sha256": "e55a81ff5f3459d5b40f3facaad96beb32719fb8d3606e37c6b8bc67e0cda697"
+    },
+    {
+      "name": "forged-equality",
+      "expected": 0,
+      "reason": "Ground equality recomputes declared terms",
+      "id": 6,
+      "path": "fixtures/06-forged-equality.cert",
+      "sha256": "6cd52349469f67d6c481e958a5861d579f90e41bfd0caa1922e61dd6f283550d"
+    },
+    {
+      "name": "addition-carry",
+      "expected": 1,
+      "reason": "Ground equality recomputes declared terms",
+      "id": 7,
+      "path": "fixtures/07-addition-carry.cert",
+      "sha256": "82a8af34a98a48e19ec8dff21f7d8110b9de53657ee964f0a09cd4aac0eaf288"
+    },
+    {
+      "name": "multiplication-two-limb-carry",
+      "expected": 1,
+      "reason": "999999^2=999998000001 with different expression shapes",
+      "id": 8,
+      "path": "fixtures/08-multiplication-two-limb-carry.cert",
+      "sha256": "d60415f6ad6bfdbb69a929b4b365dc3c419456a0dff9ebfd4ae6cfbc8676032c"
+    },
+    {
+      "name": "largest-twelve-limb-positive",
+      "expected": 1,
+      "reason": "1000^12-1 accepted exactly",
+      "id": 9,
+      "path": "fixtures/09-largest-twelve-limb-positive.cert",
+      "sha256": "b51a4cbc05e1331764eed25d3e6a053bda37ab4806c8376d7d5fada07f9aef88"
+    },
+    {
+      "name": "addition-overflow",
+      "expected": 0,
+      "reason": "1000^12 refuses overflow",
+      "id": 10,
+      "path": "fixtures/10-addition-overflow.cert",
+      "sha256": "506d2266f5bc9145094811b25002653e84fa95490f6addc840c7a9ed86112e68"
+    },
+    {
+      "name": "multiplication-overflow-false-equality",
+      "expected": 0,
+      "reason": "1000^12 must not truncate to zero",
+      "id": 11,
+      "path": "fixtures/11-multiplication-overflow-false-equality.cert",
+      "sha256": "b6540fb9a5995fb6381119d0845ba92d728ee5c485e70c26d9f5e09ff9fe63f8"
+    },
+    {
+      "name": "generic-non-euler-contradiction",
+      "expected": 1,
+      "reason": "Proves negation of P and not-P without Euler-specific data",
+      "id": 12,
+      "path": "fixtures/12-generic-non-euler-contradiction.cert",
+      "sha256": "d851ae8fc2e68155fc781f1eb6313697c708eaacd9e2e86a4de03fee3c8c6762"
+    },
+    {
+      "name": "shared-dag-budget-refusal",
+      "expected": 0,
+      "reason": "Logically valid derivation exceeds bounded structural-comparison budget; refusal is incompleteness",
+      "id": 13,
+      "path": "fixtures/13-shared-dag-budget-refusal.cert",
+      "sha256": "66942a003c26edba25285bdbfb83de967bfaf4b929a15f0369fef6813ca2d722"
+    },
+    {
+      "name": "forall-correct-witness",
+      "expected": 1,
+      "reason": "Closed universal premise must instantiate exactly the specified closed witness",
+      "id": 14,
+      "path": "fixtures/14-forall-correct-witness.cert",
+      "sha256": "b4eefd64495cedd2f9ca296436fa53bd9d0535172a693620bc99cffef32f0645"
+    },
+    {
+      "name": "forall-wrong-witness",
+      "expected": 0,
+      "reason": "Closed universal premise must instantiate exactly the specified closed witness",
+      "id": 15,
+      "path": "fixtures/15-forall-wrong-witness.cert",
+      "sha256": "1199a0c4e41e4324b5978319de3b5ec959dd35dd4dc5a35a2681f582693be3a9"
+    },
+    {
+      "name": "forall-open-witness",
+      "expected": 0,
+      "reason": "Closed universal premise must instantiate exactly the specified closed witness",
+      "id": 16,
+      "path": "fixtures/16-forall-open-witness.cert",
+      "sha256": "d2e50e41d06ad49b8c699fe511765779836e45bb2a56ceffdda802224f222426"
+    },
+    {
+      "name": "nested-binder-preserved",
+      "expected": 1,
+      "reason": "Outer variable substituted at depth1, inner Var0 preserved",
+      "id": 17,
+      "path": "fixtures/17-nested-binder-preserved.cert",
+      "sha256": "ee8eb2f6185e92df5f5f33eabbe114b9ac82ec876a17eaca12ae444c68556cf9"
+    },
+    {
+      "name": "nested-binder-capture-rejected",
+      "expected": 0,
+      "reason": "Outer variable substituted at depth1, inner Var0 preserved",
+      "id": 18,
+      "path": "fixtures/18-nested-binder-capture-rejected.cert",
+      "sha256": "c160f82cc55cc5d55e1851b7b8f29cfa50c519d7ef2e925e3b7cecaba3b1dc0e"
+    },
+    {
+      "name": "popped-scope-false-goal",
+      "expected": 0,
+      "reason": "Old Bottom cannot be reused at the same stack depth under a fresh assumption; claimed not(1>0) is false",
+      "id": 19,
+      "path": "fixtures/19-popped-scope-false-goal.cert",
+      "sha256": "113380221c85cad87000954f041f31e1b37143e701d4833e955e6277cf6cccf4"
+    },
+    {
+      "name": "undischarged-final-assumption",
+      "expected": 0,
+      "reason": "Final active stack/dependencies must be empty",
+      "id": 20,
+      "path": "fixtures/20-undischarged-final-assumption.cert",
+      "sha256": "a11d5d8148244d1a0fbe41b68de128e1f279ae3c6d5b744e18002b9e6c79d77b"
+    },
+    {
+      "name": "wrong-discharge-conclusion",
+      "expected": 0,
+      "reason": "Discharged antecedent must be actual assumed not-P, not P",
+      "id": 21,
+      "path": "fixtures/21-wrong-discharge-conclusion.cert",
+      "sha256": "a423003d5d2603991a756f484647b35b0b20cf7de588338292cc1e210f62970b"
+    },
+    {
+      "name": "non-bottom-negation-premise",
+      "expected": 0,
+      "reason": "Negation introduction requires actual Bottom",
+      "id": 22,
+      "path": "fixtures/22-non-bottom-negation-premise.cert",
+      "sha256": "cb26eb57885a767bddf63bec5196b587884b55b08061ad72ee9b754121eca1f3"
+    },
+    {
+      "name": "structural-duplicate-goal",
+      "expected": 1,
+      "reason": "Different AST indices with identical structure must compare equal",
+      "id": 23,
+      "path": "fixtures/23-structural-duplicate-goal.cert",
+      "sha256": "5d5730640ff55805677ff9915b4c03563917b265aac5e7cdbde67adeed34b87a"
+    },
+    {
+      "name": "different-true-goal",
+      "expected": 0,
+      "reason": "Truth of a different formula does not bind the submitted goal",
+      "id": 24,
+      "path": "fixtures/24-different-true-goal.cert",
+      "sha256": "ff5142c86869056481f223a32a926ef1ca32ddd44c3a517550569b4e545bb624"
+    },
+    {
+      "name": "equal-value-not-same-term",
+      "expected": 0,
+      "reason": "Structural implication match cannot substitute numerical equality for term syntax",
+      "id": 25,
+      "path": "fixtures/25-equal-value-not-same-term.cert",
+      "sha256": "66859f20dca5305bbec4ac837f249c944be158cd3257a10df13096a2daf3b68c"
+    },
+    {
+      "name": "trailing-lf",
+      "expected": 0,
+      "reason": "Exact end of input",
+      "id": 26,
+      "path": "fixtures/26-trailing-lf.cert",
+      "sha256": "6c765d7cac5c2f16ec2886a2610c0f2d8eded223742e79709000e92a9114a0a5"
+    },
+    {
+      "name": "missing-final-lf",
+      "expected": 0,
+      "reason": "Every scalar needs LF",
+      "id": 27,
+      "path": "fixtures/27-missing-final-lf.cert",
+      "sha256": "3124e7df751cbf128d44725b0b5a52d0331cf082a6a2535d982d43d24adda871"
+    },
+    {
+      "name": "leading-zero-token",
+      "expected": 0,
+      "reason": "Canonical unsigned scalar syntax",
+      "id": 28,
+      "path": "fixtures/28-leading-zero-token.cert",
+      "sha256": "3ed5b3b52be7295f1de7361c06bc069b4d099a7f2998bea9bdb9db69d2cb73b5"
+    },
+    {
+      "name": "oversized-token",
+      "expected": 0,
+      "reason": "Scalar accumulation refuses before overflow",
+      "id": 29,
+      "path": "fixtures/29-oversized-token.cert",
+      "sha256": "b2fb6ece939017aca2f5870047487db5a560938eb47eb64d7261335ae90d5da1"
+    },
+    {
+      "name": "forward-term-reference",
+      "expected": 0,
+      "reason": "Acyclic topological terms only",
+      "id": 30,
+      "path": "fixtures/30-forward-term-reference.cert",
+      "sha256": "0091cf6d9a1ab1b0529881322ecfe1f5ee6195165406603afc6191436f4b7c67"
+    },
+    {
+      "name": "self-formula-reference",
+      "expected": 0,
+      "reason": "Acyclic topological formulas only",
+      "id": 31,
+      "path": "fixtures/31-self-formula-reference.cert",
+      "sha256": "c6b23a342cd11bdaba62552e383978126c04e4c88c5577ea91210b7021ffaf36"
+    },
+    {
+      "name": "nonzero-unused-field",
+      "expected": 0,
+      "reason": "POS unused field must be zero",
+      "id": 32,
+      "path": "fixtures/32-nonzero-unused-field.cert",
+      "sha256": "76e60beaa7969cfaadeb8afa42a9f29628730d1bad52b91c74aec4eca1456b40"
+    },
+    {
+      "name": "term-depth33-refusal",
+      "expected": 0,
+      "reason": "Term depth is independently bounded at32",
+      "id": 33,
+      "path": "fixtures/33-term-depth33-refusal.cert",
+      "sha256": "fa56d31ddba7e5abc7a140d7dd9ae9cc02d99553310b201e3fde1decee8cb35b"
+    }
+  ]
+}

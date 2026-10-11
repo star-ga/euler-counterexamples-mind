@@ -1,0 +1,11 @@
+--- a/kernel.mind
++++ b/kernel.mind
+@@ -318,7 +318,7 @@
+                     if aux < 1 || aux > __mind_load_i64(w + 40) { return 0; }
+                     if __mind_load_i64(nd_term(w, aux) + 24) != 0 { return 0; }
+                     // FORALL_ELIM binds exactly the supplied closed term throughout.
+-                    if nd_formula_match(w, __mind_load_i64(first + 8), result, 1, aux, 0, 0) != 1 { return 0; }
++                    // MUTANT: universal result comparison deliberately removed.
+                 } else {
+                     if aux != 0 || __mind_load_i64(first) != 4 { return 0; }
+                     let mut side: i64 = __mind_load_i64(first + 8);

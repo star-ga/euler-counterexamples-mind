@@ -1,0 +1,8 @@
+[package]
+name = "mind-math-finite-nd-tests"
+version = "0.1.0"
+authors = ["STARGA Inc."]
+description = "Pure-MIND finite controls for the candidate natural-deduction checker"
+[build]
+target = "cpu"
+entry = "src/main.mind"

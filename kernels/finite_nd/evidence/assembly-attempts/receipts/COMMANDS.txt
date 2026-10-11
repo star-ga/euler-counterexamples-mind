@@ -1,0 +1,19 @@
+Author: STARGA Inc.
+Diagnostic scratch: /BUILD_TMP/euler-nd-suite-assembly-20261011
+Compiler SHA-256: a1444e4412efcf6eef4d2f0635ee530cacdc58414531b7c7b5bec6eff15d7ffa
+MLIR_OPT=/usr/lib/llvm-20/bin/mlir-opt
+MLIR_TRANSLATE=/usr/lib/llvm-20/bin/mlir-translate
+CLANG=/usr/lib/llvm-20/bin/clang
+CC=/usr/lib/llvm-20/bin/clang
+
+Failed diagnostic 1: from repository cwd, concatenated fixtures into root-level main with import fixtures removed; remaining import kernel unresolved. Raw build.* receipts, exit 1.
+Failed diagnostic 2: same root-level concatenation from scratch cwd; remaining import kernel unresolved. Raw build-cwd.* receipts, exit 1.
+
+Successful diagnostic: exact three source files copied under scratch src/; manifest entry src/main.mind. No concatenation adopted.
+/usr/bin/time -v -o receipts/build-src.time.txt timeout 60 taskset -c 0 nice -n 19 prlimit --as=1073741824 --cpu=50 -- /PINNED_TOOLCHAIN/mindc build src/main.mind --backend mlir --target cpu --emit binary --optimize debug --no-cache --out check-src > receipts/build-src.stdout 2> receipts/build-src.stderr
+Build exit 0.
+readelf -h check-src > receipts/elf.txt
+sha256sum check-src > receipts/executable.sha256
+/usr/bin/time -v -o receipts/run.time.txt timeout 60 taskset -c 0 nice -n 19 prlimit --as=1073741824 --cpu=50 -- ./check-src > receipts/run.stdout 2> receipts/run.stderr
+Run exit 0; stderr empty; 8 expected accepts, 1585 expected rejects, restored Euler PASS.
+Host oom_kill before and after: 1 (unchanged).

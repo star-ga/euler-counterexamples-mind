@@ -1,0 +1,68 @@
+// Author: STARGA Inc. Additional source-mutation tests, not theorem authority.
+import checker;
+fn emit(s: String) -> i64 { return __mind_write(1, s.addr, s.len, 0 - 1); }
+fn read_certificate(fd: i64, p: i64) -> i64 {
+    let mut n: i64 = 0;
+    while n < 4096 {
+        let k: i64 = __mind_read(fd, p + n, 4096 - n, 0 - 1);
+        if k < 0 { return 0 - 1; }
+        if k == 0 { return n; }
+        n = n + k;
+    }
+    if __mind_read(fd, p + 4096, 1, 0 - 1) != 0 { return 0 - 1; }
+    return n;
+}
+fn observe(label: String, accepted: i64) -> i64 {
+    emit(label); print(accepted); return accepted;
+}
+fn witness_digit(p: i64, n: i64) -> i64 {
+    let marker: String = "witness\n95800\n";
+    let mut i: i64 = 0; let mut found: i64 = 0 - 1;
+    while i + marker.len <= n {
+        let mut j: i64 = 0;
+        while j < marker.len && at(p, i + j) == at(marker.addr, j) { j = j + 1; }
+        if j == marker.len {
+            if found >= 0 { return 0 - 1; }
+            found = i + marker.len - 2;
+        }
+        i = i + 1;
+    }
+    return found;
+}
+fn main() -> i64 {
+    let ap: i64 = __mind_alloc(4097); let rp: i64 = __mind_alloc(4097);
+    let zp: i64 = __mind_alloc(4097); let zrp: i64 = __mind_alloc(4097);
+    let w: i64 = __mind_alloc(32); let scratch: i64 = __mind_alloc(224);
+    if ap == 0 || rp == 0 || zp == 0 || zrp == 0 || w == 0 || scratch == 0 { return 2; }
+    let an: i64 = read_certificate(0, ap); let rn: i64 = read_certificate(3, rp);
+    let zn: i64 = read_certificate(4, zp); let zrn: i64 = read_certificate(5, zrp);
+    if an != 225 || rn != 388 || zn <= 0 || zrn <= 0 { emit("PROBE_INPUT=FAIL\n"); return 2; }
+    let digit: i64 = witness_digit(rp, rn);
+    if digit < 0 || at(ap, 21) != 48 { emit("PROBE_INPUT=FAIL\n"); return 2; }
+    if arithmetic(ap, an, w, scratch) != 1 { return 2; }
+    if refutation(ap, an, rp, rn, w, scratch) != 1 { return 2; }
+    if arithmetic(zp, zn, w, scratch) != 1 { return 2; }
+    emit("PROBE_POSITIVE_CONTROLS=PASS\n");
+    let mut faults: i64 = observe("POSITIVITY_INVALID_ACCEPTED=", refutation(zp, zn, zrp, zrn, w, scratch));
+    // Wrong witness with unchanged claimed powers: test arithmetic directly,
+    // so a later tuple comparison cannot mask missing recomputation.
+    __mind_store_i8(ap + 21, 49);
+    faults = faults + observe("ARITHMETIC_INVALID_ACCEPTED=", arithmetic(ap, an, w, scratch));
+    // Corrupt both witnesses coherently; binding now agrees but equality is false.
+    __mind_store_i8(rp + digit, 49);
+    faults = faults + observe("COHERENT_FALSE_EQUALITY_ACCEPTED=", refutation(ap, an, rp, rn, w, scratch));
+    __mind_store_i8(ap + 21, 48);
+    faults = faults + observe("TUPLE_MISMATCH_ACCEPTED=", refutation(ap, an, rp, rn, w, scratch));
+    __mind_store_i8(rp + digit, 48);
+    __mind_store_i8(ap + an, 10); __mind_store_i8(rp + rn, 10);
+    faults = faults + observe("ARITHMETIC_TRAILING_ACCEPTED=", arithmetic(ap, an + 1, w, scratch));
+    faults = faults + observe("REFUTATION_TRAILING_ACCEPTED=", refutation(ap, an, rp, rn + 1, w, scratch));
+    if arithmetic(ap, an, w, scratch) != 1 { return 2; }
+    if refutation(ap, an, rp, rn, w, scratch) != 1 { return 2; }
+    if arithmetic(zp, zn, w, scratch) != 1 { return 2; }
+    emit("PROBE_RESTORATION=PASS\nPROBE_NEGATIVE_CASES_EXECUTED=6\nINVALID_ACCEPTANCE_COUNT="); print(faults);
+    __mind_free(ap); __mind_free(rp); __mind_free(zp); __mind_free(zrp);
+    __mind_free(w); __mind_free(scratch);
+    if faults != 0 { emit("SOURCE_MUTANT_DETECTED=YES\n"); return 1; }
+    emit("SOURCE_MUTANT_DETECTED=NO\nSUPPLEMENTAL_TESTS=PASS\n"); return 0;
+}
