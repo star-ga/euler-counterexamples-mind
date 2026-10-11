@@ -1,0 +1,3 @@
+3c5b3aaa32f9e638c2e641ff276e1791c61bcb14d61a78b524da60695a3b57d4  /work/audit/release/signing/polynomial/package.mic3
+35d466ce039a8c031fb0ea6df912cd7dda17855174faec1cd63e0b798fd1cdd8  /work/audit/release/signing/polynomial/PAYLOAD_SHA256SUMS
+9754e8945992555de32f0a4ee7927f4c8f1a427cc7c8a05212fe5f27498b7107  /work/audit/release/signing/polynomial/verify.sh

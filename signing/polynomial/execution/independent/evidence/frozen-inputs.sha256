@@ -1,0 +1,12 @@
+9754e8945992555de32f0a4ee7927f4c8f1a427cc7c8a05212fe5f27498b7107  /work/audit/independent-signature-review/public-base/signing/polynomial/verify.sh
+3c5b3aaa32f9e638c2e641ff276e1791c61bcb14d61a78b524da60695a3b57d4  /work/audit/independent-signature-review/public-base/signing/polynomial/package.mic3
+35d466ce039a8c031fb0ea6df912cd7dda17855174faec1cd63e0b798fd1cdd8  /work/audit/independent-signature-review/public-base/signing/polynomial/PAYLOAD_SHA256SUMS
+a6fa375827cca00fbfe0d79e06c2a0c09b37efad4e9fe59c5aca0450cbcbfe0a  /work/audit/independent-signature-review/public-base/signing/map-binding/src/bridge.mind
+9754e8945992555de32f0a4ee7927f4c8f1a427cc7c8a05212fe5f27498b7107  /work/audit/independent-signature-review/public-old-substitution/signing/polynomial/verify.sh
+aade52f3d0c3ad874ff7c25113f423f487c0579e864cf71ddf1833618ba86918  /work/audit/independent-signature-review/public-old-substitution/signing/polynomial/package.mic3
+d3471291b15b9e3f6d43860d4525729098c628472f7812611c2ae522a1d83965  /work/audit/independent-signature-review/public-old-substitution/signing/polynomial/PAYLOAD_SHA256SUMS
+a6fa375827cca00fbfe0d79e06c2a0c09b37efad4e9fe59c5aca0450cbcbfe0a  /work/audit/independent-signature-review/public-old-substitution/signing/map-binding/src/bridge.mind
+9754e8945992555de32f0a4ee7927f4c8f1a427cc7c8a05212fe5f27498b7107  /work/audit/independent-signature-review/public-bridge-change/signing/polynomial/verify.sh
+3c5b3aaa32f9e638c2e641ff276e1791c61bcb14d61a78b524da60695a3b57d4  /work/audit/independent-signature-review/public-bridge-change/signing/polynomial/package.mic3
+35d466ce039a8c031fb0ea6df912cd7dda17855174faec1cd63e0b798fd1cdd8  /work/audit/independent-signature-review/public-bridge-change/signing/polynomial/PAYLOAD_SHA256SUMS
+ae24918f720f3b7c1624211a710538a31035dc497099e783be6d103ee5ed5b2f  /work/audit/independent-signature-review/public-bridge-change/signing/map-binding/src/bridge.mind

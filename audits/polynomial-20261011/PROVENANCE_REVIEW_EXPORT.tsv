@@ -1,0 +1,4 @@
+record	sha256	artifact
+raw	b3563795afa80d926777113e22ebde8e71ec56c60462a75e54d96f600daf22f4	Independent reviewer raw report
+public-export	e9081e8452f30cfdc3e8287521615fa51de7a9e2d57422c2abb4f0349af1c1d6	audits/polynomial-20261011/PROVENANCE_REVIEW.md
+transform	n/a	Absolute review checkout path replaced by <review checkout>; no other changes

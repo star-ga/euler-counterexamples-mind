@@ -1,0 +1,310 @@
+// Independent finite regression probes. No imported repository fixtures.
+import kernel;
+
+fn clear(b: i64) -> i64 {
+    let mut i: i64 = 0;
+    while i < 8 { __mind_store_i64(b + 8*i, 0); i = i + 1; }
+    return 0;
+}
+fn term(b: i64, tag: i64, a: i64, c: i64) -> i64 {
+    let n: i64 = __mind_load_i64(b) + 1;
+    let p: i64 = b + 64 + (n-1)*24;
+    __mind_store_i64(p, tag); __mind_store_i64(p+8, a); __mind_store_i64(p+16, c);
+    __mind_store_i64(b, n); return n;
+}
+fn form(b: i64, tag: i64, a: i64, c: i64) -> i64 {
+    let n: i64 = __mind_load_i64(b+8) + 1;
+    let p: i64 = b + 6400 + (n-1)*24;
+    __mind_store_i64(p, tag); __mind_store_i64(p+8, a); __mind_store_i64(p+16, c);
+    __mind_store_i64(b+8, n); return n;
+}
+fn line(b: i64, rule: i64, result: i64, p1: i64, p2: i64, aux: i64) -> i64 {
+    let n: i64 = __mind_load_i64(b+16) + 1;
+    let p: i64 = b + 20000 + (n-1)*40;
+    __mind_store_i64(p, rule); __mind_store_i64(p+8, result);
+    __mind_store_i64(p+16, p1); __mind_store_i64(p+24, p2); __mind_store_i64(p+32, aux);
+    __mind_store_i64(b+16, n); return n;
+}
+fn field(p: i64, pos: i64, v: i64) -> i64 {
+    let mut at: i64 = pos; let mut div: i64 = 1;
+    while v / div >= 10 { div = div * 10; }
+    while div > 0 {
+        __mind_store_i8(p+at, 48+(v/div)%10); at = at+1; div = div/10;
+    }
+    __mind_store_i8(p+at, 10); return at+1;
+}
+fn encode(b: i64, p: i64, goal: i64, version: i64) -> i64 {
+    let mut at: i64 = field(p,0,74123); at = field(p,at,version);
+    let mut section: i64 = 0;
+    while section < 3 {
+        let count: i64 = __mind_load_i64(b+section*8);
+        let mut width: i64 = 3; let mut start: i64 = b+64;
+        if section == 1 { start = b+6400; }
+        if section == 2 { at = field(p,at,goal); width = 5; start = b+20000; }
+        at = field(p,at,count);
+        let mut i: i64 = 0;
+        while i < count*width { at = field(p,at,__mind_load_i64(start+i*8)); i=i+1; }
+        section = section+1;
+    }
+    return at;
+}
+fn closure(b: i64, lhs: i64, rhs: i64, k: i64) -> i64 {
+    let mut f: i64 = form(b,2,lhs,rhs); let mut i: i64 = 0;
+    while i < k { f = form(b,6,f,0); i = i+1; } return f;
+}
+fn maximum(b: i64) -> i64 {
+    // Six base-10^6 digits, all 999999: exactly 10^36-1.
+    let m: i64 = term(b,1,999999,0);
+    let one: i64 = term(b,1,1,0);
+    let base: i64 = term(b,3,m,one);
+    let mut v: i64 = m; let mut i: i64 = 1;
+    while i < 6 { v=term(b,4,v,base); v=term(b,3,v,m); i=i+1; }
+    return v;
+}
+fn expanded128(b: i64) -> i64 {
+    let x: i64 = term(b,2,0,0); let y: i64 = term(b,2,1,0);
+    let one: i64 = term(b,1,1,0); let mut result: i64 = one;
+    let mut power: i64 = x; let mut i: i64 = 0;
+    while i < 5 {
+        let factor: i64 = term(b,3,one,power); result=term(b,4,result,factor);
+        if i < 4 { power=term(b,4,power,power); } i=i+1;
+    }
+    result=term(b,4,result,term(b,3,one,y));
+    result=term(b,4,result,term(b,3,one,term(b,4,y,y))); return result;
+}
+fn fixture(id: i64, b: i64, p: i64) -> i64 {
+    clear(b); let mut goal: i64 = 0; let mut version: i64 = 2;
+    if id == 1 || id == 2 {
+        let x: i64 = term(b,2,0,0); let y: i64 = term(b,2,1,0);
+        let z: i64 = term(b,2,2,0); let mut lhs: i64 = term(b,4,x,term(b,3,y,z));
+        let mut rhs: i64 = term(b,3,term(b,4,x,y),term(b,4,x,z));
+        if id == 2 { lhs=term(b,3,x,y); rhs=term(b,3,x,x); }
+        goal=closure(b,lhs,rhs,3); line(b,10,goal,0,0,0);
+    }
+    if id >= 3 && id <= 7 {
+        let x: i64 = term(b,2,0,0); let zero: i64 = term(b,1,0,0);
+        let m: i64 = maximum(b); let mx: i64 = term(b,4,m,x);
+        let mut lhs: i64 = mx; let mut rhs: i64 = mx;
+        if id == 4 || id == 6 { lhs=term(b,3,mx,x); rhs=zero; }
+        if id == 5 { lhs=term(b,4,mx,term(b,1,2,0)); rhs=zero; }
+        if id == 7 { lhs=term(b,3,m,term(b,1,1,0)); rhs=zero; }
+        if id == 6 { lhs=x; rhs=x; }
+        goal=closure(b,lhs,rhs,1); line(b,10,goal,0,0,0);
+    }
+    if id == 8 || id == 9 {
+        let x: i64 = term(b,2,0,0); let two: i64 = term(b,1,2,0);
+        let mut lhs: i64 = term(b,3,x,x); let mut rhs: i64 = term(b,4,two,x);
+        if id == 9 {
+            let one: i64 = term(b,1,1,0); let q: i64 = term(b,3,x,one);
+            lhs=term(b,4,q,q); rhs=term(b,3,term(b,4,x,x),term(b,3,rhs,one));
+        }
+        goal=closure(b,lhs,rhs,1); line(b,10,goal,0,0,0);
+    }
+    if id >= 10 && id <= 13 {
+        let mut index: i64 = 0; let mut k: i64 = 2;
+        if id >= 12 { index=3; k=4; }
+        let x: i64 = term(b,2,index,0); let mut power: i64 = x; let mut i: i64 = 0;
+        while i < 5 { power=term(b,4,power,power); i=i+1; }
+        let mut rhs: i64 = power;
+        if id == 11 { power=term(b,4,power,x); rhs=term(b,2,1,0); }
+        if id == 13 { power=term(b,4,power,x); rhs=term(b,1,0,0); }
+        goal=closure(b,power,rhs,k); line(b,10,goal,0,0,0);
+    }
+    if id >= 14 && id <= 19 {
+        let x: i64 = term(b,2,0,0); let mut lhs: i64 = x; let mut rhs: i64 = x;
+        if id == 14 { term(b,2,4,0); }
+        if id == 15 { lhs=term(b,2,1,0); rhs=lhs; }
+        if id == 16 { rhs=term(b,1,0,0); lhs=term(b,4,rhs,x); }
+        if id == 17 || id == 19 {
+            let c: i64 = term(b,1,999999,0); lhs=term(b,4,c,x);
+            if id == 17 {
+                lhs=term(b,3,lhs,x); let t: i64=term(b,1,1000,0);
+                rhs=term(b,4,term(b,4,t,t),x);
+            } else { rhs=term(b,4,term(b,1,999998,0),x); }
+        }
+        if id == 18 { rhs=term(b,4,x,x); }
+        goal=closure(b,lhs,rhs,1); line(b,10,goal,0,0,0);
+    }
+    if id >= 20 && id <= 23 {
+        let y: i64=term(b,2,0,0); let x: i64=term(b,2,1,0);
+        let seven: i64=term(b,1,7,0);
+        let universal: i64=closure(b,term(b,3,x,y),term(b,3,y,x),2);
+        let mut lhs: i64=term(b,3,seven,y); let mut rhs: i64=term(b,3,y,seven);
+        if id == 21 || id == 23 { rhs=term(b,3,y,y); }
+        if id == 23 { lhs=rhs; }
+        goal=closure(b,lhs,rhs,1); line(b,10,universal,0,0,0);
+        let mut witness: i64=seven; if id == 22 { witness=y; }
+        line(b,8,goal,1,0,witness);
+    }
+    if id >= 24 && id <= 27 {
+        let x: i64=term(b,2,0,0); let universal: i64=closure(b,x,x,1);
+        let bottom: i64=form(b,3,0,0); let negation: i64=form(b,5,bottom,bottom);
+        let conjunction: i64=form(b,4,universal,universal);
+        line(b,1,bottom,0,0,0); line(b,10,universal,0,0,0);
+        if id == 26 { goal=universal; }
+        if id == 25 {
+            line(b,4,conjunction,2,2,0); line(b,9,negation,1,1,0); goal=negation;
+        }
+        if id == 24 || id == 27 {
+            line(b,9,negation,1,1,0);
+            if id == 27 { line(b,1,bottom,0,0,0); }
+            line(b,4,conjunction,2,2,0); goal=conjunction;
+        }
+    }
+    if id == 28 || id == 29 {
+        let mut v: i64=expanded128(b);
+        if id == 29 { v=term(b,3,v,term(b,2,2,0)); }
+        goal=closure(b,v,v,3); line(b,10,goal,0,0,0);
+    }
+    if id >= 30 && id <= 40 {
+        let x: i64=term(b,2,0,0); let zero: i64=term(b,1,0,0);
+        let good: i64=closure(b,x,x,1); let bad: i64=closure(b,x,zero,1);
+        goal=good;
+        if id == 30 { line(b,10,good,0,0,0); line(b,10,bad,0,0,0); goal=bad; }
+        if id == 31 { line(b,10,good,0,0,0); goal=bad; }
+        if id == 32 {
+            goal=form(b,4,good,good); line(b,10,good,0,0,0); line(b,4,goal,2,1,0);
+        }
+        if id >= 33 && id <= 39 {
+            let mut rule: i64=10; let mut aux: i64=0;
+            if id == 33 { term(b,3,3,1); }
+            if id == 34 { form(b,6,5,0); }
+            if id == 35 { term(b,1,1,1); }
+            if id == 36 { form(b,6,good,1); }
+            if id == 37 { aux=1; }
+            if id == 38 { version=1; }
+            if id == 39 { rule=11; }
+            line(b,rule,good,0,0,aux);
+        }
+        if id == 40 { goal=form(b,2,x,x); line(b,3,goal,0,0,0); }
+    }
+    if id >= 41 && id <= 46 {
+        let x: i64=term(b,2,0,0); let zero: i64=term(b,1,0,0);
+        let mut power: i64=x; let mut i: i64=0;
+        while i < 5 { power=term(b,4,power,power); i=i+1; }
+        let mut lhs: i64=power; let mut rhs: i64=power;
+        if id == 41 { lhs=term(b,4,power,term(b,4,zero,power)); rhs=zero; }
+        if id == 42 { lhs=term(b,4,zero,term(b,4,power,x)); rhs=zero; }
+        if id == 43 {
+            let v: i64=expanded128(b); lhs=term(b,3,v,v); rhs=term(b,4,term(b,1,2,0),v);
+        }
+        if id == 44 || id == 45 {
+            let v: i64=term(b,2,id-43,0); power=v; i=0;
+            while i < 5 { power=term(b,4,power,power); i=i+1; }
+            lhs=term(b,4,power,v); rhs=term(b,2,id-42,0);
+        }
+        if id == 46 {
+            let mut j: i64=1;
+            while j < 4 {
+                power=term(b,2,j,0); i=0;
+                while i < 5 { power=term(b,4,power,power); i=i+1; }
+                lhs=term(b,4,lhs,power); j=j+1;
+            }
+            rhs=lhs;
+        }
+        goal=closure(b,lhs,rhs,4); line(b,10,goal,0,0,0);
+    }
+    if id >= 401 && id <= 412 {
+        let x: i64=term(b,2,0,0); let one: i64=term(b,1,1,0);
+        let base: i64=term(b,1,1000,0); let mut value: i64=one; let mut i: i64=0;
+        while i < id-401 { value=term(b,4,value,base); i=i+1; }
+        let rhs: i64=term(b,4,term(b,3,one,value),x);
+        goal=closure(b,x,rhs,1); line(b,10,goal,0,0,0);
+    }
+    return encode(b,p,goal,version);
+}
+fn expected(id: i64) -> i64 {
+    if id == 1 || id == 3 || id == 8 || id == 9 || id == 10 || id == 12 ||
+       id == 16 || id == 17 || id == 20 || id == 25 || id == 28 || id == 41 ||
+       id == 43 || id == 46 { return 1; }
+    return 0;
+}
+fn copy_bytes(src: i64, dst: i64, n: i64) -> i64 {
+    let mut i: i64=0;
+    while i < n { __mind_store_i8(dst+i,__mind_load_i8(src+i)); i=i+1; } return 0;
+}
+fn observe(id: i64, p: i64, n: i64, w: i64, cap: i64, want: i64, snap: i64) -> i64 {
+    copy_bytes(p,snap,n); let got: i64=finite_nd_poly_check(p,n,w,cap);
+    print(id); print(got); print(want);
+    let mut i: i64=0; let mut changes: i64=0;
+    while i < n { if __mind_load_i8(p+i) != __mind_load_i8(snap+i) { changes=changes+1; } i=i+1; }
+    if changes != 0 { print(990001); print(changes); return 1; }
+    if got != want { return 1; } return 0;
+}
+fn main() -> i64 {
+    let p: i64=__mind_alloc(65536); let b: i64=__mind_alloc(65536);
+    let w: i64=__mind_alloc(4194304); let snap: i64=__mind_alloc(65536);
+    let adjacent: i64=__mind_alloc(4194304+65536);
+    if p == 0 || b == 0 || w == 0 || snap == 0 || adjacent == 0 { return 2; }
+    let mut failures: i64=0; let mut id: i64=1; let mut calls: i64=0;
+    while id <= 40 {
+        let n: i64=fixture(id,b,p);
+        failures=failures+observe(id,p,n,w,4194304,expected(id),snap); calls=calls+1; id=id+1;
+    }
+    id=41;
+    while id <= 46 {
+        let n: i64=fixture(id,b,p);
+        failures=failures+observe(id,p,n,w,4194304,expected(id),snap); calls=calls+1; id=id+1;
+    }
+    id=401;
+    while id <= 412 {
+        let n: i64=fixture(id,b,p);
+        failures=failures+observe(id,p,n,w,4194304,0,snap); calls=calls+1; id=id+1;
+    }
+    id=101;
+    while id <= 111 {
+        let mut n: i64=fixture(1,b,p);
+        if id == 101 || id == 107 || id == 108 {
+            let mut i: i64=n;
+            while i > 0 { __mind_store_i8(p+i,__mind_load_i8(p+i-1)); i=i-1; }
+            let mut ch: i64=48; if id == 107 { ch=10; } if id == 108 { ch=57; }
+            __mind_store_i8(p,ch); n=n+1;
+            if id == 108 {
+                i=n; while i > 0 { __mind_store_i8(p+i,__mind_load_i8(p+i-1)); i=i-1; }
+                __mind_store_i8(p,57); n=n+1;
+            }
+        }
+        if id >= 102 && id <= 106 {
+            let mut ch: i64=13;
+            if id == 103 { ch=32; } if id == 104 { ch=43; }
+            if id == 105 { ch=0; } if id == 106 { ch=255; }
+            __mind_store_i8(p,ch);
+        }
+        if id == 109 { n=n-1; }
+        if id == 110 { __mind_store_i8(p+n,10); n=n+1; }
+        if id == 111 { __mind_store_i8(p+n,49); n=n+1; }
+        failures=failures+observe(id,p,n,w,4194304,0,snap); calls=calls+1; id=id+1;
+    }
+    // Deliberately initialized dirty workspace, including count/valid-looking words.
+    let mut i: i64=0;
+    while i < 524288 { __mind_store_i64(w+8*i,9223372036854775807); i=i+1; }
+    let mut n: i64=fixture(28,b,p);
+    failures=failures+observe(201,p,n,w,4194304,1,snap); calls=calls+1;
+    n=fixture(2,b,p); __mind_store_i64(w+104,1);
+    failures=failures+observe(204,p,n,w,4194304,0,snap); calls=calls+1;
+    n=fixture(3,b,p);
+    failures=failures+observe(202,p,n,w,4194304,1,snap); calls=calls+1;
+    n=fixture(4,b,p);
+    failures=failures+observe(205,p,n,w,4194304,0,snap); calls=calls+1;
+    n=fixture(16,b,p);
+    failures=failures+observe(203,p,n,w,4194304,1,snap); calls=calls+1;
+    // All ordinary overlap/misalignment tests point inside an owned allocation.
+    n=fixture(1,b,p); copy_bytes(p,adjacent+8,n);
+    failures=failures+observe(301,adjacent+8,n,adjacent,4194304,0,snap); calls=calls+1;
+    copy_bytes(p,adjacent,n);
+    failures=failures+observe(302,adjacent,n,adjacent+8,4194304,0,snap); calls=calls+1;
+    failures=failures+observe(303,p,n,w+1,4194304,0,snap); calls=calls+1;
+    failures=failures+observe(304,p,n,w,4194303,0,snap); calls=calls+1;
+    // Overflow guards are expected to return before any fabricated pointer access.
+    let r305: i64=finite_nd_poly_check(9223372036854775807,n,w,4194304);
+    print(305); print(r305); print(0); if r305 != 0 { failures=failures+1; } calls=calls+1;
+    let r306: i64=finite_nd_poly_check(p,n,9223372036854775800,4194304);
+    print(306); print(r306); print(0); if r306 != 0 { failures=failures+1; } calls=calls+1;
+    copy_bytes(p,adjacent+4194304,n);
+    failures=failures+observe(307,adjacent+4194304,n,adjacent,4194304,1,snap); calls=calls+1;
+    copy_bytes(p,adjacent+65536-n,n);
+    failures=failures+observe(308,adjacent+65536-n,n,adjacent+65536,4194304,1,snap); calls=calls+1;
+    print(999999); print(calls); print(failures); assert(failures == 0);
+    __mind_free(p); __mind_free(b); __mind_free(w); __mind_free(snap); __mind_free(adjacent);
+    return 0;
+}

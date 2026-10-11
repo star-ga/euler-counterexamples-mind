@@ -1,0 +1,52 @@
+// Author: STARGA Inc. Provenance control generation, never a theorem authority.
+// stdin: authenticated-shape carrier; fd3: expected manifest digest plus LF.
+// fd4/5/6: copies changing ML-DSA signature / SLH-DSA signature / digest.
+import bridge;
+fn read_all(fd: i64, p: i64, cap: i64) -> i64 {
+    let mut n: i64 = 0;
+    while n <= cap {
+        let got: i64 = __mind_read(fd, p + n, cap + 1 - n, 0 - 1);
+        if got < 0 { return 0 - 1; }
+        if got == 0 { return n; }
+        n = n + got;
+        if n > cap { return 0 - 1; }
+    }
+    return 0 - 1;
+}
+fn write_all(fd: i64, p: i64, n: i64) -> i64 {
+    let mut at: i64 = 0;
+    while at < n {
+        let wrote: i64 = __mind_write(fd, p + at, n - at, 0 - 1);
+        if wrote <= 0 { return 0; }
+        at = at + wrote;
+    }
+    return 1;
+}
+fn changed_copy(fd: i64, p: i64, n: i64, offset: i64) -> i64 {
+    let old: i64 = __mind_load_i8(p + offset);
+    __mind_store_i8(p + offset, (old + 1) % 256);
+    let result: i64 = write_all(fd, p, n);
+    __mind_store_i8(p + offset, old);
+    return result;
+}
+fn main() -> i64 {
+    let p: i64 = __mind_alloc(131073);
+    let expected: i64 = __mind_alloc(66);
+    let work: i64 = __mind_alloc(16);
+    if p == 0 || expected == 0 || work == 0 { return 2; }
+    let n: i64 = read_all(0, p, 131072);
+    let en: i64 = read_all(3, expected, 65);
+    if n != 37642 || pqc_binding_check(p, n, expected, en, work, 16) != 1 { return 2; }
+    // Exact profile fixes these offsets (not a substring search):
+    // first ML-DSA signature byte 440, first SLH-DSA byte 7760, digest byte 355.
+    if changed_copy(4, p, n, 440) != 1 { return 2; }
+    if changed_copy(5, p, n, 7760) != 1 { return 2; }
+    let old: i64 = __mind_load_i8(p + 355);
+    let mut replacement: i64 = 48;
+    if old == 48 { replacement = 49; }
+    __mind_store_i8(p + 355, replacement);
+    if write_all(6, p, n) != 1 { return 2; }
+    __mind_store_i8(p + 355, old);
+    __mind_free(p); __mind_free(expected); __mind_free(work);
+    return 0;
+}

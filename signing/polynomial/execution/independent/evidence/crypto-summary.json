@@ -1,0 +1,26 @@
+[
+  {
+    "case": "public-base",
+    "signature": "pqc-hybrid-ml-dsa-87-slh-dsa-256s",
+    "authenticated": true,
+    "trace_hash_valid": true,
+    "fp_mode": "strict",
+    "determinism": "deterministic",
+    "mldsa87_decoded_pubkey_sha256": "0c7f47a456f77dbacbbdd4a5a03328b20543859461dc9c00f49289467a594eb0",
+    "slhdsa_decoded_pubkey_sha256": "ac85e7ecbd748a1ab57e67e44ca9b60e490ba7a7786e9ef4c707f790531c1e84",
+    "map_pass": true,
+    "final_pass": true
+  },
+  {
+    "case": "public-old-substitution",
+    "signature": "pqc-hybrid-ml-dsa-87-slh-dsa-256s",
+    "authenticated": true,
+    "trace_hash_valid": true,
+    "fp_mode": "strict",
+    "determinism": "deterministic",
+    "mldsa87_decoded_pubkey_sha256": "0c7f47a456f77dbacbbdd4a5a03328b20543859461dc9c00f49289467a594eb0",
+    "slhdsa_decoded_pubkey_sha256": "ac85e7ecbd748a1ab57e67e44ca9b60e490ba7a7786e9ef4c707f790531c1e84",
+    "map_pass": true,
+    "final_pass": false
+  }
+]

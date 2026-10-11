@@ -1,0 +1,6 @@
+/work/audit/signature-controls/corrupt-digest.mic3: OK
+/work/audit/signature-controls/corrupt-mldsa.mic3: OK
+/work/audit/signature-controls/corrupt-slh.mic3: OK
+/work/audit/signature-controls/package.mic3: OK
+/work/audit/signature-controls/digest.txt: OK
+/work/audit/signature-controls/wrong-digest.txt: OK

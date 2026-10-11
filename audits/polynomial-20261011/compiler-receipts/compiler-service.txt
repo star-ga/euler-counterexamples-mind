@@ -1,0 +1,12 @@
+Result=success
+ExecMainStartTimestamp=Sun 2026-10-11 05:59:46 PDT
+ExecMainExitTimestamp=Sun 2026-10-11 06:03:55 PDT
+ExecMainCode=1
+ExecMainStatus=0
+MemoryPeak=2147483648
+CPUUsageNSec=247605535000
+CPUQuotaPerSecUSec=1s
+AllowedCPUs=6
+MemoryMax=2147483648
+MemorySwapMax=0
+Nice=19

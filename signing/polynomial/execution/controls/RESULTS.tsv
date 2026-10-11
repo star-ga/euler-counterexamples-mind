@@ -1,0 +1,10 @@
+case	expected_exit	observed_exit
+generator	0	0
+crypto-baseline	0	0
+corrupt-mldsa	1	1
+corrupt-slh	1	1
+corrupt-digest	1	1
+wrong-mldsa-pin	1	1
+wrong-slh-pin	1	1
+binding-correct	0	0
+binding-wrong	1	1
