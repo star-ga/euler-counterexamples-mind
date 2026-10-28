@@ -6,6 +6,8 @@ Date: 2026-10-11
 This report records the new polynomial package, not a replacement of the
 historical K4/K5 attestation. It is outside the signed payload to avoid a
 self-referential signature claim; the adjacent final checksum manifest covers it.
+The 2026-10-11 carrier below was superseded on 2026-10-28 by a re-emission over a
+corrected manifest; see the amendment at the end for the current hashes.
 
 | Artifact | SHA-256 |
 | --- | --- |
@@ -90,3 +92,37 @@ The signatures authenticate this scoped release under the project identity.
 They do not establish a soundness metatheorem, designated-verifier approval,
 mathematical novelty or RH progress. **FORMAL_PROOF_SUBMITTED** and direct-native
 **BLOCKED** remain unchanged.
+
+## Amendment 2026-10-28: contract redaction and re-signing
+
+One out-of-scope sentence in the audit contract that referred to unrelated
+private work was removed; the audit scope, method and conclusions are unchanged.
+`audits/polynomial-20261011/EXPORT_FILES.tsv` records the original and exported
+contract hashes, and `FROZEN.sha256` keeps the pre-execution hash as a historical
+receipt. The contract, that export map, the audit report and the audit
+`SHA256SUMS` are signed payload files, so the manifest was regenerated and the
+carrier re-emitted with the same project keys, carrier source and owner emission
+command. The path inventory and the 2,580-file count are unchanged.
+
+| Artifact | SHA-256 |
+| --- | --- |
+| Current 2,580-file manifest | `a16efe4f3dfa0df6d097bf7e8a52fd9a358f76c74c6238fb56a3b85ba3acb944` |
+| Current 37,642-byte hybrid carrier | `6323f07d69ee13f0ea497ea65479be63abcd08d03300d9fe7d062032a4bcccd0` |
+| Superseded 2026-10-11 manifest | `35d466ce039a8c031fb0ea6df912cd7dda17855174faec1cd63e0b798fd1cdd8` |
+| Superseded 2026-10-11 carrier | `3c5b3aaa32f9e638c2e641ff276e1791c61bcb14d61a78b524da60695a3b57d4` |
+
+| Check | Observed result |
+| --- | --- |
+| Two emissions, same payload/keys | Both exit 0; 4.940s and 4.753s; complete bytes identical |
+| Unchanged public wrapper with the pinned compilers/backend | Exit 0; all 2,580 hashes and scope/inventory pass; `MAP_DIGEST_BINDING=PASS`; empty stderr |
+| Superseded carrier presented with the current manifest | Normal wrapper exit 1; `MAP_DIGEST_BINDING=FAIL` |
+| Historical K4/K5 `make signed-verify` | Exit 0; all 1,506 hashes pass; `SIGNED_PAYLOAD=PASS` |
+
+Receipts are in `resign-20261028/`; its `EXPORT_FILES.tsv` records raw/export
+hashes, and only operational paths were normalized. The tables above and
+`controls/`, `independent/`, `full-wrapper.*`, `public-download.*`, `sign.*`,
+`repeat.*`, `SIGNING_FROZEN.sha256` and `PUBLIC_DOWNLOAD.md` describe the
+superseded carrier and are retained unchanged as historical observations; the
+corruption controls were not regenerated for the current carrier. The signing
+identity, public keys and fingerprints are unchanged. **FORMAL_PROOF_SUBMITTED**
+and direct-native **BLOCKED** remain unchanged.

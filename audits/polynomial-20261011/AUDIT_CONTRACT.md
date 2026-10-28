@@ -31,6 +31,6 @@ preserving the historical K4/K5 signed artifact and its bound payload bytes.
 Cryptographic authenticity is not mathematical soundness approval. This audit
 does not supply designated external/human formal approval.
 
-Compiler/source review, new mathematical review, test execution and MIND-Lab
-continuation are separate lanes. Existing RH/MIND-Lab work and credentials remain
-private and untouched by this public audit.
+Compiler/source review, new mathematical review and test execution are separate
+lanes. Unrelated private work and credentials remain outside and untouched by
+this public audit.

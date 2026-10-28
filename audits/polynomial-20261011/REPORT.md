@@ -101,9 +101,11 @@ The contract and case lists precede their respective runs. Follow-up tests and
 signing-wrapper findings are source-informed additions, not blinded tests.
 `EXPORT_FILES.tsv` records raw/export hashes. Operational paths alone were
 normalized to public placeholders, except removal of one unrelated memory-workflow
-paragraph in the source report; original execution values and mathematical source
-are preserved. Historical receipt hashes refer to pre-export bytes; use the local
-`SHA256SUMS` for this published archive. No compiler ELF or private source is included.
+paragraph in the source report and (2026-10-28, before re-signing) of one
+out-of-scope reference to unrelated private work in the contract; original
+execution values and mathematical source are preserved. Historical receipt hashes,
+including `FROZEN.sha256`, refer to pre-export bytes; use the local `SHA256SUMS`
+for this published archive. No compiler ELF or private source is included.
 
 ## Signing and acceptance boundary
 
