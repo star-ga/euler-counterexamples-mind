@@ -1,0 +1,3 @@
+# Preserve the recorded shell command receipts, whose argv formatter emits
+# a trailing separator. These are evidence bytes, not edited source code.
+polynomial-20261011/replay/receipts/*.command whitespace=-blank-at-eol

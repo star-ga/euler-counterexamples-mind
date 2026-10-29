@@ -1,0 +1,1 @@
+error[verify]: signature is invalid — artifact signature does not verify over the trace_hash (fail-closed)

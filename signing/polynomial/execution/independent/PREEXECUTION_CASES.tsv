@@ -1,0 +1,5 @@
+case	expected_exit	expected_observation
+base	0	Both signature algorithms, MAP digest and2580payload hashes pass
+historical_manifest	0	All1506unchanged historical payload hashes pass
+old_substitution	1	Historical cryptography+MAP binding valid but polynomial scope rejects
+bridge_change	1	Pinned bridge source hash rejects before build

@@ -14,6 +14,13 @@ by the public source/lockfile recipe;
 no compiler binary is redistributed here. Record your actual compiler digest.
 A different rebuild digest requires its own qualification before adoption.
 
+The [independent audit](../../audits/polynomial-20261011/REPORT.md) rebuilt this
+compiler from anonymously fetched public source into an empty target directory,
+reproduced its digest, and repeated all three harnesses and the 54-certificate
+corpus. Its receipt-producing replay script and independent MIND tests are
+available with that report. This is same-host reproducibility, not a second
+compiler implementation or cross-platform guarantee.
+
 The historical receipts retain compiler digest `a1444e44...ffa`; the repository's
 existing `toolchain/compiler.sha256` is unchanged. That older binary is not a
 prerequisite for the newly qualified public-source route. LLVM/MLIR/Clang 20.1.8

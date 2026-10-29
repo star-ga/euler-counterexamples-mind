@@ -1,0 +1,7 @@
+make: Entering directory '/PUBLIC_REPO'
+cp signing/map-binding/Mind.toml "/work/audit/binding-build/binding/"
+cp signing/map-binding/src/*.mind "/work/audit/binding-build/binding/src/"
+cd "/work/audit/binding-build/binding" && timeout 60 taskset -c 6 nice -n 19 prlimit --as=1073741824 --cpu=50 -- "/work/compiler/mindc" build src/main.mind --backend mlir --target cpu --emit binary --optimize debug --no-cache --out "/work/audit/binding-build/map-binding-check"
+   Finished cpu [binary] /work/audit/binding-build/map-binding-check
+   Artifact: 45992 bytes
+make: Leaving directory '/PUBLIC_REPO'

@@ -18,13 +18,19 @@ The later [public-download reproduction](kernels/polynomial_nd/evidence/public-r
 also covers the full 54-certificate CLI corpus with that compiler.
 Its status remains **FORMAL_PROOF_SUBMITTED**; formal acceptance is blocked.
 
+The [independent audit](audits/polynomial-20261011/REPORT.md) adds a fresh compiler
+source rebuild, all-integer normalization review and separately authored MIND
+boundary tests. The [polynomial PQC package](signing/polynomial/README.md) binds
+this extension separately from the unchanged historical K4/K5 signed release.
+
 [Transformation and integrity notes](kernels/polynomial_nd/PUBLICATION.md)
 distinguish byte-identical checking artifacts from sanitized documentation and
 receipts. No repository history, compiler binaries, credentials, signing secrets
 or internal operational reports are included in the new extension.
 The [existing license](LICENSE.md) and [attribution](PROVENANCE.md) are retained;
-this submission selects no new license. Existing signatures do not attest the
-new extension. Publication does not grant formal acceptance of the kernel.
+this submission selects no new license. Historical signatures retain their
+original scope; the new polynomial artifact has its own manifest and verification
+instructions. Publication and signing do not grant formal acceptance of the kernel.
 
 ## Optional architecture tooling
 

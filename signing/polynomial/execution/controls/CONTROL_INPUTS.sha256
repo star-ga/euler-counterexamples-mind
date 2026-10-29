@@ -1,0 +1,6 @@
+dbc54ec6f6225365809e9051520e37bd00f521b55bb6b5b0e3ca65dc688d374e  /work/audit/signature-controls/corrupt-digest.mic3
+513e41dc737d0cb4d4825d146657347b954119f78e832db05f07b23e49d3d7c1  /work/audit/signature-controls/corrupt-mldsa.mic3
+cbb50ca574ef4a015334db7b626a05cb6c6e4042aa51c86e12b5cdbc46b70542  /work/audit/signature-controls/corrupt-slh.mic3
+3c5b3aaa32f9e638c2e641ff276e1791c61bcb14d61a78b524da60695a3b57d4  /work/audit/signature-controls/package.mic3
+ecac2fffeb5bf8258beb616551e911c4011838839a150bb365fad5d5072aaf64  /work/audit/signature-controls/digest.txt
+827d096d92f3deeaa0e8070d79f45beb176768e57a958a1cd325f5f4b754b048  /work/audit/signature-controls/wrong-digest.txt

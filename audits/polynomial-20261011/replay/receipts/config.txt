@@ -1,0 +1,4 @@
+compiler=/work/compiler/mindc
+compiler_sha256=c6a4cdce63a76af95025de2664ade696df9f3dbd1b9a84f4a77e6379e6811ea5
+source=/PUBLIC_REPO
+cpu=6

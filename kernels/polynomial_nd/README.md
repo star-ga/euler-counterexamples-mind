@@ -38,6 +38,8 @@ for Elkies' elliptic-curve construction are outside this profile.
 - [Actual source mutations](mutations/README.md)
 - [Public-source compiler qualification](evidence/public-source/RESULTS.md)
 - [Public-download reproduction and full CLI corpus](evidence/public-replay/RESULTS.md)
+- [Fresh compiler rebuild and independent audit](../../audits/polynomial-20261011/REPORT.md)
+- [Separate polynomial PQC provenance package](../../signing/polynomial/README.md)
 - [Review-export transformations and integrity](PUBLICATION.md)
 - [Certificate inventory](tests/CASES.tsv)
 
@@ -54,8 +56,9 @@ Kernel acceptance and the recorded engineering review do not grant project
 formal acceptance. PROOF_POLICY.md still requires substantive approval by the
 owner/designated verifier of the rules, dependencies, TCB and validation.
 The source/compiler correctness and normalization metatheorem are not themselves
-machine-checked. The extension is not covered by the earlier public K4/K5 PQC
-manifest or signatures.
+machine-checked. The earlier public K4/K5 PQC manifest and signatures retain their
+original scope. Polynomial coverage uses the separate manifest and artifact
+linked above; its execution report distinguishes signature checks from mathematical approval.
 
 Original implementation and formalization: STARGA Inc. Known witness provenance
 is preserved in the original Euler benchmark. The K5 regression files here are
