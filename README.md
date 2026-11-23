@@ -113,3 +113,9 @@ and Lander–Parkin (K5) counterexamples, not a new mathematical discovery.
 It makes no RH progress claim.
 Only this isolated artifact is authorized for public release; other research
 repositories and their histories are not included.
+
+## Community
+
+- **Discussions:** <https://github.com/star-ga/mind/discussions> — questions,
+  ideas and help for euler-counterexamples-mind and the wider MIND ecosystem.
+- **Discord:** <https://mindlang.dev/discord> — the MindLang community server.
